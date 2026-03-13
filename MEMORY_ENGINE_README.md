@@ -83,7 +83,7 @@ python -m memory_engine.run_pipeline \
   --input data/ShareGPT_V3_unfiltered_cleaned_split_no_imsorry.json \
   --sample-size 300 \
   --max-turns 200 \
-  --output-dir outputs/memory_engine
+  --output-dir outputs
 ```
 
 If Groq network calls are unstable, the pipeline now auto-falls back to rule extraction after repeated failures and keeps running.
@@ -92,7 +92,7 @@ If Groq network calls are unstable, the pipeline now auto-falls back to rule ext
 
 ## Expected outputs
 
-Under `outputs/memory_engine/`:
+Under `outputs/`:
 
 - `sample_turns.jsonl`
 - `pipeline_stats.json`

@@ -5,7 +5,7 @@ import time
 from pathlib import Path
 
 from .data_pipeline import build_sample_turns, load_sharegpt, write_json, write_jsonl
-from .extraction_agent import MemoryExtractionAgent
+from .extraction_agent import MemoryExtractionAgent, has_memory_output
 from .graph_memory import GraphMemory
 
 
@@ -21,7 +21,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=Path("outputs/memory_engine"),
+        default=Path("outputs"),
         help="Output directory",
     )
     parser.add_argument("--min-turn-chars", type=int, default=8, help="Minimum chars per turn")
@@ -72,6 +72,8 @@ def main() -> None:
             continue
         human_processed += 1
         extracted = agent.process_turn(turn)
+        if not has_memory_output(extracted):
+            continue
         agent_outputs.append(
             {
                 "turn_id": turn["turn_id"],
