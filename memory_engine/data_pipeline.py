@@ -56,6 +56,9 @@ def build_sample_turns(
     sample_size: int = 300,
     min_turn_chars: int = 8,
     min_turns_per_dialogue: int = 2,
+    shuffle: bool = False,
+    seed: int | None = None,
+    prefer_memory_turns: bool = False,
 ) -> tuple[list[dict[str, Any]], PipelineStats]:
     stats = PipelineStats()
     normalized_turns: list[dict[str, Any]] = []
@@ -111,4 +114,3 @@ def write_jsonl(path: Path, records: list[dict[str, Any]]) -> None:
         for record in records:
             f.write(json.dumps(record, ensure_ascii=False))
             f.write("\n")
-

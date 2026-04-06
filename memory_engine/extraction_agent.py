@@ -27,9 +27,15 @@ class ExtractionOutput:
 
 
 class MemoryExtractionAgent:
-    def __init__(self, graph_memory: GraphMemory, model: str = "llama-3.1-8b-instant") -> None:
+    def __init__(
+        self,
+        graph_memory: GraphMemory,
+        model: str = "llama-3.1-8b-instant",
+        use_relevance_filter: bool = True,
+    ) -> None:
         self.graph_memory = graph_memory
         self.model = model
+        self.use_relevance_filter = use_relevance_filter
         self.api_key = os.getenv("GROQ_API_KEY")
         self.client = (
             Groq(api_key=self.api_key, timeout=8.0, max_retries=0) if self.api_key and Groq else None
@@ -44,7 +50,7 @@ class MemoryExtractionAgent:
         return extracted
 
     def _extract(self, text: str) -> ExtractionOutput:
-        if not _is_memory_relevant_text(text):
+        if self.use_relevance_filter and not _is_memory_relevant_text(text):
             return _empty_output()
         if self.client:
             try:
@@ -623,4 +629,3 @@ def _is_good_memory_span(text: str) -> bool:
     if re.fullmatch(r"[A-Za-z]+", span) and lowered in generic:
         return False
     return True
-

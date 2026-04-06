@@ -1,0 +1,6 @@
+[
+  {
+    "query": "i am learning python for a project",
+    "expected_nodes": ["python", "sql", "excel"]
+  }
+]

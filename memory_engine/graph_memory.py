@@ -113,3 +113,15 @@ class GraphMemory:
     def summary(self) -> dict[str, int]:
         return {"nodes": self.graph.number_of_nodes(), "edges": self.graph.number_of_edges()}
 
+    def get_node_attrs(self, node_id: str) -> dict | None:
+        """Return node attributes or None if missing."""
+        if node_id not in self.graph:
+            return None
+        return dict(self.graph.nodes[node_id])
+
+    def edges_for_nodes(self, node_ids: list[str]) -> list[dict]:
+        """Return all edges connected to the provided nodes (1-hop neighborhood)."""
+        edges: list[dict] = []
+        for u, v, attrs in self.graph.edges(node_ids, data=True):
+            edges.append({"source": u, "target": v, **attrs})
+        return edges
