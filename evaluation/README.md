@@ -5,7 +5,7 @@ This folder provides lightweight scripts to score extraction and retrieval witho
 ## Extraction evaluation
 
 Inputs:
-- Gold file: list of records with `turn_id` and `entities` (each entity has `name`, optionally `type`).
+- Gold file: list of records with `turn_id` and fields: `entities`, `relations`, `preferences`, `constraints`, `goals`, `projects`, `tools` (any subset is fine).
   - Samples: `gold_extraction_sample.json` (small) or `gold_extraction_auto_large.json` (auto-labeled from latest run).
 - Pred file: output from `run_pipeline.py` (`outputs/extractions.json`).
 
@@ -14,7 +14,7 @@ Run:
 python evaluation/eval_extraction.py --gold path/to/gold.json --pred outputs/extractions.json --out outputs/eval_extraction.json
 ```
 
-Metrics: precision/recall/F1 over entity names (case-insensitive), macro over all turns.
+Metrics (for every field present in gold): precision/recall/F1 over normalized strings; relations are matched on (source, target, relation_type).
 
 ## Retrieval evaluation
 
