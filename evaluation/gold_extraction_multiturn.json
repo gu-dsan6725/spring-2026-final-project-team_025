@@ -1,0 +1,391 @@
+[
+  {
+    "turn_id": "xd92L6L_0::turn_6",
+    "text": "Write me a 4 panel comic with the follwing setup \n\nBlue is casting a spell on pink to make him more powerful than ever. He thinks he's finally going to be all powerful, but it turns out to only heal his broken horn. The dragon tell him its because he's already perfect and he doesnt want his friend to change. The friend is touched but annoued",
+    "entities": [
+      {"name": "Xid and Thanatos comic", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "Xid and Thanatos comic", "description": "4-panel comic series featuring dragon characters Xid and Thanatos; themes of friendship, magic spells, and imperfection"}
+    ],
+    "goals": [
+      {"description": "write 4 panel comic about healing spell and friendship between two dragon characters"}
+    ],
+    "preferences": [
+      {"description": "4-panel format for comics"},
+      {"description": "comics featuring emotional friendship dynamics"}
+    ],
+    "constraints": [
+      {"description": "comic must be exactly 4 panels"}
+    ],
+    "relations": [
+      {"source": "user", "target": "Xid and Thanatos comic", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "xd92L6L_0::turn_12",
+    "text": "Simplify this comic and make it funnier\n\nXid: With this spell I'll achieve my perfect body!\nXid: I'll be more powerful than ever!\n\nXid: What happened? I feel the same. \nThanatos: Yeah, I just healed your horn.\n\nThanatos: You're already perfect, best buddy!\nXid: Ah, gee..\n\nXid: But couldn't you at least make me taller?\nThanatos: No.",
+    "entities": [
+      {"name": "Xid and Thanatos comic", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "Xid and Thanatos comic", "description": "comic series featuring dragon characters Xid and Thanatos"}
+    ],
+    "goals": [
+      {"description": "simplify and make the Xid and Thanatos comic funnier"}
+    ],
+    "preferences": [
+      {"description": "simple and funny comic style"},
+      {"description": "iterative refinement of existing scripts rather than starting from scratch"}
+    ],
+    "constraints": [
+      {"description": "must preserve the core Xid and Thanatos characters and story"}
+    ],
+    "relations": [
+      {"source": "user", "target": "Xid and Thanatos comic", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "xd92L6L_15::turn_5",
+    "text": "Simplify this comic\nXid: With this spell I'll achieve my perfect body!\nXid: I feel it working! I'm gonna be more powerful than ever!\n\nXid: What happened? I feel the same. \nThanatos: Yeah, I just healed your horn.\n\nThanatos: Cuz You're already perfect, best buddy!\nXid: Ah, gee..\n\nXid: Couldn't you at least give me abs?\nThanatos: No.",
+    "entities": [
+      {"name": "Xid and Thanatos comic", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "Xid and Thanatos comic", "description": "comic series featuring dragon characters Xid and Thanatos"}
+    ],
+    "goals": [
+      {"description": "further simplify the Xid and Thanatos comic script"}
+    ],
+    "preferences": [
+      {"description": "simple and concise comic scripts"},
+      {"description": "multiple rounds of revision to reach desired simplicity"}
+    ],
+    "constraints": [
+      {"description": "must keep the Xid and Thanatos character names and punchline structure"}
+    ],
+    "relations": [
+      {"source": "user", "target": "Xid and Thanatos comic", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "xd92L6L_39::turn_7",
+    "text": "Here is a version of the comic we were talking about that I liked, can we make it funnier? THe final panel feels like its missing a joke, please help me make several options that would be funnier",
+    "entities": [
+      {"name": "book club monster comic", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "book club monster comic", "description": "comic about a book club featuring monster characters including a dragon; recurring series"}
+    ],
+    "goals": [
+      {"description": "make the final panel of the book club comic funnier"}
+    ],
+    "preferences": [
+      {"description": "humor and jokes in comic panels"},
+      {"description": "collaborative refinement process where multiple options are proposed before deciding"},
+      {"description": "keeps versions they liked and iterates from there"}
+    ],
+    "constraints": [
+      {"description": "must build on the existing version of the comic rather than rewriting"}
+    ],
+    "relations": [
+      {"source": "user", "target": "book club monster comic", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "xd92L6L_48::turn_12",
+    "text": "Give me a good YT clickbait title for the following comic featuring three monsters studying for a test",
+    "entities": [
+      {"name": "monster studying comic", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "monster studying comic", "description": "comic featuring skeleton, dragon, and werewolf studying for a test; intended for YouTube"}
+    ],
+    "goals": [
+      {"description": "create YouTube clickbait title for monster studying comic"}
+    ],
+    "preferences": [
+      {"description": "publishes comic content on YouTube"},
+      {"description": "engaging clickbait-style titles for YouTube audience"}
+    ],
+    "constraints": [
+      {"description": "title must suit YouTube clickbait conventions"}
+    ],
+    "relations": [
+      {"source": "user", "target": "monster studying comic", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "xd92L6L_80::turn_6",
+    "text": "Reduce the following script to being only 7 lines\n\nI've uncovered a giant conspiracy! \n\nThere's a secret society of lizard people living under our city! \n\nIt's not a secret. \nYeah, lizardtown has great food. \nWhat?!\n\nHow come I've never heard of it before?\nWe're shy people.\n\n[]\nThis IS a nice neighborhood. \nWhat's wrong you've barely touched your meat!",
+    "entities": [
+      {"name": "lizard people conspiracy script", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "lizard people conspiracy script", "description": "comedy script about a secret lizard people society living underground"}
+    ],
+    "goals": [
+      {"description": "reduce lizard people script to 7 lines"}
+    ],
+    "preferences": [
+      {"description": "very short and tight scripts with maximum compression"},
+      {"description": "comedy through brevity and subverted expectations"}
+    ],
+    "constraints": [
+      {"description": "script must be reduced to only 7 lines"}
+    ],
+    "relations": [
+      {"source": "user", "target": "lizard people conspiracy script", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "xd92L6L_80::turn_8",
+    "text": "simplify the script",
+    "entities": [
+      {"name": "lizard people conspiracy script", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "lizard people conspiracy script", "description": "comedy script about lizard people society; ongoing simplification"}
+    ],
+    "goals": [
+      {"description": "simplify the lizard people conspiracy script further"}
+    ],
+    "preferences": [
+      {"description": "simplified and concise scripts"},
+      {"description": "iterates on scripts until they meet simplicity standard"}
+    ],
+    "constraints": [
+      {"description": "must keep the core lizard people punchline and setting"}
+    ],
+    "relations": [
+      {"source": "user", "target": "lizard people conspiracy script", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "xd92L6L_95::turn_3",
+    "text": "Please sumarize this in a logline \n\nThey've canceled my flight and I must get home immediately!\n\nYou're the only one that can fly through this snow storm!\nAnd what's so urgent that you'd offer me your servitude?\n\nMy vacation. \n\nI've been looking forward to playing games and drinking beer all year!\nRest is important, I respect that.",
+    "entities": [
+      {"name": "flight vacation script", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "flight vacation script", "description": "short comedy script about a cancelled flight and a character desperate to get home for vacation"}
+    ],
+    "goals": [
+      {"description": "summarize the flight vacation script as a logline"}
+    ],
+    "preferences": [
+      {"description": "uses logline format to distill scripts to their core concept"},
+      {"description": "comedy based on mundane motivations contrasted with high-stakes situations"}
+    ],
+    "constraints": [
+      {"description": "summary must follow logline format conventions"}
+    ],
+    "relations": [
+      {"source": "user", "target": "flight vacation script", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "ZWqMvoL_14::turn_10",
+    "text": "Here's what Mei actually looks like: Mei is a young woman, presumably a teenager. She has short chin-length black hair with two small pigtails, straight bangs, and two green highlights framing her face. The back of her hair slightly spikes out. The silhouette of her hair resembles the head of a dragon, with her pigtails forming the horns. She wears pale pink lipstick. A comical close up implies Mei has green eyes.",
+    "entities": [
+      {"name": "Lego Monkie Kid fan fiction", "type": "PROJECT"},
+      {"name": "Mei", "type": "PERSON"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "Lego Monkie Kid fan fiction", "description": "fan fiction based on Lego Monkie Kid featuring characters Mei, MK, Sun Wukong, Spider Queen, Macaque"}
+    ],
+    "goals": [
+      {"description": "establish accurate visual character description of Mei for the fan fiction"}
+    ],
+    "preferences": [
+      {"description": "detailed and accurate character descriptions that match source material"},
+      {"description": "canon-consistent character appearance when writing scenes"}
+    ],
+    "constraints": [
+      {"description": "character appearances must stay true to the Lego Monkie Kid source material"}
+    ],
+    "relations": [
+      {"source": "user", "target": "Lego Monkie Kid fan fiction", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "ZWqMvoL_27::turn_3",
+    "text": "Let's start the scene with them already defeated and being dragged before her. Both are scared but Wukong is \"playing dumb to lighten the mood\", trying to get under Spider Queen's skin. Macaque is very aware of how much danger they're in and keeps hissing at Wukong to shut his trap. Spider Queen of course feels very triumphant that her army managed to take down the mighty Sun Wukong and now he's her prisoner, at her mercy. Let's rewrite the summary with that in mind.",
+    "entities": [
+      {"name": "Lego Monkie Kid fan fiction", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "Lego Monkie Kid fan fiction", "description": "fan fiction; Spider Queen arc where Wukong and Macaque are captured"}
+    ],
+    "goals": [
+      {"description": "write scene where Wukong and Macaque are brought before Spider Queen as prisoners"}
+    ],
+    "preferences": [
+      {"description": "scenes that balance humor and tension simultaneously"},
+      {"description": "distinct character voices: Wukong deflects with humor, Macaque is serious and anxious"}
+    ],
+    "constraints": [
+      {"description": "must preserve specified character behaviors: Wukong playing dumb, Macaque hissing warnings"}
+    ],
+    "relations": [
+      {"source": "user", "target": "Lego Monkie Kid fan fiction", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "ZWqMvoL_85::turn_8",
+    "text": "Mei goes off, shouting at the lieutenant that Ao Lie is her cousin and she knows him and he's way too clumsy to be a rebel. MK has to hold her back. The lieutenant looks completely unimpressed and shoos them away. I'd like this scene to have an underlying sense of danger but still be somewhat comedic as Mei goes over the top insisting her cousin is innocent. Let's write that scene with details and dialogue.",
+    "entities": [
+      {"name": "Lego Monkie Kid fan fiction", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "Lego Monkie Kid fan fiction", "description": "fan fiction; Mei defending Ao Lie from accusations of being a rebel"}
+    ],
+    "goals": [
+      {"description": "write scene with Mei defending Ao Lie from a lieutenant with details and dialogue"}
+    ],
+    "preferences": [
+      {"description": "underlying sense of danger combined with comedic tone"},
+      {"description": "detailed scenes written with full dialogue"},
+      {"description": "character reactions that feel over-the-top and emotionally consistent"}
+    ],
+    "constraints": [
+      {"description": "scene must maintain established dynamic: Mei is passionate and over-the-top, lieutenant is unimpressed"}
+    ],
+    "relations": [
+      {"source": "user", "target": "Lego Monkie Kid fan fiction", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "ZWqMvoL_162::turn_3",
+    "text": "Back in the prison: Ao Lie makes one last desperate attempt to tell a guard he's not Bai Long Ma. The guard - the same spider demon from earlier - enters Ao Lie's cell and bites him. The venom makes Ao Lie weak and sick as the demon leaves him alone in the cell again. Ao Lie, panicking, asks if he's going to die. The demon answers that Ao Lie will wish he could die until the venom wears off. Let's write that scene with details and dialogue.",
+    "entities": [
+      {"name": "Lego Monkie Kid fan fiction", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "Lego Monkie Kid fan fiction", "description": "fan fiction; prison arc where Ao Lie is poisoned by a spider demon guard"}
+    ],
+    "goals": [
+      {"description": "write prison scene where Ao Lie is bitten and poisoned by the spider demon guard"}
+    ],
+    "preferences": [
+      {"description": "detailed scenes with full dialogue"},
+      {"description": "dark and tense scenes for the prison arc; does not shy away from character suffering"}
+    ],
+    "constraints": [
+      {"description": "must use the same spider demon guard established in earlier scenes for continuity"}
+    ],
+    "relations": [
+      {"source": "user", "target": "Lego Monkie Kid fan fiction", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "lDVDe5H_0::turn_6",
+    "text": "I have a plan for how I want the story to go. I just want your help visualizing it and drafting a few scenes. I'll start by describing the setting.",
+    "entities": [
+      {"name": "Sun Wukong and MK AU story", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "Sun Wukong and MK AU story", "description": "alternate universe fan fiction; user has a complete story plan and wants AI help only with scene drafting"}
+    ],
+    "goals": [
+      {"description": "visualize and draft specific scenes for pre-planned Sun Wukong and MK AU story"}
+    ],
+    "preferences": [
+      {"description": "retains full creative control over plot direction"},
+      {"description": "uses AI as a drafting and visualization tool, not a plot generator"}
+    ],
+    "constraints": [
+      {"description": "story direction is pre-planned by user and must not be changed by the AI"}
+    ],
+    "relations": [
+      {"source": "user", "target": "Sun Wukong and MK AU story", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "lDVDe5H_0::turn_8",
+    "text": "Setting: a mountain, similar to Flower-Fruit Mountain, though not quite the same. Sun Wukong is king of the mountain and is raising his son, MK, to be the next king someday. He, MK, and the royal guard and servant monkeys all have golden fur - most of the others on the mountain have dark fur, including MK's two best friends, Mei and Tang. MK leads a happy life, if somewhat isolated, as he doesn't really interact with \"commoners\" beyond Mei and Tang. He's noticed they seem afraid of his father Sun Wukong but just assumes that's because he's the king and is immensely powerful.",
+    "entities": [
+      {"name": "Sun Wukong and MK AU story", "type": "PROJECT"},
+      {"name": "Sun Wukong", "type": "PERSON"},
+      {"name": "MK", "type": "PERSON"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "Sun Wukong and MK AU story", "description": "AU where Sun Wukong is king raising MK as prince; golden-fur royals vs dark-fur commoners; MK is sheltered but has friends Mei and Tang"}
+    ],
+    "goals": [
+      {"description": "establish world-building and social structure for the AU story"}
+    ],
+    "preferences": [
+      {"description": "rich world-building with clear social hierarchy and visual distinctions between groups"},
+      {"description": "character isolation and naivety as story setup elements"}
+    ],
+    "constraints": [
+      {"description": "world rules must be internally consistent: golden fur marks royalty, dark fur marks commoners"}
+    ],
+    "relations": [
+      {"source": "user", "target": "Sun Wukong and MK AU story", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "lDVDe5H_0::turn_12",
+    "text": "So, in the first scene of the story, a very young MK (maybe 5 years old) wakes up to hearing the whole mountain groaning as though it's moving, though it isn't. He gets scared and calls for his father. A few minutes later, the sounds stop and Sun Wukong comes to check on him, asking what's wrong. MK tells him about the scary noises. Wukong has a moment of realization and horror that's quickly replaced by fatherly instinct, reassuring MK that everything's fine and he's sure the scary noises won't come back.",
+    "entities": [
+      {"name": "Sun Wukong and MK AU story", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "Sun Wukong and MK AU story", "description": "opening scene: young MK frightened by mysterious mountain sounds; Wukong conceals horror to protect MK"}
+    ],
+    "goals": [
+      {"description": "write opening scene establishing young MK's innocence and Wukong's protective but secretive parenting"}
+    ],
+    "preferences": [
+      {"description": "scenes that establish emotional character dynamics while hinting at a hidden darker backstory"},
+      {"description": "opens story with a quiet domestic scene before escalating conflict"}
+    ],
+    "constraints": [
+      {"description": "Wukong must hide his true reaction; MK must remain unaware of the real danger"}
+    ],
+    "relations": [
+      {"source": "user", "target": "Sun Wukong and MK AU story", "relation_type": "WORKS_ON"}
+    ]
+  },
+  {
+    "turn_id": "lDVDe5H_471::turn_7",
+    "text": "Wukong looks down at MK and Macaque, then tells his army to round up the able-bodied monkeys from the village. MK shouts in protest as Macaque groans. One of the golden-haired soldiers asks Wukong what they should do with MK and Macaque. Wukong looks at Macaque and says \"You, I can't kill\" - he looks at MK and says \"You, I won't kill\" - and orders the soldiers to hold them until he's finished with the village, and then to let them go. Let's write that whole scene with details and dialogue.",
+    "entities": [
+      {"name": "Sun Wukong and MK AU story", "type": "PROJECT"}
+    ],
+    "tools": [],
+    "projects": [
+      {"name": "Sun Wukong and MK AU story", "description": "late-story arc: Wukong has become a villain; confrontation with MK and Macaque; Wukong spares both but for different reasons"}
+    ],
+    "goals": [
+      {"description": "write confrontation scene between villainous Wukong and MK and Macaque with full dialogue"}
+    ],
+    "preferences": [
+      {"description": "detailed scenes with full dialogue"},
+      {"description": "morally complex villain scenes that preserve emotional ties between characters"}
+    ],
+    "constraints": [
+      {"description": "Wukong must spare both MK and Macaque for their specified distinct reasons: can't kill Macaque, won't kill MK"}
+    ],
+    "relations": [
+      {"source": "user", "target": "Sun Wukong and MK AU story", "relation_type": "WORKS_ON"}
+    ]
+  }
+]
