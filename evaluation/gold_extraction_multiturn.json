@@ -39,7 +39,9 @@
       {"description": "simple and funny comic style"},
       {"description": "iterative refinement of existing drafts rather than starting over"}
     ],
-    "constraints": [],
+    "constraints": [
+      {"description": "must preserve Xid and Thanatos characters and the core punchline of the spell healing the horn instead of granting power"}
+    ],
     "relations": [
       {"source": "user", "target": "Xid and Thanatos comic", "relation_type": "WORKS_ON"}
     ]
@@ -61,7 +63,9 @@
       {"description": "simple and concise comic scripts"},
       {"description": "iterative refinement of existing drafts rather than starting over"}
     ],
-    "constraints": [],
+    "constraints": [
+      {"description": "must retain Xid and Thanatos characters and the you are already perfect message as the emotional core"}
+    ],
     "relations": [
       {"source": "user", "target": "Xid and Thanatos comic", "relation_type": "WORKS_ON"}
     ]
@@ -83,7 +87,10 @@
       {"description": "humor and jokes in comics"},
       {"description": "prefers being given multiple options to choose from"}
     ],
-    "constraints": [],
+    "constraints": [
+      {"description": "must build on the existing version they approved; only the final panel should change"},
+      {"description": "must keep the existing book club setup and monster characters"}
+    ],
     "relations": [
       {"source": "user", "target": "book club monster comic", "relation_type": "WORKS_ON"}
     ]
@@ -104,7 +111,9 @@
     "preferences": [
       {"description": "publishes comic content on YouTube"}
     ],
-    "constraints": [],
+    "constraints": [
+      {"description": "title must reflect the monster characters and studying theme of the comic"}
+    ],
     "relations": [
       {"source": "user", "target": "monster studying comic", "relation_type": "WORKS_ON"}
     ]
@@ -149,7 +158,9 @@
       {"description": "simple and concise scripts"},
       {"description": "iterative refinement of existing drafts rather than starting over"}
     ],
-    "constraints": [],
+    "constraints": [
+      {"description": "must keep the lizard people secret society reveal as the core punchline"}
+    ],
     "relations": [
       {"source": "user", "target": "lizard people conspiracy script", "relation_type": "WORKS_ON"}
     ]
@@ -171,7 +182,10 @@
       {"description": "uses logline format to distill scripts to their core concept"},
       {"description": "comedy based on mundane motivations in high-stakes situations"}
     ],
-    "constraints": [],
+    "constraints": [
+      {"description": "logline must be a single sentence"},
+      {"description": "must preserve the comedic contrast between the trivial motivation and the high-stakes situation"}
+    ],
     "relations": [
       {"source": "user", "target": "flight vacation script", "relation_type": "WORKS_ON"}
     ]
@@ -193,7 +207,9 @@
     "preferences": [
       {"description": "canon-accurate character portrayals that match source material"}
     ],
-    "constraints": [],
+    "constraints": [
+      {"description": "Mei's appearance in scenes must match the described design: chin-length black hair with pigtails, green highlights, green eyes, pale pink lipstick"}
+    ],
     "relations": [
       {"source": "user", "target": "Lego Monkie Kid fan fiction", "relation_type": "WORKS_ON"}
     ]
@@ -239,7 +255,10 @@
       {"description": "tonal complexity in scenes: danger and comedy coexist"},
       {"description": "detailed scenes written with full dialogue"}
     ],
-    "constraints": [],
+    "constraints": [
+      {"description": "MK must physically hold Mei back in the scene"},
+      {"description": "lieutenant must remain unimpressed and shoo them away at the end"}
+    ],
     "relations": [
       {"source": "user", "target": "Lego Monkie Kid fan fiction", "relation_type": "WORKS_ON"}
     ]
@@ -284,7 +303,9 @@
     "preferences": [
       {"description": "retains full creative control over plot; uses AI only for scene drafting and visualization"}
     ],
-    "constraints": [],
+    "constraints": [
+      {"description": "AI must not introduce new plot directions; story arc is pre-planned by user"}
+    ],
     "relations": [
       {"source": "user", "target": "Sun Wukong and MK AU story", "relation_type": "WORKS_ON"}
     ]
