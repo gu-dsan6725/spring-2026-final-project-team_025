@@ -7,14 +7,13 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "Xid and Thanatos comic", "description": "4-panel comic series featuring dragon characters Xid and Thanatos; themes of friendship, magic spells, and imperfection"}
+      {"name": "Xid and Thanatos comic", "description": "comic series featuring dragon characters Xid and Thanatos; themes of friendship and self-acceptance"}
     ],
     "goals": [
-      {"description": "write 4 panel comic about healing spell and friendship between two dragon characters"}
+      {"description": "write 4 panel comic about a healing spell and friendship between two dragon characters"}
     ],
     "preferences": [
-      {"description": "4-panel format for comics"},
-      {"description": "comics featuring emotional friendship dynamics"}
+      {"description": "friendship and emotional themes in comics"}
     ],
     "constraints": [
       {"description": "comic must be exactly 4 panels"}
@@ -38,11 +37,9 @@
     ],
     "preferences": [
       {"description": "simple and funny comic style"},
-      {"description": "iterative refinement of existing scripts rather than starting from scratch"}
+      {"description": "iterative refinement of existing drafts rather than starting over"}
     ],
-    "constraints": [
-      {"description": "must preserve the core Xid and Thanatos characters and story"}
-    ],
+    "constraints": [],
     "relations": [
       {"source": "user", "target": "Xid and Thanatos comic", "relation_type": "WORKS_ON"}
     ]
@@ -62,11 +59,9 @@
     ],
     "preferences": [
       {"description": "simple and concise comic scripts"},
-      {"description": "multiple rounds of revision to reach desired simplicity"}
+      {"description": "iterative refinement of existing drafts rather than starting over"}
     ],
-    "constraints": [
-      {"description": "must keep the Xid and Thanatos character names and punchline structure"}
-    ],
+    "constraints": [],
     "relations": [
       {"source": "user", "target": "Xid and Thanatos comic", "relation_type": "WORKS_ON"}
     ]
@@ -79,19 +74,16 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "book club monster comic", "description": "comic about a book club featuring monster characters including a dragon; recurring series"}
+      {"name": "book club monster comic", "description": "comic about a book club featuring monster characters including a dragon"}
     ],
     "goals": [
       {"description": "make the final panel of the book club comic funnier"}
     ],
     "preferences": [
-      {"description": "humor and jokes in comic panels"},
-      {"description": "collaborative refinement process where multiple options are proposed before deciding"},
-      {"description": "keeps versions they liked and iterates from there"}
+      {"description": "humor and jokes in comics"},
+      {"description": "prefers being given multiple options to choose from"}
     ],
-    "constraints": [
-      {"description": "must build on the existing version of the comic rather than rewriting"}
-    ],
+    "constraints": [],
     "relations": [
       {"source": "user", "target": "book club monster comic", "relation_type": "WORKS_ON"}
     ]
@@ -104,18 +96,15 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "monster studying comic", "description": "comic featuring skeleton, dragon, and werewolf studying for a test; intended for YouTube"}
+      {"name": "monster studying comic", "description": "comic featuring skeleton, dragon, and werewolf studying for a test; published on YouTube"}
     ],
     "goals": [
-      {"description": "create YouTube clickbait title for monster studying comic"}
+      {"description": "create a YouTube clickbait title for the monster studying comic"}
     ],
     "preferences": [
-      {"description": "publishes comic content on YouTube"},
-      {"description": "engaging clickbait-style titles for YouTube audience"}
+      {"description": "publishes comic content on YouTube"}
     ],
-    "constraints": [
-      {"description": "title must suit YouTube clickbait conventions"}
-    ],
+    "constraints": [],
     "relations": [
       {"source": "user", "target": "monster studying comic", "relation_type": "WORKS_ON"}
     ]
@@ -128,14 +117,13 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "lizard people conspiracy script", "description": "comedy script about a secret lizard people society living underground"}
+      {"name": "lizard people conspiracy script", "description": "comedy script about a secret lizard society living underground"}
     ],
     "goals": [
-      {"description": "reduce lizard people script to 7 lines"}
+      {"description": "reduce the lizard people script to 7 lines"}
     ],
     "preferences": [
-      {"description": "very short and tight scripts with maximum compression"},
-      {"description": "comedy through brevity and subverted expectations"}
+      {"description": "very short and punchy scripts with maximum compression"}
     ],
     "constraints": [
       {"description": "script must be reduced to only 7 lines"}
@@ -152,18 +140,16 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "lizard people conspiracy script", "description": "comedy script about lizard people society; ongoing simplification"}
+      {"name": "lizard people conspiracy script", "description": "comedy script about lizard society; ongoing simplification"}
     ],
     "goals": [
-      {"description": "simplify the lizard people conspiracy script further"}
+      {"description": "simplify the lizard people conspiracy script"}
     ],
     "preferences": [
-      {"description": "simplified and concise scripts"},
-      {"description": "iterates on scripts until they meet simplicity standard"}
+      {"description": "simple and concise scripts"},
+      {"description": "iterative refinement of existing drafts rather than starting over"}
     ],
-    "constraints": [
-      {"description": "must keep the core lizard people punchline and setting"}
-    ],
+    "constraints": [],
     "relations": [
       {"source": "user", "target": "lizard people conspiracy script", "relation_type": "WORKS_ON"}
     ]
@@ -176,18 +162,16 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "flight vacation script", "description": "short comedy script about a cancelled flight and a character desperate to get home for vacation"}
+      {"name": "flight vacation script", "description": "short comedy script about a cancelled flight; character desperate to get home for vacation"}
     ],
     "goals": [
       {"description": "summarize the flight vacation script as a logline"}
     ],
     "preferences": [
       {"description": "uses logline format to distill scripts to their core concept"},
-      {"description": "comedy based on mundane motivations contrasted with high-stakes situations"}
+      {"description": "comedy based on mundane motivations in high-stakes situations"}
     ],
-    "constraints": [
-      {"description": "summary must follow logline format conventions"}
-    ],
+    "constraints": [],
     "relations": [
       {"source": "user", "target": "flight vacation script", "relation_type": "WORKS_ON"}
     ]
@@ -201,18 +185,15 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "Lego Monkie Kid fan fiction", "description": "fan fiction based on Lego Monkie Kid featuring characters Mei, MK, Sun Wukong, Spider Queen, Macaque"}
+      {"name": "Lego Monkie Kid fan fiction", "description": "fan fiction based on Lego Monkie Kid featuring characters Mei, MK, Wukong, Spider Queen, Macaque, Ao Lie"}
     ],
     "goals": [
       {"description": "establish accurate visual character description of Mei for the fan fiction"}
     ],
     "preferences": [
-      {"description": "detailed and accurate character descriptions that match source material"},
-      {"description": "canon-consistent character appearance when writing scenes"}
+      {"description": "canon-accurate character portrayals that match source material"}
     ],
-    "constraints": [
-      {"description": "character appearances must stay true to the Lego Monkie Kid source material"}
-    ],
+    "constraints": [],
     "relations": [
       {"source": "user", "target": "Lego Monkie Kid fan fiction", "relation_type": "WORKS_ON"}
     ]
@@ -232,10 +213,10 @@
     ],
     "preferences": [
       {"description": "scenes that balance humor and tension simultaneously"},
-      {"description": "distinct character voices: Wukong deflects with humor, Macaque is serious and anxious"}
+      {"description": "distinct and consistent character voices across scenes"}
     ],
     "constraints": [
-      {"description": "must preserve specified character behaviors: Wukong playing dumb, Macaque hissing warnings"}
+      {"description": "Wukong must play dumb to lighten mood; Macaque must be serious and anxious"}
     ],
     "relations": [
       {"source": "user", "target": "Lego Monkie Kid fan fiction", "relation_type": "WORKS_ON"}
@@ -249,19 +230,16 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "Lego Monkie Kid fan fiction", "description": "fan fiction; Mei defending Ao Lie from accusations of being a rebel"}
+      {"name": "Lego Monkie Kid fan fiction", "description": "fan fiction; Mei defending Ao Lie from rebel accusations before a lieutenant"}
     ],
     "goals": [
-      {"description": "write scene with Mei defending Ao Lie from a lieutenant with details and dialogue"}
+      {"description": "write scene with Mei defending Ao Lie with details and dialogue"}
     ],
     "preferences": [
-      {"description": "underlying sense of danger combined with comedic tone"},
-      {"description": "detailed scenes written with full dialogue"},
-      {"description": "character reactions that feel over-the-top and emotionally consistent"}
+      {"description": "tonal complexity in scenes: danger and comedy coexist"},
+      {"description": "detailed scenes written with full dialogue"}
     ],
-    "constraints": [
-      {"description": "scene must maintain established dynamic: Mei is passionate and over-the-top, lieutenant is unimpressed"}
-    ],
+    "constraints": [],
     "relations": [
       {"source": "user", "target": "Lego Monkie Kid fan fiction", "relation_type": "WORKS_ON"}
     ]
@@ -280,11 +258,11 @@
       {"description": "write prison scene where Ao Lie is bitten and poisoned by the spider demon guard"}
     ],
     "preferences": [
-      {"description": "detailed scenes with full dialogue"},
-      {"description": "dark and tense scenes for the prison arc; does not shy away from character suffering"}
+      {"description": "detailed scenes written with full dialogue"},
+      {"description": "does not shy away from dark and tense scenes involving character suffering"}
     ],
     "constraints": [
-      {"description": "must use the same spider demon guard established in earlier scenes for continuity"}
+      {"description": "must use the same spider demon guard established in a previous scene for story continuity"}
     ],
     "relations": [
       {"source": "user", "target": "Lego Monkie Kid fan fiction", "relation_type": "WORKS_ON"}
@@ -298,18 +276,15 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "Sun Wukong and MK AU story", "description": "alternate universe fan fiction; user has a complete story plan and wants AI help only with scene drafting"}
+      {"name": "Sun Wukong and MK AU story", "description": "alternate universe fan fiction with a pre-planned story arc; user owns the plot direction"}
     ],
     "goals": [
-      {"description": "visualize and draft specific scenes for pre-planned Sun Wukong and MK AU story"}
+      {"description": "visualize and draft specific scenes for the pre-planned Sun Wukong and MK AU story"}
     ],
     "preferences": [
-      {"description": "retains full creative control over plot direction"},
-      {"description": "uses AI as a drafting and visualization tool, not a plot generator"}
+      {"description": "retains full creative control over plot; uses AI only for scene drafting and visualization"}
     ],
-    "constraints": [
-      {"description": "story direction is pre-planned by user and must not be changed by the AI"}
-    ],
+    "constraints": [],
     "relations": [
       {"source": "user", "target": "Sun Wukong and MK AU story", "relation_type": "WORKS_ON"}
     ]
@@ -324,17 +299,17 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "Sun Wukong and MK AU story", "description": "AU where Sun Wukong is king raising MK as prince; golden-fur royals vs dark-fur commoners; MK is sheltered but has friends Mei and Tang"}
+      {"name": "Sun Wukong and MK AU story", "description": "AU where Sun Wukong is king raising MK as prince; golden-fur royals vs dark-fur commoners; MK is sheltered with friends Mei and Tang"}
     ],
     "goals": [
       {"description": "establish world-building and social structure for the AU story"}
     ],
     "preferences": [
-      {"description": "rich world-building with clear social hierarchy and visual distinctions between groups"},
-      {"description": "character isolation and naivety as story setup elements"}
+      {"description": "rich world-building with clear internal rules and social hierarchy"},
+      {"description": "character naivety and isolation as story setup elements"}
     ],
     "constraints": [
-      {"description": "world rules must be internally consistent: golden fur marks royalty, dark fur marks commoners"}
+      {"description": "world rules must stay internally consistent: golden fur marks royalty, dark fur marks commoners"}
     ],
     "relations": [
       {"source": "user", "target": "Sun Wukong and MK AU story", "relation_type": "WORKS_ON"}
@@ -348,17 +323,17 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "Sun Wukong and MK AU story", "description": "opening scene: young MK frightened by mysterious mountain sounds; Wukong conceals horror to protect MK"}
+      {"name": "Sun Wukong and MK AU story", "description": "opening scene: young MK frightened by mysterious mountain sounds; Wukong hides his horror to protect MK"}
     ],
     "goals": [
       {"description": "write opening scene establishing young MK's innocence and Wukong's protective but secretive parenting"}
     ],
     "preferences": [
-      {"description": "scenes that establish emotional character dynamics while hinting at a hidden darker backstory"},
-      {"description": "opens story with a quiet domestic scene before escalating conflict"}
+      {"description": "opens stories with quiet emotional scenes before escalating conflict"},
+      {"description": "characters that conceal their true feelings to protect others"}
     ],
     "constraints": [
-      {"description": "Wukong must hide his true reaction; MK must remain unaware of the real danger"}
+      {"description": "Wukong must conceal his true reaction; MK must remain unaware of the real danger"}
     ],
     "relations": [
       {"source": "user", "target": "Sun Wukong and MK AU story", "relation_type": "WORKS_ON"}
@@ -372,17 +347,17 @@
     ],
     "tools": [],
     "projects": [
-      {"name": "Sun Wukong and MK AU story", "description": "late-story arc: Wukong has become a villain; confrontation with MK and Macaque; Wukong spares both but for different reasons"}
+      {"name": "Sun Wukong and MK AU story", "description": "late-story arc: Wukong as villain confronting MK and Macaque; spares both for distinct personal reasons"}
     ],
     "goals": [
       {"description": "write confrontation scene between villainous Wukong and MK and Macaque with full dialogue"}
     ],
     "preferences": [
-      {"description": "detailed scenes with full dialogue"},
-      {"description": "morally complex villain scenes that preserve emotional ties between characters"}
+      {"description": "morally complex villain scenes that preserve emotional ties between characters"},
+      {"description": "detailed scenes written with full dialogue"}
     ],
     "constraints": [
-      {"description": "Wukong must spare both MK and Macaque for their specified distinct reasons: can't kill Macaque, won't kill MK"}
+      {"description": "Wukong must spare both MK and Macaque with their specified distinct reasons: cannot kill Macaque, will not kill MK"}
     ],
     "relations": [
       {"source": "user", "target": "Sun Wukong and MK AU story", "relation_type": "WORKS_ON"}
