@@ -1,0 +1,152 @@
+---
+title: ""
+author: ""
+format:
+  pdf:
+    pdf-engine: lualatex
+    toc: false
+    number-sections: true
+fontsize: 12pt
+geometry: margin=1in
+header-includes:
+  - \usepackage{hyperref}
+  - \hypersetup{
+      colorlinks=true,
+      linkcolor=black,
+      urlcolor=black,
+      citecolor=black
+    }
+---
+
+\begin{center}
+{\LARGE \textbf{Personal Knowledge \\ Graph Memory Engine}}\\[0.8em]
+{\large group 25}
+\end{center}
+\vspace{1em}
+
+\hypersetup{linkcolor=black}
+\tableofcontents
+\newpage
+
+
+# Abstract {.unnumbered}
+
+We present a Personal Knowledge Graph Memory Engine that transforms conversational interactions into structured, queryable knowledge representations. Rather than relying on flat retrieval mechanisms, our system automatically identifies and extracts semantically meaningful elements from user dialogues including goals, preferences, active projects, and constraints and organizes them within a graph-based memory architecture. The core pipeline integrates information extraction and entity linking to surface relevant concepts from unstructured conversation, followed by graph storage to preserve relational context between entities. A memory retrieval ranking layer then surfaces the most contextually relevant nodes during subsequent interactions, enabling the system to reason over accumulated user knowledge rather than isolated exchanges. We explore two primary experimental directions: first, the tradeoff between memory size and retrieval quality, examining how graph density affects precision and recall; second, a comparative evaluation between graph-structured memory and pure vector embedding approaches, assessing which better captures relational semantics over long interaction histories. This work sits at the intersection of knowledge representation and cognitive modeling, drawing inspiration from how humans structure personal memory around relationships and context rather than raw similarity. The proposed system offers a principled foundation for building AI assistants with persistent, structured, and interpretable long-term memory.
+
+# Introduction
+
+In the realm of artificial intelligence, particularly in conversational agents and personal assistants, the ability to retain and utilize long-term memory is paramount for delivering personalized and context-aware interactions. Traditional approaches often struggle with the dynamic and relational nature of human conversation, relying on limited context windows or flat retrieval methods that fail to capture the intricate connections between pieces of information. Our project addresses this challenge by introducing a Personal Knowledge Graph Memory Engine designed to transform unstructured conversational data into a structured, queryable knowledge graph. This system aims to move beyond simple keyword matching or vector similarity, instead building a rich, relational memory that can be leveraged for more intelligent and human-like responses.
+
+# Related Work
+
+The development of our Personal Knowledge Graph Memory Engine draws upon several key areas of research. Knowledge graphs have long been recognized for their ability to represent complex relationships between entities, offering a structured approach to information storage and retrieval that surpasses traditional databases in semantic richness. Recent advancements in Large Language Models have revolutionized natural language understanding and generation, making them powerful tools for information extraction from unstructured text. Techniques in information extraction, including named entity recognition and relation extraction, are critical for populating knowledge graphs from conversational data. Furthermore, the field of information retrieval provides methodologies for efficiently querying and ranking relevant information from large datasets, which is essential for leveraging the knowledge graph in real-time interactions. Our work integrates these disciplines to create a novel system that combines the semantic power of knowledge graphs with the linguistic capabilities of modern language models.
+
+# System Architecture
+
+The Personal Knowledge Graph Memory Engine is designed as a modular, multi-layered system that processes conversational data into a structured knowledge graph and enables intelligent retrieval.
+
+## Overall Data Flow
+
+The system operates as a pipeline: input data is processed, structured information is extracted, stored in a graph, retrieved, and used to generate responses.
+
+**Figure 1: High-Level System Architecture Diagram**  
+*(Diagram placeholder)*
+
+## Input/Data Layer
+
+- **Components:** `data_pipeline.py`
+- **Functionality:**
+  - Data loading
+  - Turn segmentation
+  - Noise filtering
+  - Normalization
+  - Sampling
+- **Output:** JSONL conversational turns
+
+## Extraction & Linking Layer
+
+- **Components:** `extraction_agent.py`, `graph_memory.py`
+- **Functionality:**
+  - LLM-based extraction
+  - Rule-based fallback
+  - Entity linking
+  - Data cleaning
+- **Output:** structured memory + graph updates
+
+## Graph Memory Layer
+
+- **Components:** `graph_memory.py` (NetworkX)
+- **Functionality:**
+  - Graph storage (MultiDiGraph)
+  - Node and edge attributes
+  - Export capability
+- **Output:** `graph_memory.json`
+
+## Retrieval & Ranking Layer
+
+- **Components:** `retrieval.py`
+- **Functionality:**
+  - Hybrid scoring (keyword, similarity, recency, frequency)
+  - Top-k retrieval
+  - Context expansion
+- **Output:** ranked nodes
+
+## Response Construction
+
+- **Components:** `response_builder.py`
+- **Functionality:**
+  - Summary generation
+  - Optional LLM response
+- **Output:** final response
+
+## Key Design Choices and Trade-offs
+
+- Hybrid extraction (LLM + rules)
+- Type-aware entity linking
+- Temporal metadata usage
+- Hybrid retrieval scoring
+- Configurable filtering
+
+# Evaluation
+
+## Evaluation Methodology
+
+We compare outputs with hand-labeled datasets.
+
+## Extraction Evaluation
+
+- Precision / Recall / F1
+
+## Retrieval Evaluation
+
+- Hit-rate@k
+- Recall@k
+
+## Preliminary Results
+
+*(To be added)*
+
+# Risks and Mitigations
+
+- Extraction noise → fallback + validation
+- Entity merging errors → thresholds + type constraints
+- Schema drift → schema control
+- Cost → sampling + caching
+- Privacy → anonymization
+
+# Conclusion and Future Work
+
+## Summary of Contributions
+
+We propose a structured memory system combining LLM extraction with graph storage.
+
+## Future Directions
+
+- Better embeddings
+- Dynamic updates
+- Visualization tools
+- Human evaluation
+
+# References {.unnumbered}
+
+*(References to be added)*
