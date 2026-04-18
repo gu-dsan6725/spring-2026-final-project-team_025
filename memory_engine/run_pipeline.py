@@ -35,6 +35,12 @@ def parse_args() -> argparse.Namespace:
         help="Groq model name for extraction",
     )
     parser.add_argument(
+        "--temperature",
+        type=float,
+        default=0.0,
+        help="Extractor temperature. Keep at 0.0 for deterministic runs.",
+    )
+    parser.add_argument(
         "--progress-every",
         type=int,
         default=25,
@@ -97,6 +103,7 @@ def main() -> None:
         graph_memory=graph_memory,
         model=args.model,
         use_relevance_filter=not args.disable_relevance_filter,
+        temperature=args.temperature,
     )
     groq_enabled = agent.client is not None
     print(
