@@ -1,0 +1,149 @@
+{
+  "user_id": "user_001",
+  "target": "Financial Quantitative Analysts (13-2099.01)",
+  "knowledge_gaps": [
+    {
+      "element": "English Language",
+      "user_score": 0.0,
+      "required_score": 3.05,
+      "gap": 3.05,
+      "priority": 1
+    },
+    {
+      "element": "Administration and Management",
+      "user_score": 0.0,
+      "required_score": 2.1,
+      "gap": 2.1,
+      "priority": 2
+    },
+    {
+      "element": "Customer and Personal Service",
+      "user_score": 0.0,
+      "required_score": 2.05,
+      "gap": 2.05,
+      "priority": 3
+    },
+    {
+      "element": "Psychology",
+      "user_score": 0.0,
+      "required_score": 2.05,
+      "gap": 2.05,
+      "priority": 4
+    },
+    {
+      "element": "Education and Training",
+      "user_score": 0.0,
+      "required_score": 2.05,
+      "gap": 2.05,
+      "priority": 5
+    },
+    {
+      "element": "Personnel and Human Resources",
+      "user_score": 0.0,
+      "required_score": 2.0,
+      "gap": 2.0,
+      "priority": 6
+    },
+    {
+      "element": "Communications and Media",
+      "user_score": 0.0,
+      "required_score": 2.0,
+      "gap": 2.0,
+      "priority": 7
+    },
+    {
+      "element": "Law and Government",
+      "user_score": 0.0,
+      "required_score": 1.9,
+      "gap": 1.9,
+      "priority": 8
+    },
+    {
+      "element": "Sales and Marketing",
+      "user_score": 0.0,
+      "required_score": 1.85,
+      "gap": 1.85,
+      "priority": 9
+    },
+    {
+      "element": "Production and Processing",
+      "user_score": 0.0,
+      "required_score": 1.7,
+      "gap": 1.7,
+      "priority": 10
+    }
+  ],
+  "skill_gaps": [
+    {
+      "element": "Reading Comprehension",
+      "user_score": 0.0,
+      "required_score": 4.0,
+      "gap": 4.0,
+      "priority": 1
+    },
+    {
+      "element": "Active Listening",
+      "user_score": 0.0,
+      "required_score": 3.75,
+      "gap": 3.75,
+      "priority": 2
+    },
+    {
+      "element": "Speaking",
+      "user_score": 0.0,
+      "required_score": 3.75,
+      "gap": 3.75,
+      "priority": 3
+    },
+    {
+      "element": "Mathematics",
+      "user_score": 0.63,
+      "required_score": 4.38,
+      "gap": 3.75,
+      "priority": 4
+    },
+    {
+      "element": "Active Learning",
+      "user_score": 0.0,
+      "required_score": 3.75,
+      "gap": 3.75,
+      "priority": 5
+    },
+    {
+      "element": "Judgment and Decision Making",
+      "user_score": 0.0,
+      "required_score": 3.75,
+      "gap": 3.75,
+      "priority": 6
+    },
+    {
+      "element": "Writing",
+      "user_score": 0.0,
+      "required_score": 3.5,
+      "gap": 3.5,
+      "priority": 7
+    },
+    {
+      "element": "Persuasion",
+      "user_score": 0.0,
+      "required_score": 3.12,
+      "gap": 3.12,
+      "priority": 8
+    },
+    {
+      "element": "Learning Strategies",
+      "user_score": 0.0,
+      "required_score": 3.0,
+      "gap": 3.0,
+      "priority": 9
+    },
+    {
+      "element": "Monitoring",
+      "user_score": 0.0,
+      "required_score": 3.0,
+      "gap": 3.0,
+      "priority": 10
+    }
+  ],
+  "work_style_gaps": []
+}

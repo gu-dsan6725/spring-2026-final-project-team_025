@@ -1,0 +1,27 @@
+{
+  "total_non_empty_extractions": 1177,
+  "item_counts": {
+    "knowledge": 293,
+    "skill": 416,
+    "tool": 543,
+    "project": 590,
+    "course": 110,
+    "career_goal": 400,
+    "interest": 86,
+    "behavioral_trait": 326,
+    "constraint": 113,
+    "implicit_signal": 530
+  },
+  "turn_counts_by_field": {
+    "knowledge": 227,
+    "skill": 322,
+    "tool": 328,
+    "project": 563,
+    "course": 108,
+    "career_goal": 391,
+    "interest": 80,
+    "behavioral_trait": 286,
+    "constraint": 112,
+    "implicit_signal": 449
+  }
+}

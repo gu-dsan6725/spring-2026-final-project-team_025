@@ -1,0 +1,105 @@
+{
+  "user_id": "user_001",
+  "recommendations": [
+    {
+      "onet_code": "15-1251.00",
+      "title": "Computer Programmers",
+      "score": 0.5575,
+      "component_scores": {
+        "knowledge": 0.5487,
+        "skills": 0.5648,
+        "work_styles": 0.0
+      }
+    },
+    {
+      "onet_code": "13-2099.01",
+      "title": "Financial Quantitative Analysts",
+      "score": 0.5548,
+      "component_scores": {
+        "knowledge": 0.6705,
+        "skills": 0.4601,
+        "work_styles": 0.0
+      }
+    },
+    {
+      "onet_code": "15-1243.01",
+      "title": "Data Warehousing Specialists",
+      "score": 0.5544,
+      "component_scores": {
+        "knowledge": 0.5836,
+        "skills": 0.5305,
+        "work_styles": 0.0
+      }
+    },
+    {
+      "onet_code": "15-1243.00",
+      "title": "Database Architects",
+      "score": 0.5474,
+      "component_scores": {
+        "knowledge": 0.587,
+        "skills": 0.515,
+        "work_styles": 0.0
+      }
+    },
+    {
+      "onet_code": "15-1252.00",
+      "title": "Software Developers",
+      "score": 0.5458,
+      "component_scores": {
+        "knowledge": 0.5567,
+        "skills": 0.5369,
+        "work_styles": 0.0
+      }
+    },
+    {
+      "onet_code": "15-2011.00",
+      "title": "Actuaries",
+      "score": 0.526,
+      "component_scores": {
+        "knowledge": 0.5889,
+        "skills": 0.4746,
+        "work_styles": 0.0
+      }
+    },
+    {
+      "onet_code": "15-1253.00",
+      "title": "Software Quality Assurance Analysts and Testers",
+      "score": 0.5256,
+      "component_scores": {
+        "knowledge": 0.5429,
+        "skills": 0.5113,
+        "work_styles": 0.0
+      }
+    },
+    {
+      "onet_code": "15-2031.00",
+      "title": "Operations Research Analysts",
+      "score": 0.5231,
+      "component_scores": {
+        "knowledge": 0.5857,
+        "skills": 0.4719,
+        "work_styles": 0.0
+      }
+    },
+    {
+      "onet_code": "15-1221.00",
+      "title": "Computer and Information Research Scientists",
+      "score": 0.5227,
+      "component_scores": {
+        "knowledge": 0.5297,
+        "skills": 0.517,
+        "work_styles": 0.0
+      }
+    },
+    {
+      "onet_code": "15-1241.00",
+      "title": "Computer Network Architects",
+      "score": 0.5177,
+      "component_scores": {
+        "knowledge": 0.5095,
+        "skills": 0.5244,
+        "work_styles": 0.0
+      }
+    }
+  ]
+}
