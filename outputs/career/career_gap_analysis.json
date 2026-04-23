@@ -4,35 +4,30 @@
   "knowledge_gaps": [
     {
       "element": "Customer and Personal Service",
-      "user_score": 0.0,
       "required_score": 2.96,
       "gap": 2.96,
       "priority": 1
     },
     {
       "element": "Communications and Media",
-      "user_score": 0.343,
       "required_score": 3.21,
       "gap": 2.867,
       "priority": 2
     },
     {
       "element": "Administrative",
-      "user_score": 0.0,
       "required_score": 2.38,
       "gap": 2.38,
       "priority": 3
     },
     {
       "element": "Fine Arts",
-      "user_score": 0.0,
       "required_score": 2.04,
       "gap": 2.04,
       "priority": 4
     },
     {
       "element": "Education and Training",
-      "user_score": 0.337,
       "required_score": 2.25,
       "gap": 1.913,
       "priority": 5
@@ -41,35 +36,30 @@
   "skill_gaps": [
     {
       "element": "Speaking",
-      "user_score": 0.0,
       "required_score": 3.25,
       "gap": 3.25,
       "priority": 1
     },
     {
       "element": "Reading Comprehension",
-      "user_score": 0.5,
       "required_score": 3.62,
       "gap": 3.12,
       "priority": 2
     },
     {
       "element": "Critical Thinking",
-      "user_score": 0.8,
       "required_score": 3.75,
       "gap": 2.95,
       "priority": 3
     },
     {
       "element": "Social Perceptiveness",
-      "user_score": 0.0,
       "required_score": 2.88,
       "gap": 2.88,
       "priority": 4
     },
     {
       "element": "Service Orientation",
-      "user_score": 0.0,
       "required_score": 2.88,
       "gap": 2.88,
       "priority": 5
@@ -78,35 +68,30 @@
   "work_style_gaps": [
     {
       "element": "Tolerance for Ambiguity",
-      "user_score": 0.0,
       "required_score": 1.41,
       "gap": 1.41,
       "priority": 1
     },
     {
       "element": "Cautiousness",
-      "user_score": 0.414,
       "required_score": 1.56,
       "gap": 1.146,
       "priority": 2
     },
     {
       "element": "Stress Tolerance",
-      "user_score": 0.4,
       "required_score": 1.09,
       "gap": 0.69,
       "priority": 3
     },
     {
       "element": "Cooperation",
-      "user_score": 0.527,
       "required_score": 0.85,
       "gap": 0.323,
       "priority": 4
     },
     {
       "element": "Sincerity",
-      "user_score": 0.0,
       "required_score": 0.24,
       "gap": 0.24,
       "priority": 5

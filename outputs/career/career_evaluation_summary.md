@@ -33,9 +33,9 @@
 
 ## Gap Analysis Target
 - Target: Web Developers (15-1254.00)
-- Top knowledge gaps: [{'element': 'Customer and Personal Service', 'user_score': 0.0, 'required_score': 2.96, 'gap': 2.96, 'priority': 1}, {'element': 'Communications and Media', 'user_score': 0.343, 'required_score': 3.21, 'gap': 2.867, 'priority': 2}, {'element': 'Administrative', 'user_score': 0.0, 'required_score': 2.38, 'gap': 2.38, 'priority': 3}]
-- Top skill gaps: [{'element': 'Speaking', 'user_score': 0.0, 'required_score': 3.25, 'gap': 3.25, 'priority': 1}, {'element': 'Reading Comprehension', 'user_score': 0.5, 'required_score': 3.62, 'gap': 3.12, 'priority': 2}, {'element': 'Critical Thinking', 'user_score': 0.8, 'required_score': 3.75, 'gap': 2.95, 'priority': 3}]
-- Top work style gaps: [{'element': 'Tolerance for Ambiguity', 'user_score': 0.0, 'required_score': 1.41, 'gap': 1.41, 'priority': 1}, {'element': 'Cautiousness', 'user_score': 0.414, 'required_score': 1.56, 'gap': 1.146, 'priority': 2}, {'element': 'Stress Tolerance', 'user_score': 0.4, 'required_score': 1.09, 'gap': 0.69, 'priority': 3}]
+- Top knowledge gaps: [{'element': 'Customer and Personal Service', 'required_score': 2.96, 'gap': 2.96, 'priority': 1}, {'element': 'Communications and Media', 'required_score': 3.21, 'gap': 2.867, 'priority': 2}, {'element': 'Administrative', 'required_score': 2.38, 'gap': 2.38, 'priority': 3}]
+- Top skill gaps: [{'element': 'Speaking', 'required_score': 3.25, 'gap': 3.25, 'priority': 1}, {'element': 'Reading Comprehension', 'required_score': 3.62, 'gap': 3.12, 'priority': 2}, {'element': 'Critical Thinking', 'required_score': 3.75, 'gap': 2.95, 'priority': 3}]
+- Top work style gaps: [{'element': 'Tolerance for Ambiguity', 'required_score': 1.41, 'gap': 1.41, 'priority': 1}, {'element': 'Cautiousness', 'required_score': 1.56, 'gap': 1.146, 'priority': 2}, {'element': 'Stress Tolerance', 'required_score': 1.09, 'gap': 0.69, 'priority': 3}]
 
 ## Data Sources
 - Knowledge.xlsx and Skills.xlsx: real O*NET data (loaded)

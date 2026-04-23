@@ -569,7 +569,6 @@ def _top_gaps(user_vector: dict[str, float], occupation_vector: dict[str, float]
         gaps.append(
             {
                 "element": element,
-                "user_score": round(user_score, 3),
                 "required_score": round(float(required), 3),
                 "gap": round(gap, 3),
             }
