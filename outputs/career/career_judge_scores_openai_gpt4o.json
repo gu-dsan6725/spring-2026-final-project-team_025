@@ -1,212 +1,212 @@
 [
   {
-    "turn_id": "career_dev_217::turn_2",
+    "turn_id": "career_dev_217::turn_0",
+    "completeness": 2,
+    "faithfulness": 2,
+    "career_utility": 2,
+    "rationale": "The extraction misses key signals like MLFlow, Data Scientist sustainability concerns, and interest in generative AI ethics, while including unsupported items like 'innovation' and vague career goals, limiting its utility."
+  },
+  {
+    "turn_id": "career_dev_246::turn_4",
+    "completeness": 2,
+    "faithfulness": 2,
+    "career_utility": 2,
+    "rationale": "The extraction misses key signals such as the user's focus on social impact, interest in risk modeling, and long-term career planning, while incorrectly categorizing 'the right steps for my long-term future' as a course, leading to limited utility."
+  },
+  {
+    "turn_id": "career_dev_022::turn_6",
+    "completeness": 1,
+    "faithfulness": 1,
+    "career_utility": 1,
+    "rationale": "The extracted signals miss key elements such as the user's interest in becoming a UX researcher and the skills they feel they lack, while also incorrectly categorizing 'stakeholder management' as a project, leading to a lack of actionable insights."
+  },
+  {
+    "turn_id": "career_dev_137::turn_8",
     "completeness": 2,
     "faithfulness": 3,
     "career_utility": 2,
-    "rationale": "The extraction captures the project 'financial news sentiment' but misses key signals like skills, tools, and work styles; it partially reflects the user's iterative approach but lacks explicit mention of feature engineering or computer vision, limiting its utility for career analysis."
+    "rationale": "The extraction captures the user's desire for dynamic career recommendations but misses key signals like the importance of evolving skills and projects; it includes some unsupported elements like 'skills and project' as a project, limiting its utility."
   },
   {
-    "turn_id": "career_dev_247::turn_0",
+    "turn_id": "career_dev_327::turn_2",
     "completeness": 1,
     "faithfulness": 3,
-    "career_utility": 1,
-    "rationale": "The extraction lacks completeness as it misses key signals like tools (Optuna), skills (reinforcement learning), and interests (finance-oriented roles), and while it correctly identifies 'finance', it fails to capture the context of the user's query, limiting its career utility."
-  },
-  {
-    "turn_id": "career_dev_022::turn_8",
-    "completeness": 2,
-    "faithfulness": 4,
-    "career_utility": 3,
-    "rationale": "The extraction captures the user's goal of having an assistant infer career paths but misses explicit details on projects, tools, and habits, which limits its utility for career recommendations."
-  },
-  {
-    "turn_id": "career_dev_138::turn_0",
-    "completeness": 3,
-    "faithfulness": 4,
-    "career_utility": 3,
-    "rationale": "The extraction captures tools and a skill but misses explicit projects, goals, and interests; it is mostly faithful but lacks some context, and the signals are somewhat useful for career analysis."
-  },
-  {
-    "turn_id": "career_dev_328::turn_0",
-    "completeness": 2,
-    "faithfulness": 2,
     "career_utility": 2,
-    "rationale": "The extraction misses key signals like the user's interest in market impact and tools used (C++, Numpy), includes unsupported claims like 'explore' as a career goal, and lacks utility due to incomplete and inaccurate signal extraction."
+    "rationale": "The extraction misses key signals such as skills (Go, concurrency), work style (fast-paced), and interests (industry valuation of traits), while the extracted project is supported by the message but lacks depth, making it partially useful."
   },
   {
-    "turn_id": "career_dev_305::turn_2",
+    "turn_id": "career_dev_304::turn_6",
     "completeness": 3,
-    "faithfulness": 4,
+    "faithfulness": 5,
     "career_utility": 4,
-    "rationale": "The extraction captures key signals like the project and behavioral trait but misses explicit mention of career goals or constraints; it is mostly faithful to the user message and useful for career analysis."
+    "rationale": "The extraction captures the main signals of tool usage (PyTorch) and interest (neural architecture search) but misses the project aspect (medical image segmenter) and skills related to these activities; all extracted signals are grounded in the message and are useful for career analysis."
   },
   {
-    "turn_id": "career_dev_234::turn_0",
-    "completeness": 2,
-    "faithfulness": 2,
-    "career_utility": 2,
-    "rationale": "The extraction misses key signals such as skills (Rust, Terraform), interests (cloud-native security), and work style (perfectionism in API design), and includes unsupported elements like 'production-oriented' and incorrectly identifies 'explore' as a career goal, limiting its utility for career analysis."
-  },
-  {
-    "turn_id": "career_dev_161::turn_8",
-    "completeness": 2,
-    "faithfulness": 3,
-    "career_utility": 2,
-    "rationale": "The extraction captures a general career goal but misses specific projects, tools, and habits mentioned, and the extracted signal is somewhat supported by the message but lacks detail for practical career utility."
-  },
-  {
-    "turn_id": "career_dev_298::turn_0",
-    "completeness": 2,
-    "faithfulness": 3,
-    "career_utility": 3,
-    "rationale": "The extraction misses key tools like HuggingFace and NVIDIA Jetson, and career goals like MLE, but it captures some relevant skills and interests, though not all are fully supported by the message."
-  },
-  {
-    "turn_id": "career_dev_196::turn_0",
+    "turn_id": "career_dev_233::turn_6",
     "completeness": 3,
     "faithfulness": 3,
     "career_utility": 3,
-    "rationale": "The extraction captures some key signals like tools, skills, and interests but misses others like the user's career goal of becoming a Data Scientist and incorrectly includes 'for our team' as a course, affecting faithfulness and utility."
+    "rationale": "The extraction captures the main signals of a dynamic career goal and interest in Docker, but it misses the context of learning and the question about memory graph updates, and the 'USES_TOOL' relation is not fully supported by the message."
   },
   {
-    "turn_id": "career_dev_116::turn_0",
-    "completeness": 2,
-    "faithfulness": 3,
-    "career_utility": 2,
-    "rationale": "The extraction misses key projects and interests, partially captures tools, and includes unsupported traits, limiting its utility for career analysis."
-  },
-  {
-    "turn_id": "career_dev_321::turn_0",
-    "completeness": 2,
+    "turn_id": "career_dev_161::turn_6",
+    "completeness": 1,
     "faithfulness": 2,
+    "career_utility": 1,
+    "rationale": "The extraction misses key constraints mentioned (limited exposure to advanced probability and financial derivatives) and incorrectly identifies a career goal, making it incomplete and of limited utility, though it is mostly faithful to the user's message."
+  },
+  {
+    "turn_id": "career_dev_297::turn_2",
+    "completeness": 2,
+    "faithfulness": 4,
     "career_utility": 2,
-    "rationale": "The extraction misses key signals like interest in kernel development, skills in DevOps and iterative bug finding, and tools like Kubernetes; it inaccurately lists 'explore' as a career goal and 'for our team' as a course, limiting its utility for career analysis."
+    "rationale": "The extraction captures the project 'option pricing tool' but misses key signals like collaboration and interest in econometrics, which are relevant for career development."
+  },
+  {
+    "turn_id": "career_dev_195::turn_2",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The extraction captures the main project and some traits but misses key signals like skills (Rust, cloud infrastructure) and interests, and includes a questionable trait (innovation) not explicitly mentioned."
+  },
+  {
+    "turn_id": "career_dev_115::turn_8",
+    "completeness": 2,
+    "faithfulness": 4,
+    "career_utility": 3,
+    "rationale": "The extraction captures the user's desire for dynamic career recommendations but misses explicit signals like skills, projects, and interests; it is mostly faithful to the message but lacks depth for actionable career utility."
+  },
+  {
+    "turn_id": "career_dev_320::turn_6",
+    "completeness": 2,
+    "faithfulness": 5,
+    "career_utility": 2,
+    "rationale": "The extraction captures the user's career goal of having a dynamic career but misses the interest in learning KDB+/Q; all extracted signals are grounded in the message, but the utility is limited due to lack of actionable details."
+  },
+  {
+    "turn_id": "career_dev_074::turn_4",
+    "completeness": 3,
+    "faithfulness": 5,
+    "career_utility": 4,
+    "rationale": "The extraction captures the main career goal but misses the interest in supply chain analysis; all extracted signals are grounded in the message and provide useful information for career guidance."
+  },
+  {
+    "turn_id": "career_dev_150::turn_0",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The extraction captures main tools and projects but misses the user's career contemplation and incorrectly infers machine learning skills; signals are partially useful but lack depth for career guidance."
   },
   {
     "turn_id": "career_dev_074::turn_6",
     "completeness": 3,
     "faithfulness": 3,
     "career_utility": 3,
-    "rationale": "The extraction captures the career goal and a skill gap but misses ERP systems and incorrectly interprets constraints and implicit signals, affecting faithfulness and utility."
+    "rationale": "The extraction captures the main career goal and skill gap but misses the ERP systems gap and includes questionable implicit signals."
   },
   {
-    "turn_id": "career_dev_150::turn_4",
-    "completeness": 3,
-    "faithfulness": 2,
-    "career_utility": 3,
-    "rationale": "The extraction captures the user's career goal but misses the interest in being a quantitative analyst and incorrectly infers 'analytical thinking'; it partially supports career recommendations but lacks detail on skills and tools."
+    "turn_id": "career_dev_050::turn_8",
+    "completeness": 2,
+    "faithfulness": 4,
+    "career_utility": 2,
+    "rationale": "The extraction captures the user's desire for career path inference but misses explicit signals like projects, tools, and habits; it is mostly faithful but lacks actionable details for career utility."
   },
   {
-    "turn_id": "career_dev_074::turn_8",
+    "turn_id": "career_dev_133::turn_8",
     "completeness": 2,
     "faithfulness": 3,
     "career_utility": 2,
-    "rationale": "The extraction captures some intent about evolving skills and projects but misses explicit signals like specific skills, tools, or goals, and the 'WORKS_ON' relation is not fully supported by the message."
+    "rationale": "The extraction captures the user's desire for dynamic career recommendations and mentions of skills and projects, but misses the implicit goal of evolving recommendations and lacks detail on specific skills or projects, with some questionable interpretations."
   },
   {
-    "turn_id": "career_dev_051::turn_0",
-    "completeness": 2,
-    "faithfulness": 4,
-    "career_utility": 3,
-    "rationale": "The extraction captures some tools and projects but misses key signals like Linux, Splunk, and career goals, though it remains mostly faithful to the user message."
-  },
-  {
-    "turn_id": "career_dev_134::turn_0",
+    "turn_id": "career_dev_345::turn_2",
     "completeness": 2,
     "faithfulness": 3,
     "career_utility": 2,
-    "rationale": "The extraction captures some tools and a vague project reference but misses key details like specific projects, interests, and career goals, and misclassifies career uncertainty as a constraint."
+    "rationale": "The extraction captures the project but misses key signals like skills (Redis, API design), tools (Redis), and behavioral traits (collaborative, cares about API design); it includes an unsupported implicit signal, reducing faithfulness and utility."
   },
   {
-    "turn_id": "career_dev_345::turn_6",
+    "turn_id": "career_dev_077::turn_8",
     "completeness": 2,
     "faithfulness": 4,
-    "career_utility": 3,
-    "rationale": "The extraction missed key signals such as skills in CI/CD and Terraform, but correctly identified interest in microservices orchestration; however, it lacks completeness and some utility for career analysis."
+    "career_utility": 2,
+    "rationale": "The extraction captures the user's desire for dynamic career recommendations but misses other signals like the need for skill revision and adaptability; it is mostly faithful but lacks depth in utility for career analysis."
   },
   {
-    "turn_id": "career_dev_078::turn_0",
+    "turn_id": "career_dev_165::turn_4",
     "completeness": 3,
     "faithfulness": 4,
     "career_utility": 3,
-    "rationale": "The extraction captures some key tools and projects but misses important signals like Google Analytics, career goals, and interests, while the signals are mostly faithful to the user message and moderately useful for career analysis."
+    "rationale": "The extraction captures the main career goals but misses some skills like backend development and MLOps, and while mostly faithful, it inaccurately lists 'machine learning' as a skill signal instead of MLOps basics; the signals are partially useful but lack specificity for career recommendations."
   },
   {
-    "turn_id": "career_dev_165::turn_6",
-    "completeness": 2,
-    "faithfulness": 2,
-    "career_utility": 2,
-    "rationale": "The extraction misses key constraints like 'limited exposure to cloud deployment' and misrepresents the user's goal, while also introducing unsupported signals like 'production-oriented', limiting its utility."
-  },
-  {
-    "turn_id": "career_dev_053::turn_0",
-    "completeness": 2,
-    "faithfulness": 2,
-    "career_utility": 2,
-    "rationale": "The extraction misses key signals like skills (JavaScript), projects (web app backend, REST API), and interests (enjoyment of current work), and includes unsupported signals like 'production-oriented' and incorrectly categorizes career goals as constraints."
-  },
-  {
-    "turn_id": "career_dev_039::turn_8",
-    "completeness": 2,
-    "faithfulness": 3,
-    "career_utility": 2,
-    "rationale": "The extraction captures the user's desire for dynamic career recommendations but misses explicit signals like skills, tools, or projects, and the extracted goal is somewhat inferred rather than directly stated."
-  },
-  {
-    "turn_id": "career_dev_176::turn_4",
+    "turn_id": "career_dev_052::turn_8",
     "completeness": 2,
     "faithfulness": 4,
-    "career_utility": 3,
-    "rationale": "The extraction captures the user's interest in network security and threat modeling but misses the mention of cybersecurity analyst and curiosity about other occupations, which are relevant for career development."
+    "career_utility": 2,
+    "rationale": "The extraction captures the user's desire for career path inference but misses explicit signals like skills, tools, and projects mentioned in the message, and the extracted goal is somewhat vague for career utility."
   },
   {
-    "turn_id": "career_dev_293::turn_4",
+    "turn_id": "career_dev_039::turn_6",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The extraction captures the main signals of career goal and skill gaps but misses the mention of ERP systems and incorrectly interprets constraints and implicit signals."
+  },
+  {
+    "turn_id": "career_dev_176::turn_0",
     "completeness": 2,
     "faithfulness": 2,
     "career_utility": 2,
-    "rationale": "The extraction captures the user's skill in deep learning but misses key signals like the remote-only constraint and interest in climate modeling, and it incorrectly identifies a course, reducing faithfulness and utility."
+    "rationale": "The extraction misses key signals such as specific projects, tools like Linux and Wireshark, and career interests, while including unsupported items like 'analytical thinking' and misrepresenting career goals as constraints, limiting its utility."
+  },
+  {
+    "turn_id": "career_dev_293::turn_2",
+    "completeness": 1,
+    "faithfulness": 3,
+    "career_utility": 2,
+    "rationale": "The extraction misses key signals such as tools (NVIDIA Jetson), skills (distributed training), and behavioral traits (fast-paced), while the extracted project is supported by the message but lacks additional context, limiting its career utility."
   },
   {
     "turn_id": "career_dev_368::turn_0",
-    "completeness": 2,
-    "faithfulness": 2,
-    "career_utility": 2,
-    "rationale": "The extraction misses key signals like interest in HFT strategies and potential career change, misrepresents 'explore' as a career goal, and lacks faithfulness in capturing the user's work style and tools used."
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The extraction captures some key signals like tools and skills but misses others such as the interest in HFT strategies and the consideration of career sustainability; some signals like 'explore' as a career goal are not well-grounded in the message."
   },
   {
-    "turn_id": "career_dev_054::turn_0",
+    "turn_id": "career_dev_053::turn_8",
     "completeness": 2,
     "faithfulness": 3,
     "career_utility": 2,
-    "rationale": "The extraction captures some tools used but misses key projects, skills, and career goals mentioned, and the course extraction is inaccurate, limiting its utility for career analysis."
+    "rationale": "The extraction captures the user's desire for dynamic recommendations and mentions skills and projects, but misses the implicit goal of evolving career guidance and lacks detail on specific skills or projects."
   },
   {
-    "turn_id": "career_dev_192::turn_6",
-    "completeness": 2,
+    "turn_id": "career_dev_192::turn_2",
+    "completeness": 1,
+    "faithfulness": 3,
+    "career_utility": 2,
+    "rationale": "The extraction misses key signals such as skills (Rust, concurrency), work style (fast-paced), and interests (DevOps industry traits), but the extracted project is grounded in the message; however, the signals are too sparse to be highly useful for career analysis."
+  },
+  {
+    "turn_id": "career_dev_259::turn_2",
+    "completeness": 3,
     "faithfulness": 4,
     "career_utility": 3,
-    "rationale": "The extraction captures the interest in event-driven architecture but misses key signals like skills in Terraform and projects involving custom load balancers, which are important for career analysis."
+    "rationale": "The extraction captures the main signals such as the project and skill but misses the use of C++ and the user's perfectionism trait; it is mostly faithful but lacks some explicit mentions; the signals are partially useful but could be more detailed for career analysis."
   },
   {
-    "turn_id": "career_dev_259::turn_4",
-    "completeness": 2,
-    "faithfulness": 2,
-    "career_utility": 2,
-    "rationale": "The extraction misses key signals like the user's constraint of limited system design exposure and their interest in risk modeling, while incorrectly identifying 'the right steps for my long-term future' as a course, affecting both faithfulness and utility."
+    "turn_id": "career_dev_168::turn_4",
+    "completeness": 3,
+    "faithfulness": 5,
+    "career_utility": 4,
+    "rationale": "The extraction captures the main career goal related to scripting and incident response but misses the interest in cybersecurity analyst and curiosity about other occupations; all extracted signals are grounded in the message and provide useful information for career recommendations."
   },
   {
-    "turn_id": "career_dev_168::turn_8",
-    "completeness": 2,
-    "faithfulness": 3,
-    "career_utility": 2,
-    "rationale": "The extraction captures a general career goal but misses specific projects, tools, habits, and dynamic profile changes mentioned by the user, limiting its utility for detailed career analysis."
-  },
-  {
-    "turn_id": "career_dev_108::turn_4",
-    "completeness": 2,
-    "faithfulness": 3,
-    "career_utility": 2,
-    "rationale": "The extraction captures the user's career goal but misses explicit skills and potential roles; it is mostly faithful but infers 'analytical thinking' without strong support, and the signals are limited for career recommendations."
+    "turn_id": "career_dev_108::turn_0",
+    "completeness": 3,
+    "faithfulness": 4,
+    "career_utility": 3,
+    "rationale": "The extraction captures main tools and projects but misses PowerPoint and the user's career interest in business or product analysis; it is mostly faithful but lacks some detail, and the signals are somewhat useful for career analysis but could be clearer."
   }
 ]

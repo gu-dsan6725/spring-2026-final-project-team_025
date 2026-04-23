@@ -2,138 +2,83 @@
   {
     "turn_id": "career_dev_001::turn_0",
     "text": "I’m currently working on computer vision classifier and also helping with model deployment API. Most of my recent work uses FastAPI, PyTorch, and Python. I keep wondering whether my background points more toward machine learning engineer or something adjacent like data scientist.",
-    "relations": [
-      {
-        "source": "USER",
-        "target": "Machine Learning",
-        "relation_type": "INTEREST"
-      },
-      {
-        "source": "USER",
-        "target": "Computer Vision",
-        "relation_type": "INTEREST"
-      },
-      {
-        "source": "USER",
-        "target": "Data Science",
-        "relation_type": "ADJACENT_ROLE"
-      },
-      {
-        "source": "USER",
-        "target": "Model Deployment",
-        "relation_type": "SKILL"
-      },
-      {
-        "source": "USER",
-        "target": "API Development",
-        "relation_type": "SKILL"
-      },
-      {
-        "source": "USER",
-        "target": "PyTorch",
-        "relation_type": "TOOL"
-      },
-      {
-        "source": "USER",
-        "target": "FastAPI",
-        "relation_type": "TOOL"
-      },
-      {
-        "source": "USER",
-        "target": "Python",
-        "relation_type": "TOOL"
-      },
-      {
-        "source": "USER",
-        "target": "Computer Vision Classifier",
-        "relation_type": "PROJECT"
-      }
-    ],
+    "relations": [],
     "knowledge": [
       {
-        "name": "Machine Learning",
+        "name": "machine learning",
         "confidence": 0.8
       },
       {
-        "name": "Computer Vision",
+        "name": "software engineering",
         "confidence": 0.7
-      },
-      {
-        "name": "Data Science",
-        "confidence": 0.6
       }
     ],
     "skill": [
       {
-        "name": "Model Deployment",
+        "name": "image classification using PyTorch",
         "confidence": 0.9
       },
       {
-        "name": "API Development",
+        "name": "model deployment API",
         "confidence": 0.8
-      },
-      {
-        "name": "PyTorch",
-        "confidence": 0.9
       },
       {
         "name": "FastAPI",
-        "confidence": 0.8
+        "confidence": 0.9
       },
       {
-        "name": "Python",
-        "confidence": 0.9
+        "name": "Python programming",
+        "confidence": 1.0
       }
     ],
     "tool": [
       {
-        "name": "FastAPI",
-        "confidence": 0.8
-      },
-      {
         "name": "PyTorch",
         "confidence": 0.9
       },
       {
-        "name": "Python",
+        "name": "FastAPI",
         "confidence": 0.9
+      },
+      {
+        "name": "Python",
+        "confidence": 1.0
       }
     ],
     "project": [
       {
-        "name": "Computer Vision Classifier",
+        "name": "computer vision classifier",
         "confidence": 0.9
       }
     ],
     "course": [],
     "career_goal": [
       {
-        "name": "Machine Learning Engineer",
-        "confidence": 0.7
+        "name": "machine learning engineer",
+        "confidence": 0.6
       },
       {
-        "name": "Data Scientist",
+        "name": "data scientist",
         "confidence": 0.6
       }
     ],
     "interest": [],
     "behavioral_trait": [
       {
-        "name": "Analytical Thinking",
-        "confidence": 0.6
+        "name": "Achievement Orientation",
+        "confidence": 0.5
       },
       {
-        "name": "Persistence",
+        "name": "Adaptability",
+        "confidence": 0.5
+      },
+      {
+        "name": "Intellectual Curiosity",
         "confidence": 0.5
       }
     ],
     "constraint": [],
-    "implicit_signal": [
-      {
-        "name": "Interest in adjacent roles",
-        "confidence": 0.7
-      }
-    ]
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_001::turn_4",
@@ -141,348 +86,260 @@
     "relations": [
       {
         "source": "USER",
-        "target": "Machine Learning",
-        "relation_type": "INTEREST"
+        "target": "a career that combines model evaluation, deep learning, and real-world problem solving",
+        "relation_type": "HAS_CAREER_GOAL"
       },
       {
         "source": "USER",
-        "target": "Model Evaluation",
-        "relation_type": "SKILL"
+        "target": "current project",
+        "relation_type": "WORKS_ON"
       },
       {
         "source": "USER",
-        "target": "Python",
-        "relation_type": "TOOL"
+        "target": "model evaluation",
+        "relation_type": "HAS_SKILL_SIGNAL"
       },
       {
         "source": "USER",
-        "target": "Current Projects",
-        "relation_type": "PROJECT"
+        "target": "machine learning",
+        "relation_type": "HAS_SKILL_SIGNAL"
       },
       {
         "source": "USER",
-        "target": "Machine Learning Engineer",
-        "relation_type": "CAREER_GOAL"
+        "target": "deep learning",
+        "relation_type": "HAS_SKILL_SIGNAL"
       }
     ],
     "knowledge": [
       {
-        "name": "Machine Learning",
-        "confidence": 0.8
+        "name": "machine learning",
+        "confidence": 0.75
       },
       {
-        "name": "Data Analysis",
-        "confidence": 0.6
-      },
-      {
-        "name": "Deep Learning",
-        "confidence": 0.8
+        "name": "deep learning",
+        "confidence": 0.75
       }
     ],
     "skill": [
       {
-        "name": "Model Evaluation",
-        "confidence": 0.8
+        "name": "model evaluation",
+        "confidence": 0.75
       },
       {
-        "name": "Deep Learning",
-        "confidence": 0.8
+        "name": "machine learning",
+        "confidence": 0.75
       },
       {
-        "name": "Real-World Problem Solving",
-        "confidence": 0.6
+        "name": "deep learning",
+        "confidence": 0.75
       }
     ],
-    "tool": [
-      {
-        "name": "Python",
-        "confidence": 0.8
-      },
-      {
-        "name": "PyTorch",
-        "confidence": 0.6
-      }
-    ],
+    "tool": [],
     "project": [
       {
-        "name": "Current Projects",
-        "confidence": 0.6
+        "name": "current project",
+        "confidence": 0.75
       }
     ],
     "course": [],
     "career_goal": [
       {
-        "name": "Machine Learning Engineer",
-        "confidence": 0.8
+        "name": "a career that combines model evaluation, deep learning, and real-world problem solving",
+        "confidence": 0.75
       }
     ],
-    "interest": [
-      {
-        "name": "Real-World Problem Solving",
-        "confidence": 0.6
-      }
-    ],
+    "interest": [],
     "behavioral_trait": [
       {
-        "name": "Analytical Thinking",
-        "confidence": 0.6
-      },
-      {
-        "name": "Persistence",
-        "confidence": 0.4
+        "name": "analytical thinking",
+        "confidence": 0.75
       }
     ],
     "constraint": [],
     "implicit_signal": [
       {
-        "name": "Open to Development Directions",
-        "confidence": 0.8
+        "name": "analytical thinking",
+        "confidence": 0.75
       }
     ]
   },
   {
     "turn_id": "career_dev_001::turn_6",
     "text": "My concern is that I probably have gaps in system design and distributed systems, and I’m not sure whether that blocks me from moving toward machine learning engineer.",
-    "relations": [
-      {
-        "source": "USER",
-        "target": "Machine Learning Engineer",
-        "relation_type": "CAREER_GOAL"
-      },
-      {
-        "source": "USER",
-        "target": "System Design",
-        "relation_type": "KNOWLEDGE_AREA"
-      },
-      {
-        "source": "USER",
-        "target": "Distributed Systems",
-        "relation_type": "KNOWLEDGE_AREA"
-      },
-      {
-        "source": "USER",
-        "target": "Gaps in knowledge",
-        "relation_type": "CONSTRAINT"
-      }
-    ],
+    "relations": [],
     "knowledge": [
       {
-        "name": "System Design",
+        "name": "software engineering",
         "confidence": 0.8
       },
       {
-        "name": "Distributed Systems",
-        "confidence": 0.8
-      },
-      {
-        "name": "Machine Learning",
-        "confidence": 0.9
+        "name": "machine learning",
+        "confidence": 0.6
       }
     ],
     "skill": [
       {
-        "name": "System Design",
-        "confidence": 0.8
+        "name": "system design",
+        "confidence": 0.5
       },
       {
-        "name": "Distributed Systems",
+        "name": "distributed systems",
+        "confidence": 0.5
+      }
+    ],
+    "tool": [
+      {
+        "name": "Python",
+        "confidence": 0.9
+      },
+      {
+        "name": "SQL",
         "confidence": 0.8
       }
     ],
-    "tool": [],
     "project": [],
     "course": [],
     "career_goal": [
       {
-        "name": "Machine Learning Engineer",
+        "name": "machine learning engineer",
         "confidence": 0.9
       }
     ],
     "interest": [],
-    "behavioral_trait": [],
-    "constraint": [
+    "behavioral_trait": [
       {
-        "name": "Gaps in knowledge",
-        "confidence": 0.9
+        "name": "Achievement Orientation",
+        "confidence": 0.7
+      },
+      {
+        "name": "Perseverance",
+        "confidence": 0.7
+      },
+      {
+        "name": "Initiative",
+        "confidence": 0.7
       }
     ],
-    "implicit_signal": [
+    "constraint": [
       {
-        "name": "Concern about career progression",
+        "name": "gaps in system design and distributed systems",
         "confidence": 0.8
       }
-    ]
+    ],
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_001::turn_8",
     "text": "That sounds useful. I want career recommendations to be dynamic and multi-path, so that if my projects shift over time, the assistant can revise what roles fit me best and what skills I still need.",
-    "relations": [
-      {
-        "source": "USER",
-        "target": "career development",
-        "relation_type": "INTEREST"
-      },
-      {
-        "source": "USER",
-        "target": "project management",
-        "relation_type": "INTEREST"
-      },
-      {
-        "source": "USER",
-        "target": "dynamic career recommendations",
-        "relation_type": "CAREER GOAL"
-      },
-      {
-        "source": "USER",
-        "target": "multi-path career planning",
-        "relation_type": "CAREER GOAL"
-      }
-    ],
+    "relations": [],
     "knowledge": [
       {
-        "name": "career development",
+        "name": "software engineering",
         "confidence": 0.8
       },
       {
-        "name": "project management",
-        "confidence": 0.6
+        "name": "machine learning",
+        "confidence": 0.7
       }
     ],
     "skill": [
       {
-        "name": "dynamic career recommendations",
-        "confidence": 0.7
-      },
-      {
-        "name": "multi-path career planning",
-        "confidence": 0.7
-      }
-    ],
-    "tool": [],
-    "project": [],
-    "course": [],
-    "career_goal": [
-      {
-        "name": "dynamic career recommendations",
-        "confidence": 0.9
-      },
-      {
-        "name": "multi-path career planning",
-        "confidence": 0.9
-      }
-    ],
-    "interest": [
-      {
-        "name": "career development",
+        "name": "PyTorch for image classification",
         "confidence": 0.8
       },
       {
-        "name": "project management",
-        "confidence": 0.6
-      }
-    ],
-    "behavioral_trait": [
-      {
-        "name": "adaptable",
-        "confidence": 0.7
-      },
-      {
-        "name": "analytical",
-        "confidence": 0.6
-      }
-    ],
-    "constraint": [],
-    "implicit_signal": [
-      {
-        "name": "ability to pivot",
-        "confidence": 0.8
-      },
-      {
-        "name": "desire for flexibility",
-        "confidence": 0.7
-      }
-    ]
-  },
-  {
-    "turn_id": "career_dev_002::turn_0",
-    "text": "I’m currently working on email funnel experiment and also helping with campaign performance dashboard. Most of my recent work uses Tableau, Google Analytics, and SQL. I keep wondering whether my background points more toward marketing analyst or something adjacent like product marketer.",
-    "relations": [
-      {
-        "source": "USER",
-        "target": "Email Funnel Experiment",
-        "relation_type": "WORKED_ON"
-      },
-      {
-        "source": "USER",
-        "target": "Campaign Performance Dashboard",
-        "relation_type": "WORKED_ON"
-      },
-      {
-        "source": "USER",
-        "target": "Tableau",
-        "relation_type": "USED_TOOL"
-      },
-      {
-        "source": "USER",
-        "target": "Google Analytics",
-        "relation_type": "USED_TOOL"
-      },
-      {
-        "source": "USER",
-        "target": "SQL",
-        "relation_type": "USED_TOOL"
-      },
-      {
-        "source": "USER",
-        "target": "Marketing Analyst",
-        "relation_type": "CAREER_GOAL"
-      },
-      {
-        "source": "USER",
-        "target": "Product Marketer",
-        "relation_type": "CAREER_GOAL"
-      }
-    ],
-    "knowledge": [
-      {
-        "name": "Data Analysis",
-        "confidence": 0.8
-      },
-      {
-        "name": "Marketing Analysis",
-        "confidence": 0.7
-      },
-      {
-        "name": "Data Visualization",
-        "confidence": 0.6
-      }
-    ],
-    "skill": [
-      {
-        "name": "SQL",
-        "confidence": 0.9
-      },
-      {
-        "name": "Tableau",
-        "confidence": 0.8
-      },
-      {
-        "name": "Google Analytics",
-        "confidence": 0.8
-      },
-      {
-        "name": "Marketing Analysis",
+        "name": "SQL query optimization",
         "confidence": 0.7
       }
     ],
     "tool": [
       {
-        "name": "Tableau",
+        "name": "Python",
+        "confidence": 0.9
+      },
+      {
+        "name": "SQL",
         "confidence": 0.8
       },
       {
-        "name": "Google Analytics",
+        "name": "PyTorch",
         "confidence": 0.8
+      },
+      {
+        "name": "FastAPI",
+        "confidence": 0.6
+      },
+      {
+        "name": "Docker",
+        "confidence": 0.5
+      },
+      {
+        "name": "AWS",
+        "confidence": 0.5
+      }
+    ],
+    "project": [],
+    "course": [],
+    "career_goal": [
+      {
+        "name": "dynamic and multi-path career recommendations",
+        "confidence": 1.0
+      }
+    ],
+    "interest": [],
+    "behavioral_trait": [
+      {
+        "name": "Innovation",
+        "confidence": 0.8
+      },
+      {
+        "name": "Adaptability",
+        "confidence": 0.7
+      }
+    ],
+    "constraint": [],
+    "implicit_signal": []
+  },
+  {
+    "turn_id": "career_dev_002::turn_0",
+    "text": "I’m currently working on email funnel experiment and also helping with campaign performance dashboard. Most of my recent work uses Tableau, Google Analytics, and SQL. I keep wondering whether my background points more toward marketing analyst or something adjacent like product marketer.",
+    "relations": [],
+    "knowledge": [
+      {
+        "name": "data analysis",
+        "confidence": 0.8
+      },
+      {
+        "name": "data visualization",
+        "confidence": 0.8
+      },
+      {
+        "name": "marketing",
+        "confidence": 0.6
+      }
+    ],
+    "skill": [
+      {
+        "name": "SQL query optimization",
+        "confidence": 0.7
+      },
+      {
+        "name": "data analysis with Google Analytics",
+        "confidence": 0.8
+      },
+      {
+        "name": "data visualization with Tableau",
+        "confidence": 0.8
+      }
+    ],
+    "tool": [
+      {
+        "name": "Tableau",
+        "confidence": 0.9
+      },
+      {
+        "name": "Google Analytics",
+        "confidence": 0.9
       },
       {
         "name": "SQL",
@@ -491,112 +348,174 @@
     ],
     "project": [
       {
-        "name": "Email Funnel Experiment",
+        "name": "email funnel experiment",
         "confidence": 0.9
       },
       {
-        "name": "Campaign Performance Dashboard",
-        "confidence": 0.8
+        "name": "campaign performance dashboard",
+        "confidence": 0.9
       }
     ],
     "course": [],
     "career_goal": [
       {
-        "name": "Marketing Analyst",
+        "name": "marketing analyst",
         "confidence": 0.7
       },
       {
-        "name": "Product Marketer",
+        "name": "product marketer",
         "confidence": 0.6
       }
     ],
-    "interest": [
-      {
-        "name": "Marketing",
-        "confidence": 0.8
-      },
-      {
-        "name": "Data Analysis",
-        "confidence": 0.7
-      }
-    ],
+    "interest": [],
     "behavioral_trait": [
       {
-        "name": "Analytical Thinking",
-        "confidence": 0.8
+        "name": "Achievement Orientation",
+        "confidence": 0.5
+      },
+      {
+        "name": "Adaptability",
+        "confidence": 0.5
       },
       {
         "name": "Attention to Detail",
-        "confidence": 0.7
+        "confidence": 0.5
+      },
+      {
+        "name": "Intellectual Curiosity",
+        "confidence": 0.5
+      },
+      {
+        "name": "Perseverance",
+        "confidence": 0.5
+      },
+      {
+        "name": "Initiative",
+        "confidence": 0.5
+      },
+      {
+        "name": "Innovation",
+        "confidence": 0.5
+      },
+      {
+        "name": "Cooperation",
+        "confidence": 0.5
+      },
+      {
+        "name": "Dependability",
+        "confidence": 0.5
+      },
+      {
+        "name": "Integrity",
+        "confidence": 0.5
+      },
+      {
+        "name": "Stress Tolerance",
+        "confidence": 0.5
+      },
+      {
+        "name": "Self-Control",
+        "confidence": 0.5
+      },
+      {
+        "name": "Leadership Orientation",
+        "confidence": 0.5
       }
     ],
     "constraint": [],
-    "implicit_signal": [
-      {
-        "name": "Interest in Marketing",
-        "confidence": 0.8
-      },
-      {
-        "name": "Ability to work with data",
-        "confidence": 0.9
-      }
-    ]
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_002::turn_4",
     "text": "My long-term career goal is still forming, but I know I want to use experimentation and attribution in a role with strong growth potential. I’ve thought about marketing analyst, although I’m curious what other occupations could fit me.",
-    "relations": [
-      {
-        "source": "USER",
-        "target": "Marketing Analyst",
-        "relation_type": "CAREER_GOAL"
-      },
-      {
-        "source": "USER",
-        "target": "Experimentation and attribution",
-        "relation_type": "INTEREST"
-      },
-      {
-        "source": "USER",
-        "target": "Role with strong growth potential",
-        "relation_type": "CAREER_GOAL"
-      }
-    ],
+    "relations": [],
     "knowledge": [
       {
-        "name": "Data Analysis",
-        "confidence": 0.8
-      },
-      {
-        "name": "Machine Learning",
+        "name": "machine learning",
         "confidence": 0.7
       },
       {
-        "name": "Statistics",
+        "name": "statistics",
         "confidence": 0.6
       }
     ],
     "skill": [
       {
-        "name": "Experimentation",
-        "confidence": 0.9
-      },
-      {
-        "name": "Attribution",
+        "name": "experimentation",
         "confidence": 0.8
       },
       {
-        "name": "Analytical Thinking",
+        "name": "attribution",
+        "confidence": 0.8
+      }
+    ],
+    "tool": [
+      {
+        "name": "PyTorch",
+        "confidence": 0.9
+      },
+      {
+        "name": "SQL",
+        "confidence": 0.8
+      }
+    ],
+    "project": [],
+    "course": [],
+    "career_goal": [
+      {
+        "name": "growth potential role",
+        "confidence": 0.9
+      },
+      {
+        "name": "marketing analyst",
+        "confidence": 0.6
+      }
+    ],
+    "interest": [],
+    "behavioral_trait": [
+      {
+        "name": "Achievement Orientation",
+        "confidence": 0.8
+      },
+      {
+        "name": "Adaptability",
         "confidence": 0.7
+      },
+      {
+        "name": "Intellectual Curiosity",
+        "confidence": 0.9
+      }
+    ],
+    "constraint": [],
+    "implicit_signal": []
+  },
+  {
+    "turn_id": "career_dev_002::turn_6",
+    "text": "I feel less confident about statistical rigor and automation. That makes me wonder what skills I still need before I could seriously target marketing analyst.",
+    "relations": [],
+    "knowledge": [
+      {
+        "name": "statistics",
+        "confidence": 0.5
+      },
+      {
+        "name": "marketing",
+        "confidence": 0.5
+      }
+    ],
+    "skill": [
+      {
+        "name": "statistical rigor",
+        "confidence": 0.5
+      },
+      {
+        "name": "automation",
+        "confidence": 0.5
       }
     ],
     "tool": [
       {
         "name": "Python",
-        "confidence": 0.8
-      },
-      {
-        "name": "SQL",
         "confidence": 0.7
       }
     ],
@@ -604,41 +523,27 @@
     "course": [],
     "career_goal": [
       {
-        "name": "Marketing Analyst",
+        "name": "marketing analyst",
         "confidence": 0.8
-      },
-      {
-        "name": "Role with strong growth potential",
-        "confidence": 0.6
       }
     ],
-    "interest": [
-      {
-        "name": "Experimentation and attribution",
-        "confidence": 0.9
-      }
-    ],
+    "interest": [],
     "behavioral_trait": [
       {
-        "name": "Attention to detail",
-        "confidence": 0.7
+        "name": "Achievement Orientation",
+        "confidence": 0.6
       },
       {
-        "name": "Persistence",
+        "name": "Adaptability",
+        "confidence": 0.6
+      },
+      {
+        "name": "Perseverance",
         "confidence": 0.6
       }
     ],
     "constraint": [],
-    "implicit_signal": [
-      {
-        "name": "Desire for growth and development",
-        "confidence": 0.8
-      },
-      {
-        "name": "Curiosity and openness to new opportunities",
-        "confidence": 0.7
-      }
-    ]
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_002::turn_8",
@@ -2438,47 +2343,20 @@
     "relations": [
       {
         "source": "USER",
-        "target": "Supply Chain Analyst",
-        "relation_type": "CAREER_GOAL"
+        "target": "use process analysis and optimization in a role with strong growth potential",
+        "relation_type": "HAS_CAREER_GOAL"
       },
       {
         "source": "USER",
-        "target": "Role with Strong Growth Potential",
-        "relation_type": "CAREER_GOAL"
-      },
-      {
-        "source": "USER",
-        "target": "Process Analysis",
-        "relation_type": "KNOWLEDGE_AREA"
-      },
-      {
-        "source": "USER",
-        "target": "Process Optimization",
-        "relation_type": "SKILL"
+        "target": "optimization",
+        "relation_type": "HAS_SKILL_SIGNAL"
       }
     ],
-    "knowledge": [
-      {
-        "name": "Process Analysis",
-        "confidence": 0.8
-      },
-      {
-        "name": "Operations Research",
-        "confidence": 0.6
-      },
-      {
-        "name": "Supply Chain Management",
-        "confidence": 0.7
-      }
-    ],
+    "knowledge": [],
     "skill": [
       {
-        "name": "Process Optimization",
-        "confidence": 0.9
-      },
-      {
-        "name": "Analytical Thinking",
-        "confidence": 0.8
+        "name": "optimization",
+        "confidence": 0.75
       }
     ],
     "tool": [],
@@ -2486,39 +2364,26 @@
     "course": [],
     "career_goal": [
       {
-        "name": "Supply Chain Analyst",
-        "confidence": 0.7
-      },
-      {
-        "name": "Role with Strong Growth Potential",
-        "confidence": 0.6
+        "name": "use process analysis and optimization in a role with strong growth potential",
+        "confidence": 0.75
       }
     ],
-    "interest": [
-      {
-        "name": "Career Growth",
-        "confidence": 0.8
-      },
-      {
-        "name": "Process Improvement",
-        "confidence": 0.7
-      }
-    ],
+    "interest": [],
     "behavioral_trait": [
       {
-        "name": "Analytical",
-        "confidence": 0.8
-      },
-      {
-        "name": "Detail-Oriented",
-        "confidence": 0.6
+        "name": "analytical thinking",
+        "confidence": 0.75
       }
     ],
     "constraint": [],
     "implicit_signal": [
       {
-        "name": "Curiosity about Alternative Occupations",
-        "confidence": 0.7
+        "name": "analytical thinking",
+        "confidence": 0.75
+      },
+      {
+        "name": "optimization-oriented",
+        "confidence": 0.75
       }
     ]
   },
@@ -4114,21 +3979,72 @@
   {
     "turn_id": "career_dev_026::turn_8",
     "text": "That sounds useful. I want career recommendations to be dynamic and multi-path, so that if my projects shift over time, the assistant can revise what roles fit me best and what skills I still need.",
-    "relations": [
+    "relations": [],
+    "knowledge": [
       {
-        "source": "USER",
-        "target": "career recommendations to be dynamic and multi-path, so that if my projects shift over time, the assistant can revise what roles fit me best and what skills I still need",
-        "relation_type": "HAS_CAREER_GOAL"
+        "name": "software engineering",
+        "confidence": 0.8
+      },
+      {
+        "name": "machine learning",
+        "confidence": 0.7
       }
     ],
-    "knowledge": [],
-    "skill": [],
-    "tool": [],
+    "skill": [
+      {
+        "name": "PyTorch for image classification",
+        "confidence": 0.8
+      },
+      {
+        "name": "SQL query optimization",
+        "confidence": 0.7
+      }
+    ],
+    "tool": [
+      {
+        "name": "Python",
+        "confidence": 0.9
+      },
+      {
+        "name": "SQL",
+        "confidence": 0.8
+      },
+      {
+        "name": "PyTorch",
+        "confidence": 0.8
+      },
+      {
+        "name": "FastAPI",
+        "confidence": 0.6
+      },
+      {
+        "name": "Docker",
+        "confidence": 0.5
+      },
+      {
+        "name": "AWS",
+        "confidence": 0.5
+      }
+    ],
     "project": [],
     "course": [],
-    "career_goal": [],
+    "career_goal": [
+      {
+        "name": "dynamic and multi-path career recommendations",
+        "confidence": 1.0
+      }
+    ],
     "interest": [],
-    "behavioral_trait": [],
+    "behavioral_trait": [
+      {
+        "name": "Innovation",
+        "confidence": 0.8
+      },
+      {
+        "name": "Adaptability",
+        "confidence": 0.7
+      }
+    ],
     "constraint": [],
     "implicit_signal": []
   },
@@ -7702,33 +7618,64 @@
     "relations": [
       {
         "source": "USER",
-        "target": "use data cleaning and feature engineering in a role with strong growth potential",
-        "relation_type": "HAS_CAREER_GOAL"
-      },
-      {
-        "source": "USER",
-        "target": "data cleaning",
-        "relation_type": "HAS_SKILL_SIGNAL"
+        "target": "data scientist",
+        "relation_type": "CAREER_GOAL"
       }
     ],
-    "knowledge": [],
+    "knowledge": [
+      {
+        "name": "machine learning",
+        "confidence": 0.7
+      },
+      {
+        "name": "statistics",
+        "confidence": 0.6
+      }
+    ],
     "skill": [
       {
         "name": "data cleaning",
-        "confidence": 0.75
+        "confidence": 0.8
+      },
+      {
+        "name": "feature engineering",
+        "confidence": 0.8
       }
     ],
-    "tool": [],
+    "tool": [
+      {
+        "name": "Python",
+        "confidence": 0.9
+      },
+      {
+        "name": "PyTorch",
+        "confidence": 0.8
+      }
+    ],
     "project": [],
     "course": [],
     "career_goal": [
       {
-        "name": "use data cleaning and feature engineering in a role with strong growth potential",
-        "confidence": 0.75
+        "name": "data scientist",
+        "confidence": 0.6
       }
     ],
-    "interest": [],
-    "behavioral_trait": [],
+    "interest": [
+      {
+        "name": "strong growth potential",
+        "confidence": 0.5
+      }
+    ],
+    "behavioral_trait": [
+      {
+        "name": "Achievement Orientation",
+        "confidence": 0.5
+      },
+      {
+        "name": "Intellectual Curiosity",
+        "confidence": 0.5
+      }
+    ],
     "constraint": [],
     "implicit_signal": []
   },
@@ -11897,79 +11844,25 @@
     "relations": [
       {
         "source": "USER",
-        "target": "reverse engineering",
-        "relation_type": "CONSTRAINT"
-      },
-      {
-        "source": "USER",
-        "target": "enterprise security operations",
-        "relation_type": "CONSTRAINT"
-      },
-      {
-        "source": "USER",
-        "target": "improve security skills",
-        "relation_type": "CAREER_GOAL"
+        "target": "know whether I should strengthen those first",
+        "relation_type": "HAS_CAREER_GOAL"
       }
     ],
-    "knowledge": [
-      {
-        "name": "security",
-        "confidence": 0.8
-      },
-      {
-        "name": "reverse engineering",
-        "confidence": 0.7
-      },
-      {
-        "name": "enterprise security operations",
-        "confidence": 0.8
-      }
-    ],
-    "skill": [
-      {
-        "name": "reverse engineering",
-        "confidence": 0.7
-      },
-      {
-        "name": "enterprise security operations",
-        "confidence": 0.8
-      }
-    ],
+    "knowledge": [],
+    "skill": [],
     "tool": [],
     "project": [],
     "course": [],
     "career_goal": [
       {
-        "name": "improve security skills",
-        "confidence": 0.9
-      },
-      {
-        "name": "enhance enterprise security operations knowledge",
-        "confidence": 0.8
+        "name": "know whether I should strengthen those first",
+        "confidence": 0.75
       }
     ],
     "interest": [],
     "behavioral_trait": [],
-    "constraint": [
-      {
-        "name": "limited exposure to reverse engineering",
-        "confidence": 0.9
-      },
-      {
-        "name": "limited exposure to enterprise security operations",
-        "confidence": 0.9
-      }
-    ],
-    "implicit_signal": [
-      {
-        "name": "desire for self-improvement",
-        "confidence": 0.8
-      },
-      {
-        "name": "analytical thinking",
-        "confidence": 0.6
-      }
-    ]
+    "constraint": [],
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_081::turn_8",
@@ -13606,63 +13499,102 @@
   {
     "turn_id": "career_dev_092::turn_4",
     "text": "Long term I want a career that combines backend development, data pipelines, and real-world problem solving. machine learning engineer sounds appealing, but I’m open to other development directions if my current projects suggest them.",
-    "relations": [
-      {
-        "source": "USER",
-        "target": "a career that combines backend development, data pipelines, and real-world problem solving",
-        "relation_type": "HAS_CAREER_GOAL"
-      },
-      {
-        "source": "USER",
-        "target": "current project",
-        "relation_type": "WORKS_ON"
-      },
-      {
-        "source": "USER",
-        "target": "machine learning",
-        "relation_type": "HAS_SKILL_SIGNAL"
-      }
-    ],
+    "relations": [],
     "knowledge": [
       {
         "name": "machine learning",
-        "confidence": 0.75
+        "confidence": 0.8
+      },
+      {
+        "name": "software engineering",
+        "confidence": 0.8
       }
     ],
     "skill": [
       {
-        "name": "machine learning",
-        "confidence": 0.75
-      }
-    ],
-    "tool": [],
-    "project": [
+        "name": "backend development",
+        "confidence": 0.8
+      },
       {
-        "name": "current project",
-        "confidence": 0.75
+        "name": "data pipelines",
+        "confidence": 0.8
+      },
+      {
+        "name": "real-world problem solving",
+        "confidence": 0.8
       }
     ],
+    "tool": [
+      {
+        "name": "Python",
+        "confidence": 0.9
+      },
+      {
+        "name": "PyTorch",
+        "confidence": 0.8
+      }
+    ],
+    "project": [],
     "course": [],
     "career_goal": [
       {
-        "name": "a career that combines backend development, data pipelines, and real-world problem solving",
-        "confidence": 0.75
+        "name": "machine learning engineer",
+        "confidence": 0.8
       }
     ],
     "interest": [],
     "behavioral_trait": [
       {
-        "name": "analytical thinking",
-        "confidence": 0.75
+        "name": "Achievement Orientation",
+        "confidence": 0.6
+      },
+      {
+        "name": "Adaptability",
+        "confidence": 0.6
+      },
+      {
+        "name": "Intellectual Curiosity",
+        "confidence": 0.6
+      },
+      {
+        "name": "Perseverance",
+        "confidence": 0.6
+      },
+      {
+        "name": "Innovation",
+        "confidence": 0.6
+      },
+      {
+        "name": "Initiative",
+        "confidence": 0.6
+      },
+      {
+        "name": "Cooperation",
+        "confidence": 0.6
+      },
+      {
+        "name": "Dependability",
+        "confidence": 0.6
+      },
+      {
+        "name": "Integrity",
+        "confidence": 0.6
+      },
+      {
+        "name": "Stress Tolerance",
+        "confidence": 0.6
+      },
+      {
+        "name": "Self-Control",
+        "confidence": 0.6
+      },
+      {
+        "name": "Leadership Orientation",
+        "confidence": 0.6
       }
     ],
     "constraint": [],
-    "implicit_signal": [
-      {
-        "name": "analytical thinking",
-        "confidence": 0.75
-      }
-    ]
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_092::turn_6",
@@ -17502,146 +17434,39 @@
     "relations": [
       {
         "source": "USER",
-        "target": "Market Volatility Dashboard",
-        "relation_type": "WORKED_ON"
+        "target": "sql",
+        "relation_type": "USES_TOOL"
       },
       {
         "source": "USER",
-        "target": "Trading Strategy Backtest",
-        "relation_type": "WORKED_ON"
-      },
-      {
-        "source": "USER",
-        "target": "Quantitative Analyst",
-        "relation_type": "ASPIRES_TO"
-      },
-      {
-        "source": "USER",
-        "target": "Risk Analyst",
-        "relation_type": "ASPIRES_TO"
-      },
-      {
-        "source": "USER",
-        "target": "Data Scientist",
-        "relation_type": "ASPIRES_TO"
+        "target": "pandas",
+        "relation_type": "USES_TOOL"
       }
     ],
-    "knowledge": [
-      {
-        "name": "Data Analysis",
-        "confidence": 0.8
-      },
-      {
-        "name": "Machine Learning",
-        "confidence": 0.6
-      },
-      {
-        "name": "Finance",
-        "confidence": 0.8
-      }
-    ],
-    "skill": [
-      {
-        "name": "Data Analysis",
-        "confidence": 0.8
-      },
-      {
-        "name": "Backtesting",
-        "confidence": 0.7
-      },
-      {
-        "name": "Data Visualization",
-        "confidence": 0.6
-      }
-    ],
+    "knowledge": [],
+    "skill": [],
     "tool": [
       {
-        "name": "NumPy",
-        "confidence": 0.9
+        "name": "sql",
+        "confidence": 0.75
       },
       {
         "name": "pandas",
-        "confidence": 0.9
-      },
-      {
-        "name": "SQL",
-        "confidence": 0.8
+        "confidence": 0.75
       }
     ],
-    "project": [
-      {
-        "name": "Market Volatility Dashboard",
-        "confidence": 0.9
-      },
-      {
-        "name": "Trading Strategy Backtest",
-        "confidence": 0.8
-      }
-    ],
+    "project": [],
     "course": [
       {
-        "name": "Quantitative Analysis",
-        "confidence": 0.7
-      },
-      {
-        "name": "Data Science",
-        "confidence": 0.6
+        "name": "or internship task, I'm also doing trading strategy backtest with NumPy, pandas, and SQL",
+        "confidence": 0.75
       }
     ],
-    "career_goal": [
-      {
-        "name": "Quantitative Analyst",
-        "confidence": 0.8
-      },
-      {
-        "name": "Risk Analyst",
-        "confidence": 0.7
-      },
-      {
-        "name": "Data Scientist",
-        "confidence": 0.6
-      }
-    ],
-    "interest": [
-      {
-        "name": "Finance",
-        "confidence": 0.8
-      },
-      {
-        "name": "Data Analysis",
-        "confidence": 0.8
-      }
-    ],
-    "behavioral_trait": [
-      {
-        "name": "Analytical Thinking",
-        "confidence": 0.8
-      },
-      {
-        "name": "Attention to Detail",
-        "confidence": 0.7
-      },
-      {
-        "name": "Persistence",
-        "confidence": 0.6
-      }
-    ],
-    "constraint": [
-      {
-        "name": "Time Management",
-        "confidence": 0.6
-      }
-    ],
-    "implicit_signal": [
-      {
-        "name": "Interest in Finance and Data Analysis",
-        "confidence": 0.8
-      },
-      {
-        "name": "Potential for Career Advancement",
-        "confidence": 0.6
-      }
-    ]
+    "career_goal": [],
+    "interest": [],
+    "behavioral_trait": [],
+    "constraint": [],
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_120::turn_4",
@@ -19394,21 +19219,72 @@
   {
     "turn_id": "career_dev_131::turn_8",
     "text": "That sounds useful. I want career recommendations to be dynamic and multi-path, so that if my projects shift over time, the assistant can revise what roles fit me best and what skills I still need.",
-    "relations": [
+    "relations": [],
+    "knowledge": [
       {
-        "source": "USER",
-        "target": "career recommendations to be dynamic and multi-path, so that if my projects shift over time, the assistant can revise what roles fit me best and what skills I still need",
-        "relation_type": "HAS_CAREER_GOAL"
+        "name": "software engineering",
+        "confidence": 0.8
+      },
+      {
+        "name": "machine learning",
+        "confidence": 0.7
       }
     ],
-    "knowledge": [],
-    "skill": [],
-    "tool": [],
+    "skill": [
+      {
+        "name": "PyTorch for image classification",
+        "confidence": 0.8
+      },
+      {
+        "name": "SQL query optimization",
+        "confidence": 0.7
+      }
+    ],
+    "tool": [
+      {
+        "name": "Python",
+        "confidence": 0.9
+      },
+      {
+        "name": "SQL",
+        "confidence": 0.8
+      },
+      {
+        "name": "PyTorch",
+        "confidence": 0.8
+      },
+      {
+        "name": "FastAPI",
+        "confidence": 0.6
+      },
+      {
+        "name": "Docker",
+        "confidence": 0.5
+      },
+      {
+        "name": "AWS",
+        "confidence": 0.5
+      }
+    ],
     "project": [],
     "course": [],
-    "career_goal": [],
+    "career_goal": [
+      {
+        "name": "dynamic and multi-path career recommendations",
+        "confidence": 1.0
+      }
+    ],
     "interest": [],
-    "behavioral_trait": [],
+    "behavioral_trait": [
+      {
+        "name": "Innovation",
+        "confidence": 0.8
+      },
+      {
+        "name": "Adaptability",
+        "confidence": 0.7
+      }
+    ],
     "constraint": [],
     "implicit_signal": []
   },
@@ -23324,121 +23200,62 @@
     "relations": [
       {
         "source": "USER",
-        "target": "Machine Learning Engineer",
-        "relation_type": "CAREER_GOAL"
+        "target": "work that uses model evaluation, deep learning, and clear decision-making",
+        "relation_type": "HAS_CAREER_GOAL"
       },
       {
         "source": "USER",
-        "target": "Data Scientist",
-        "relation_type": "CAREER_GOAL"
+        "target": "model evaluation",
+        "relation_type": "HAS_SKILL_SIGNAL"
       },
       {
         "source": "USER",
-        "target": "Model Evaluation",
-        "relation_type": "SKILL"
+        "target": "machine learning",
+        "relation_type": "HAS_SKILL_SIGNAL"
       },
       {
         "source": "USER",
-        "target": "Deep Learning",
-        "relation_type": "SKILL"
-      },
-      {
-        "source": "USER",
-        "target": "Clear Decision-Making",
-        "relation_type": "SKILL"
-      },
-      {
-        "source": "USER",
-        "target": "Python",
-        "relation_type": "TOOL"
-      },
-      {
-        "source": "USER",
-        "target": "PyTorch",
-        "relation_type": "TOOL"
+        "target": "deep learning",
+        "relation_type": "HAS_SKILL_SIGNAL"
       }
     ],
     "knowledge": [
       {
-        "name": "Machine Learning",
-        "confidence": 0.8
+        "name": "machine learning",
+        "confidence": 0.75
       },
       {
-        "name": "Data Analysis",
-        "confidence": 0.6
-      },
-      {
-        "name": "Deep Learning",
-        "confidence": 0.8
+        "name": "deep learning",
+        "confidence": 0.75
       }
     ],
     "skill": [
       {
-        "name": "Model Evaluation",
-        "confidence": 0.9
+        "name": "model evaluation",
+        "confidence": 0.75
       },
       {
-        "name": "Deep Learning",
-        "confidence": 0.8
+        "name": "machine learning",
+        "confidence": 0.75
       },
       {
-        "name": "Clear Decision-Making",
-        "confidence": 0.7
+        "name": "deep learning",
+        "confidence": 0.75
       }
     ],
-    "tool": [
-      {
-        "name": "Python",
-        "confidence": 0.9
-      },
-      {
-        "name": "PyTorch",
-        "confidence": 0.8
-      }
-    ],
+    "tool": [],
     "project": [],
     "course": [],
     "career_goal": [
       {
-        "name": "Machine Learning Engineer",
-        "confidence": 0.9
-      },
-      {
-        "name": "Data Scientist",
-        "confidence": 0.6
+        "name": "work that uses model evaluation, deep learning, and clear decision-making",
+        "confidence": 0.75
       }
     ],
-    "interest": [
-      {
-        "name": "Clear Decision-Making",
-        "confidence": 0.7
-      },
-      {
-        "name": "Model Evaluation",
-        "confidence": 0.9
-      }
-    ],
-    "behavioral_trait": [
-      {
-        "name": "Analytical Thinking",
-        "confidence": 0.8
-      },
-      {
-        "name": "Persistence",
-        "confidence": 0.6
-      }
-    ],
+    "interest": [],
+    "behavioral_trait": [],
     "constraint": [],
-    "implicit_signal": [
-      {
-        "name": "Desire for Variety",
-        "confidence": 0.5
-      },
-      {
-        "name": "Interest in Business Applications",
-        "confidence": 0.4
-      }
-    ]
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_157::turn_6",
@@ -25696,26 +25513,60 @@
   {
     "turn_id": "career_dev_172::turn_4",
     "text": "My long-term career goal is still forming, but I know I want to use threat modeling and operating systems in a role with strong growth potential. I’ve thought about cybersecurity analyst, although I’m curious what other occupations could fit me.",
-    "relations": [
+    "relations": [],
+    "knowledge": [
       {
-        "source": "USER",
-        "target": "use threat modeling and operating systems in a role with strong growth potential",
-        "relation_type": "HAS_CAREER_GOAL"
+        "name": "cybersecurity",
+        "confidence": 0.7
+      },
+      {
+        "name": "operating systems",
+        "confidence": 0.7
       }
     ],
-    "knowledge": [],
-    "skill": [],
-    "tool": [],
+    "skill": [
+      {
+        "name": "threat modeling",
+        "confidence": 0.8
+      },
+      {
+        "name": "operating systems",
+        "confidence": 0.8
+      }
+    ],
+    "tool": [
+      {
+        "name": "Python",
+        "confidence": 0.8
+      },
+      {
+        "name": "SQL",
+        "confidence": 0.8
+      }
+    ],
     "project": [],
     "course": [],
     "career_goal": [
       {
-        "name": "use threat modeling and operating systems in a role with strong growth potential",
-        "confidence": 0.75
+        "name": "cybersecurity analyst",
+        "confidence": 0.6
       }
     ],
     "interest": [],
-    "behavioral_trait": [],
+    "behavioral_trait": [
+      {
+        "name": "Achievement Orientation",
+        "confidence": 0.5
+      },
+      {
+        "name": "Adaptability",
+        "confidence": 0.5
+      },
+      {
+        "name": "Intellectual Curiosity",
+        "confidence": 0.5
+      }
+    ],
     "constraint": [],
     "implicit_signal": []
   },
@@ -29425,126 +29276,22 @@
   {
     "turn_id": "career_dev_203::turn_6",
     "text": "How do I bridge the gap between statistics and statistical arbitrage?",
-    "relations": [
-      {
-        "source": "USER",
-        "target": "Statistics",
-        "relation_type": "INTEREST"
-      },
-      {
-        "source": "USER",
-        "target": "Statistical Arbitrage",
-        "relation_type": "CAREER_GOAL"
-      },
-      {
-        "source": "USER",
-        "target": "Python",
-        "relation_type": "TOOL"
-      },
-      {
-        "source": "USER",
-        "target": "SQL",
-        "relation_type": "TOOL"
-      },
-      {
-        "source": "USER",
-        "target": "Statistics Course",
-        "relation_type": "COURSE"
-      },
-      {
-        "source": "USER",
-        "target": "Quantitative Trader",
-        "relation_type": "CAREER_GOAL"
-      }
-    ],
+    "relations": [],
     "knowledge": [
       {
-        "name": "Statistics",
-        "confidence": 0.9
-      },
-      {
-        "name": "Statistical Arbitrage",
-        "confidence": 0.8
-      },
-      {
-        "name": "Finance",
-        "confidence": 0.7
+        "name": "statistics",
+        "confidence": 0.75
       }
     ],
-    "skill": [
-      {
-        "name": "Data Analysis",
-        "confidence": 0.8
-      },
-      {
-        "name": "Statistical Modeling",
-        "confidence": 0.7
-      },
-      {
-        "name": "Programming",
-        "confidence": 0.6
-      }
-    ],
-    "tool": [
-      {
-        "name": "Python",
-        "confidence": 0.8
-      },
-      {
-        "name": "SQL",
-        "confidence": 0.7
-      }
-    ],
-    "project": [
-      {
-        "name": "Statistical Arbitrage Project",
-        "confidence": 0.6
-      }
-    ],
-    "course": [
-      {
-        "name": "Statistics Course",
-        "confidence": 0.8
-      }
-    ],
-    "career_goal": [
-      {
-        "name": "Quantitative Trader",
-        "confidence": 0.7
-      }
-    ],
-    "interest": [
-      {
-        "name": "Finance",
-        "confidence": 0.8
-      }
-    ],
-    "behavioral_trait": [
-      {
-        "name": "Analytical Thinking",
-        "confidence": 0.8
-      },
-      {
-        "name": "Attention to Detail",
-        "confidence": 0.7
-      }
-    ],
-    "constraint": [
-      {
-        "name": "Limited Experience",
-        "confidence": 0.6
-      }
-    ],
-    "implicit_signal": [
-      {
-        "name": "Desire to Bridge Gap",
-        "confidence": 0.9
-      },
-      {
-        "name": "Need for Practical Application",
-        "confidence": 0.8
-      }
-    ]
+    "skill": [],
+    "tool": [],
+    "project": [],
+    "course": [],
+    "career_goal": [],
+    "interest": [],
+    "behavioral_trait": [],
+    "constraint": [],
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_204::turn_0",
@@ -31108,16 +30855,56 @@
     "knowledge": [
       {
         "name": "statistics",
-        "confidence": 0.75
+        "confidence": 0.8
+      },
+      {
+        "name": "finance",
+        "confidence": 0.7
       }
     ],
-    "skill": [],
-    "tool": [],
+    "skill": [
+      {
+        "name": "statistics",
+        "confidence": 0.8
+      },
+      {
+        "name": "data analysis",
+        "confidence": 0.7
+      }
+    ],
+    "tool": [
+      {
+        "name": "Python",
+        "confidence": 0.9
+      },
+      {
+        "name": "SQL",
+        "confidence": 0.8
+      }
+    ],
     "project": [],
     "course": [],
-    "career_goal": [],
+    "career_goal": [
+      {
+        "name": "career in crypto derivatives",
+        "confidence": 0.9
+      }
+    ],
     "interest": [],
-    "behavioral_trait": [],
+    "behavioral_trait": [
+      {
+        "name": "Achievement Orientation",
+        "confidence": 0.6
+      },
+      {
+        "name": "Adaptability",
+        "confidence": 0.5
+      },
+      {
+        "name": "Intellectual Curiosity",
+        "confidence": 0.7
+      }
+    ],
     "constraint": [],
     "implicit_signal": []
   },
@@ -34662,84 +34449,25 @@
     "relations": [
       {
         "source": "USER",
-        "target": "Risk Modeling",
-        "relation_type": "INTEREST"
-      },
-      {
-        "source": "USER",
-        "target": "SQL",
-        "relation_type": "SKILL"
-      },
-      {
-        "source": "USER",
-        "target": "Data Analysis",
-        "relation_type": "KNOWLEDGE_AREA"
+        "target": "sql",
+        "relation_type": "USES_TOOL"
       }
     ],
-    "knowledge": [
-      {
-        "name": "Risk Modeling",
-        "confidence": 0.8
-      },
-      {
-        "name": "Data Analysis",
-        "confidence": 0.6
-      },
-      {
-        "name": "Finance",
-        "confidence": 0.4
-      }
-    ],
-    "skill": [
-      {
-        "name": "SQL",
-        "confidence": 0.9
-      },
-      {
-        "name": "Data Analysis",
-        "confidence": 0.7
-      },
-      {
-        "name": "Risk Modeling",
-        "confidence": 0.5
-      }
-    ],
+    "knowledge": [],
+    "skill": [],
     "tool": [
       {
-        "name": "SQL",
-        "confidence": 0.9
+        "name": "sql",
+        "confidence": 0.75
       }
     ],
     "project": [],
     "course": [],
-    "career_goal": [
-      {
-        "name": "Risk Modeling oriented roles",
-        "confidence": 0.9
-      }
-    ],
+    "career_goal": [],
     "interest": [],
-    "behavioral_trait": [
-      {
-        "name": "Analytical thinking",
-        "confidence": 0.7
-      },
-      {
-        "name": "Attention to detail",
-        "confidence": 0.5
-      }
-    ],
+    "behavioral_trait": [],
     "constraint": [],
-    "implicit_signal": [
-      {
-        "name": "Desire for technical skills",
-        "confidence": 0.8
-      },
-      {
-        "name": "Interest in finance and data analysis",
-        "confidence": 0.6
-      }
-    ]
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_259::turn_2",
@@ -36689,19 +36417,56 @@
     "turn_id": "career_dev_280::turn_6",
     "text": "That makes sense. I actually spend a lot of my spare time on VaR estimation using KDB+/Q because I'm very interested in crypto derivatives.",
     "relations": [],
-    "knowledge": [],
-    "skill": [],
-    "tool": [],
+    "knowledge": [
+      {
+        "name": "finance",
+        "confidence": 0.8
+      },
+      {
+        "name": "machine learning",
+        "confidence": 0.7
+      }
+    ],
+    "skill": [
+      {
+        "name": "VaR estimation",
+        "confidence": 0.8
+      },
+      {
+        "name": "KDB+/Q",
+        "confidence": 0.8
+      }
+    ],
+    "tool": [
+      {
+        "name": "KDB+/Q",
+        "confidence": 0.8
+      }
+    ],
     "project": [],
     "course": [],
-    "career_goal": [],
+    "career_goal": [
+      {
+        "name": "career in crypto derivatives",
+        "confidence": 0.9
+      }
+    ],
     "interest": [
       {
         "name": "crypto derivatives",
-        "confidence": 0.75
+        "confidence": 0.9
       }
     ],
-    "behavioral_trait": [],
+    "behavioral_trait": [
+      {
+        "name": "Achievement Orientation",
+        "confidence": 0.6
+      },
+      {
+        "name": "Intellectual Curiosity",
+        "confidence": 0.6
+      }
+    ],
     "constraint": [],
     "implicit_signal": []
   },
@@ -38142,93 +37907,30 @@
     "relations": [
       {
         "source": "USER",
-        "target": "E-commerce Recommendation",
-        "relation_type": "WORKING_ON"
-      },
-      {
-        "source": "USER",
-        "target": "Distributed Training",
-        "relation_type": "SKILL"
-      },
-      {
-        "source": "USER",
-        "target": "Fast-paced Work Style",
-        "relation_type": "WORK_STYLE"
+        "target": "e-commerce recommendation",
+        "relation_type": "WORKS_ON"
       }
     ],
     "knowledge": [
       {
-        "name": "Computer Vision",
-        "confidence": 0.8
-      },
-      {
-        "name": "Machine Learning",
-        "confidence": 0.7
-      },
-      {
-        "name": "Data Analysis",
-        "confidence": 0.5
+        "name": "computer vision",
+        "confidence": 0.75
       }
     ],
-    "skill": [
-      {
-        "name": "Distributed Training",
-        "confidence": 0.9
-      },
-      {
-        "name": "E-commerce Recommendation",
-        "confidence": 0.8
-      },
-      {
-        "name": "Fast-paced Work Style",
-        "confidence": 0.7
-      }
-    ],
-    "tool": [
-      {
-        "name": "Python",
-        "confidence": 0.9
-      },
-      {
-        "name": "PyTorch",
-        "confidence": 0.8
-      }
-    ],
+    "skill": [],
+    "tool": [],
     "project": [
       {
-        "name": "E-commerce Recommendation",
-        "confidence": 0.8
+        "name": "e-commerce recommendation",
+        "confidence": 0.75
       }
     ],
     "course": [],
-    "career_goal": [
-      {
-        "name": "Computer Vision Specialist",
-        "confidence": 0.9
-      }
-    ],
+    "career_goal": [],
     "interest": [],
-    "behavioral_trait": [
-      {
-        "name": "Fast-paced Work Style",
-        "confidence": 0.7
-      },
-      {
-        "name": "Analytical Thinking",
-        "confidence": 0.5
-      }
-    ],
+    "behavioral_trait": [],
     "constraint": [],
-    "implicit_signal": [
-      {
-        "name": "Adaptability",
-        "confidence": 0.6
-      },
-      {
-        "name": "Problem-solving",
-        "confidence": 0.5
-      }
-    ]
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_297::turn_2",
@@ -38582,26 +38284,60 @@
   {
     "turn_id": "career_dev_300::turn_6",
     "text": "How do I bridge the gap between distributed systems and serverless patterns?",
-    "relations": [
-      {
-        "source": "USER",
-        "target": "distributed systems",
-        "relation_type": "HAS_SKILL_SIGNAL"
-      }
-    ],
-    "knowledge": [],
-    "skill": [
+    "relations": [],
+    "knowledge": [
       {
         "name": "distributed systems",
-        "confidence": 0.75
+        "confidence": 0.7
+      },
+      {
+        "name": "serverless patterns",
+        "confidence": 0.7
       }
     ],
-    "tool": [],
+    "skill": [
+      {
+        "name": "Python",
+        "confidence": 0.8
+      },
+      {
+        "name": "SQL query optimization",
+        "confidence": 0.7
+      }
+    ],
+    "tool": [
+      {
+        "name": "Docker",
+        "confidence": 0.6
+      },
+      {
+        "name": "FastAPI",
+        "confidence": 0.6
+      }
+    ],
     "project": [],
     "course": [],
-    "career_goal": [],
+    "career_goal": [
+      {
+        "name": "bridging the gap between distributed systems and serverless patterns",
+        "confidence": 0.9
+      }
+    ],
     "interest": [],
-    "behavioral_trait": [],
+    "behavioral_trait": [
+      {
+        "name": "Achievement Orientation",
+        "confidence": 0.5
+      },
+      {
+        "name": "Adaptability",
+        "confidence": 0.5
+      },
+      {
+        "name": "Intellectual Curiosity",
+        "confidence": 0.5
+      }
+    ],
     "constraint": [],
     "implicit_signal": []
   },
@@ -40822,26 +40558,60 @@
   {
     "turn_id": "career_dev_325::turn_0",
     "text": "How does Python help in crypto derivatives oriented roles?",
-    "relations": [
+    "relations": [],
+    "knowledge": [
       {
-        "source": "USER",
-        "target": "python",
-        "relation_type": "USES_TOOL"
+        "name": "machine learning",
+        "confidence": 0.7
+      },
+      {
+        "name": "finance",
+        "confidence": 0.6
       }
     ],
-    "knowledge": [],
-    "skill": [],
+    "skill": [
+      {
+        "name": "Python",
+        "confidence": 0.8
+      },
+      {
+        "name": "PyTorch",
+        "confidence": 0.7
+      }
+    ],
     "tool": [
       {
-        "name": "python",
-        "confidence": 0.75
+        "name": "Python",
+        "confidence": 0.8
+      },
+      {
+        "name": "PyTorch",
+        "confidence": 0.7
       }
     ],
     "project": [],
     "course": [],
-    "career_goal": [],
+    "career_goal": [
+      {
+        "name": "crypto derivatives oriented roles",
+        "confidence": 0.9
+      }
+    ],
     "interest": [],
-    "behavioral_trait": [],
+    "behavioral_trait": [
+      {
+        "name": "Achievement Orientation",
+        "confidence": 0.5
+      },
+      {
+        "name": "Adaptability",
+        "confidence": 0.5
+      },
+      {
+        "name": "Intellectual Curiosity",
+        "confidence": 0.5
+      }
+    ],
     "constraint": [],
     "implicit_signal": []
   },
@@ -43351,38 +43121,63 @@
   {
     "turn_id": "career_dev_352::turn_2",
     "text": "I'm also working on real-time drone detection. Do you think my being detail-oriented helps with distributed training in AI Researcher roles?",
-    "relations": [
+    "relations": [],
+    "knowledge": [
       {
-        "source": "USER",
-        "target": "real-time drone detection",
-        "relation_type": "WORKS_ON"
+        "name": "AI",
+        "confidence": 0.8
+      },
+      {
+        "name": "Machine Learning",
+        "confidence": 0.8
       }
     ],
-    "knowledge": [],
-    "skill": [],
-    "tool": [],
+    "skill": [
+      {
+        "name": "Real-time drone detection",
+        "confidence": 0.7
+      },
+      {
+        "name": "Distributed training",
+        "confidence": 0.6
+      },
+      {
+        "name": "Detail-oriented",
+        "confidence": 0.8
+      }
+    ],
+    "tool": [
+      {
+        "name": "PyTorch",
+        "confidence": 0.8
+      },
+      {
+        "name": "Python",
+        "confidence": 0.9
+      }
+    ],
     "project": [
       {
-        "name": "real-time drone detection",
-        "confidence": 0.75
+        "name": "Real-time drone detection",
+        "confidence": 0.7
       }
     ],
     "course": [],
-    "career_goal": [],
+    "career_goal": [
+      {
+        "name": "AI Researcher",
+        "confidence": 0.9
+      }
+    ],
     "interest": [],
     "behavioral_trait": [
       {
-        "name": "attention to detail",
-        "confidence": 0.75
+        "name": "Attention to Detail",
+        "confidence": 0.8
       }
     ],
     "constraint": [],
-    "implicit_signal": [
-      {
-        "name": "attention to detail",
-        "confidence": 0.75
-      }
-    ]
+    "implicit_signal": []
   },
   {
     "turn_id": "career_dev_352::turn_6",
@@ -44146,111 +43941,6 @@
     "behavioral_trait": [],
     "constraint": [],
     "implicit_signal": []
-  },
-  {
-    "turn_id": "career_dev_360::turn_6",
-    "text": "If I stay a Backend Engineer, can I still do cloud-native security?",
-    "relations": [
-      {
-        "source": "USER",
-        "target": "Cloud Computing",
-        "relation_type": "INTEREST"
-      },
-      {
-        "source": "USER",
-        "target": "Security",
-        "relation_type": "INTEREST"
-      },
-      {
-        "source": "USER",
-        "target": "Backend Engineering",
-        "relation_type": "CURRENT_ROLE"
-      }
-    ],
-    "knowledge": [
-      {
-        "name": "Cloud Computing",
-        "confidence": 0.8
-      },
-      {
-        "name": "Security",
-        "confidence": 0.7
-      },
-      {
-        "name": "Backend Engineering",
-        "confidence": 0.9
-      }
-    ],
-    "skill": [
-      {
-        "name": "Backend Engineering",
-        "confidence": 0.9
-      },
-      {
-        "name": "Cloud-Native Security",
-        "confidence": 0.6
-      }
-    ],
-    "tool": [
-      {
-        "name": "Cloud-based tools",
-        "confidence": 0.5
-      },
-      {
-        "name": "Security frameworks",
-        "confidence": 0.4
-      }
-    ],
-    "project": [
-      {
-        "name": "Cloud-native security project",
-        "confidence": 0.4
-      }
-    ],
-    "course": [
-      {
-        "name": "Cloud Security Course",
-        "confidence": 0.3
-      }
-    ],
-    "career_goal": [
-      {
-        "name": "Cloud-Native Security Specialist",
-        "confidence": 0.5
-      }
-    ],
-    "interest": [
-      {
-        "name": "Cloud Computing",
-        "confidence": 0.8
-      },
-      {
-        "name": "Security",
-        "confidence": 0.7
-      }
-    ],
-    "behavioral_trait": [
-      {
-        "name": "Analytical thinking",
-        "confidence": 0.6
-      },
-      {
-        "name": "Problem-solving",
-        "confidence": 0.5
-      }
-    ],
-    "constraint": [
-      {
-        "name": "Current role as Backend Engineer",
-        "confidence": 0.9
-      }
-    ],
-    "implicit_signal": [
-      {
-        "name": "Desire to transition to cloud-native security",
-        "confidence": 0.7
-      }
-    ]
   },
   {
     "turn_id": "career_dev_361::turn_2",

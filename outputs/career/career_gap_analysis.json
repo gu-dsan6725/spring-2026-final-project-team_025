@@ -1,149 +1,115 @@
 {
   "user_id": "user_001",
-  "target": "Financial Quantitative Analysts (13-2099.01)",
+  "target": "Software Developers (15-1252.00)",
   "knowledge_gaps": [
-    {
-      "element": "English Language",
-      "user_score": 0.0,
-      "required_score": 3.05,
-      "gap": 3.05,
-      "priority": 1
-    },
-    {
-      "element": "Administration and Management",
-      "user_score": 0.0,
-      "required_score": 2.1,
-      "gap": 2.1,
-      "priority": 2
-    },
     {
       "element": "Customer and Personal Service",
       "user_score": 0.0,
-      "required_score": 2.05,
-      "gap": 2.05,
-      "priority": 3
-    },
-    {
-      "element": "Psychology",
-      "user_score": 0.0,
-      "required_score": 2.05,
-      "gap": 2.05,
-      "priority": 4
+      "required_score": 3.56,
+      "gap": 3.56,
+      "priority": 1
     },
     {
       "element": "Education and Training",
       "user_score": 0.0,
-      "required_score": 2.05,
-      "gap": 2.05,
-      "priority": 5
+      "required_score": 2.84,
+      "gap": 2.84,
+      "priority": 2
+    },
+    {
+      "element": "Telecommunications",
+      "user_score": 0.221,
+      "required_score": 2.62,
+      "gap": 2.399,
+      "priority": 3
     },
     {
       "element": "Personnel and Human Resources",
       "user_score": 0.0,
-      "required_score": 2.0,
-      "gap": 2.0,
-      "priority": 6
+      "required_score": 2.36,
+      "gap": 2.36,
+      "priority": 4
     },
     {
-      "element": "Communications and Media",
-      "user_score": 0.0,
-      "required_score": 2.0,
-      "gap": 2.0,
-      "priority": 7
-    },
-    {
-      "element": "Law and Government",
-      "user_score": 0.0,
-      "required_score": 1.9,
-      "gap": 1.9,
-      "priority": 8
-    },
-    {
-      "element": "Sales and Marketing",
-      "user_score": 0.0,
-      "required_score": 1.85,
-      "gap": 1.85,
-      "priority": 9
-    },
-    {
-      "element": "Production and Processing",
-      "user_score": 0.0,
-      "required_score": 1.7,
-      "gap": 1.7,
-      "priority": 10
+      "element": "Public Safety and Security",
+      "user_score": 0.333,
+      "required_score": 2.57,
+      "gap": 2.237,
+      "priority": 5
     }
   ],
   "skill_gaps": [
     {
-      "element": "Reading Comprehension",
+      "element": "Critical Thinking",
       "user_score": 0.0,
-      "required_score": 4.0,
-      "gap": 4.0,
+      "required_score": 3.88,
+      "gap": 3.88,
       "priority": 1
-    },
-    {
-      "element": "Active Listening",
-      "user_score": 0.0,
-      "required_score": 3.75,
-      "gap": 3.75,
-      "priority": 2
-    },
-    {
-      "element": "Speaking",
-      "user_score": 0.0,
-      "required_score": 3.75,
-      "gap": 3.75,
-      "priority": 3
-    },
-    {
-      "element": "Mathematics",
-      "user_score": 0.63,
-      "required_score": 4.38,
-      "gap": 3.75,
-      "priority": 4
-    },
-    {
-      "element": "Active Learning",
-      "user_score": 0.0,
-      "required_score": 3.75,
-      "gap": 3.75,
-      "priority": 5
     },
     {
       "element": "Judgment and Decision Making",
       "user_score": 0.0,
-      "required_score": 3.75,
-      "gap": 3.75,
-      "priority": 6
+      "required_score": 3.62,
+      "gap": 3.62,
+      "priority": 2
+    },
+    {
+      "element": "Reading Comprehension",
+      "user_score": 0.0,
+      "required_score": 3.5,
+      "gap": 3.5,
+      "priority": 3
     },
     {
       "element": "Writing",
       "user_score": 0.0,
-      "required_score": 3.5,
-      "gap": 3.5,
-      "priority": 7
+      "required_score": 3.25,
+      "gap": 3.25,
+      "priority": 4
     },
     {
-      "element": "Persuasion",
+      "element": "Speaking",
       "user_score": 0.0,
       "required_score": 3.12,
       "gap": 3.12,
-      "priority": 8
-    },
-    {
-      "element": "Learning Strategies",
-      "user_score": 0.0,
-      "required_score": 3.0,
-      "gap": 3.0,
-      "priority": 9
-    },
-    {
-      "element": "Monitoring",
-      "user_score": 0.0,
-      "required_score": 3.0,
-      "gap": 3.0,
-      "priority": 10
+      "priority": 5
     }
   ],
-  "work_style_gaps": []
+  "work_style_gaps": [
+    {
+      "element": "Cautiousness",
+      "user_score": 0.0,
+      "required_score": 1.76,
+      "gap": 1.76,
+      "priority": 1
+    },
+    {
+      "element": "Tolerance for Ambiguity",
+      "user_score": 0.0,
+      "required_score": 1.72,
+      "gap": 1.72,
+      "priority": 2
+    },
+    {
+      "element": "Self-Confidence",
+      "user_score": 0.74,
+      "required_score": 1.47,
+      "gap": 0.73,
+      "priority": 3
+    },
+    {
+      "element": "Optimism",
+      "user_score": 0.0,
+      "required_score": 0.49,
+      "gap": 0.49,
+      "priority": 4
+    },
+    {
+      "element": "Empathy",
+      "user_score": 0.0,
+      "required_score": 0.41,
+      "gap": 0.41,
+      "priority": 5
+    }
+  ]
 }

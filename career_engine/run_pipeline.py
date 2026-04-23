@@ -101,6 +101,7 @@ def main() -> None:
         gap_analysis,
         occupation_count=len(occupations),
         onet_dir=args.onet_dir,
+        output_dir=args.output_dir,
     )
     (args.output_dir / "career_evaluation_summary.md").write_text(summary, encoding="utf-8")
 
@@ -133,6 +134,7 @@ def _build_summary(
     gap_analysis: dict,
     occupation_count: int,
     onet_dir: Path,
+    output_dir: Path | None = None,
 ) -> str:
     top = recommendations["recommendations"][0] if recommendations["recommendations"] else {}
     field_counts: dict[str, int] = {}
@@ -140,6 +142,18 @@ def _build_summary(
         for key, value in row.items():
             if isinstance(value, list) and key != "relations":
                 field_counts[key] = field_counts.get(key, 0) + len(value)
+
+    work_styles_path = onet_dir / "Work Styles.xlsx"
+    work_styles_status = (
+        "loaded" if work_styles_path.exists()
+        else f"MISSING — download from https://www.onetcenter.org/database.html#individual-files and place at {work_styles_path}"
+    )
+    work_styles_score = top.get("component_scores", {}).get("work_styles", 0.0)
+    work_styles_note = (
+        "" if work_styles_path.exists()
+        else " (0.0 because Work Styles.xlsx is missing)"
+    )
+
     lines = [
         "# Career Evaluation Summary",
         "",
@@ -156,15 +170,20 @@ def _build_summary(
     ]
     for key in sorted(field_counts):
         lines.append(f"- {key}: {field_counts[key]}")
+
+    component_scores = top.get("component_scores", {})
     lines.extend(
         [
             "",
-        "## Career Recommendation",
-        f"- O*NET occupation profiles loaded: {occupation_count}",
-        f"- O*NET source directory: {onet_dir}",
-        f"- Top recommendation: {top.get('title', 'N/A')}",
+            "## Career Recommendation",
+            f"- O*NET occupation profiles loaded: {occupation_count}",
+            f"- O*NET source directory: {onet_dir}",
+            f"- Work Styles.xlsx: {work_styles_status}",
+            f"- Top recommendation: {top.get('title', 'N/A')}",
             f"- Top score: {top.get('score', 0)}",
-            f"- Top component scores: {top.get('component_scores', {})}",
+            f"- knowledge score: {component_scores.get('knowledge', 0.0)}",
+            f"- skills score: {component_scores.get('skills', 0.0)}",
+            f"- work_styles score: {work_styles_score}{work_styles_note}",
             "",
             "## Gap Analysis Target",
             f"- Target: {gap_analysis.get('target', 'N/A')}",
@@ -172,13 +191,27 @@ def _build_summary(
             f"- Top skill gaps: {gap_analysis.get('skill_gaps', [])[:3]}",
             f"- Top work style gaps: {gap_analysis.get('work_style_gaps', [])[:3]}",
             "",
-            "## Reading",
-            "- This career version keeps the original memory-graph idea, but makes the stored memory career-specific.",
-            "- Real O*NET Knowledge and Skills xlsx files are used when available.",
-            "- Work Styles will be included automatically if a Work Styles.xlsx file is added.",
-            "- O*NET vectors turn graph nodes into occupation matching and skill gap analysis.",
+            "## Data Sources",
+            "- Knowledge.xlsx and Skills.xlsx: real O*NET data (loaded)",
+            f"- Work Styles.xlsx: {work_styles_status}",
+            "- Node-to-O*NET mapping: sentence-transformers (all-MiniLM-L6-v2) with keyword fallback",
         ]
     )
+
+    # Append GPT judge results if available
+    judge_path = output_dir / "career_judge_summary_openai_gpt4o.json" if output_dir else None
+    if judge_path and judge_path.exists():
+        import json as _json
+        judge = _json.loads(judge_path.read_text(encoding="utf-8"))
+        lines.extend([
+            "",
+            "## GPT-4o Career Judge",
+            f"- Sample size: {judge.get('sample_size', 'N/A')}",
+            f"- Completeness: {judge.get('completeness', 'N/A')} / 5",
+            f"- Faithfulness: {judge.get('faithfulness', 'N/A')} / 5",
+            f"- Career utility: {judge.get('career_utility', 'N/A')} / 5",
+        ])
+
     return "\n".join(lines) + "\n"
 
 

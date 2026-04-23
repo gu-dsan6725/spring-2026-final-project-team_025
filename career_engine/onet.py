@@ -11,7 +11,58 @@ import xml.etree.ElementTree as ET
 
 from .schema import KNOWLEDGE_ELEMENTS, SKILL_ELEMENTS, WORK_STYLE_ELEMENTS
 
+try:
+    from sentence_transformers import SentenceTransformer as _SentenceTransformer
+    import numpy as _np
+    _SBERT_AVAILABLE = True
+except ImportError:  # pragma: no cover
+    _SBERT_AVAILABLE = False
+
 XLSX_NS = {"a": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+
+_ALL_CANONICAL: list[str] = KNOWLEDGE_ELEMENTS + SKILL_ELEMENTS + WORK_STYLE_ELEMENTS
+_CANONICAL_LOWER: dict[str, str] = {e.lower(): e for e in _ALL_CANONICAL}
+
+
+def _canonicalize_element(name: str) -> str:
+    """Map an xlsx element name to the canonical form used in schema lists (case-insensitive)."""
+    return _CANONICAL_LOWER.get(name.strip().lower(), name.strip())
+
+
+class _EmbeddingMapper:
+    """Lazy singleton: maps free-text node content to O*NET elements via sentence embeddings."""
+
+    _instance: "_EmbeddingMapper | None" = None
+
+    def __init__(self) -> None:
+        model = _SentenceTransformer("all-MiniLM-L6-v2")
+        self._model = model
+        self._categories: dict[str, tuple[list[str], Any]] = {}
+        for cat, elements in [
+            ("knowledge", KNOWLEDGE_ELEMENTS),
+            ("skills", SKILL_ELEMENTS),
+            ("work_styles", WORK_STYLE_ELEMENTS),
+        ]:
+            embs = model.encode(elements, normalize_embeddings=True)
+            self._categories[cat] = (list(elements), embs)
+
+    @classmethod
+    def get(cls) -> "_EmbeddingMapper":
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+
+    def map(self, content: str, category: str, top_k: int = 2) -> list[dict[str, Any]]:
+        if category not in self._categories:
+            return []
+        elements, embs = self._categories[category]
+        query_emb = self._model.encode([content], normalize_embeddings=True)[0]
+        scores = (_np.array(embs) @ query_emb).tolist()
+        ranked = sorted(zip(elements, scores), key=lambda x: -x[1])
+        return [
+            {"element_name": elem, "confidence": round(float(max(0.0, score)), 4)}
+            for elem, score in ranked[:top_k]
+        ]
 
 
 @dataclass
@@ -181,7 +232,7 @@ def load_occupation_profiles(data_dir: Path | None = None) -> list[OccupationPro
 
     knowledge = _load_onet_xlsx(knowledge_path, scale_id="IM")
     skills = _load_onet_xlsx(skills_path, scale_id="IM")
-    work_styles = _load_onet_xlsx(work_styles_path, scale_id="IM") if work_styles_path.exists() else {}
+    work_styles = _load_onet_xlsx(work_styles_path, scale_id="WI") if work_styles_path.exists() else {}
     occupation_keys = sorted(set(knowledge) | set(skills) | set(work_styles))
     profiles: list[OccupationProfile] = []
     for code in occupation_keys:
@@ -327,7 +378,7 @@ def _load_onet_xlsx(path: Path, scale_id: str = "IM") -> dict[str, dict[str, Any
             continue
         code = str(row[headers["O*NET-SOC Code"]]).strip()
         title = str(row[headers["Title"]]).strip()
-        element = str(row[headers["Element Name"]]).strip()
+        element = _canonicalize_element(str(row[headers["Element Name"]]).strip())
         value_raw = str(row[headers["Data Value"]]).strip()
         if not code or not element or not value_raw:
             continue
@@ -393,14 +444,29 @@ def _dataset_for_node(node_type: str) -> str | None:
 def _map_node(node: dict[str, Any]) -> list[dict[str, Any]]:
     content = str(node.get("content", "")).lower()
     node_type = str(node.get("node_type", "")).lower()
+
     if node_type == "knowledge":
-        mappings = _knowledge_mappings(content)
+        category = "knowledge"
     elif node_type in {"skill", "tool"}:
-        mappings = _skill_mappings(content)
+        category = "skills"
     elif node_type in {"behavioral_trait", "implicit_signal"}:
-        mappings = _work_style_mappings(content)
+        category = "work_styles"
     else:
-        mappings = []
+        return []
+
+    if _SBERT_AVAILABLE:
+        try:
+            return _EmbeddingMapper.get().map(content, category, top_k=2)
+        except Exception:  # pragma: no cover
+            pass
+
+    # fallback: keyword rules
+    if category == "knowledge":
+        mappings = _knowledge_mappings(content)
+    elif category == "skills":
+        mappings = _skill_mappings(content)
+    else:
+        mappings = _work_style_mappings(content)
     mappings.sort(key=lambda item: item["confidence"], reverse=True)
     return mappings[:3]
 
@@ -433,12 +499,18 @@ def _skill_mappings(content: str) -> list[dict[str, Any]]:
 
 def _work_style_mappings(content: str) -> list[dict[str, Any]]:
     rules = [
-        ("Attention to Detail", ["detail", "edge cases", "quality", "checking"]),
-        ("Analytical Thinking", ["analytical", "analysis", "problem solving", "reasoning"]),
-        ("Persistence", ["persistence", "persistent", "refine", "keep trying", "going back"]),
-        ("Dependability", ["reliable", "dependable", "responsible"]),
-        ("Innovation", ["creative", "innovation", "prototype", "experiment"]),
-        ("Independence", ["independent", "self-directed", "on my own"]),
+        ("Attention to Detail", ["detail", "edge cases", "quality", "checking", "thorough"]),
+        ("Intellectual Curiosity", ["analytical", "analysis", "problem solving", "reasoning", "curious", "explore"]),
+        ("Perseverance", ["persistence", "persistent", "refine", "keep trying", "going back", "determined"]),
+        ("Dependability", ["reliable", "dependable", "responsible", "consistent"]),
+        ("Innovation", ["creative", "innovation", "prototype", "experiment", "novel"]),
+        ("Initiative", ["independent", "self-directed", "on my own", "proactive", "self-starter"]),
+        ("Adaptability", ["adapt", "flexible", "change", "pivot", "adjust"]),
+        ("Achievement Orientation", ["achieve", "accomplish", "goal", "driven", "motivated"]),
+        ("Cooperation", ["team", "collaborate", "work with", "together"]),
+        ("Stress Tolerance", ["stress", "pressure", "deadline", "calm", "composed"]),
+        ("Integrity", ["honest", "ethics", "transparent", "integrity"]),
+        ("Self-Control", ["patient", "self-control", "disciplined", "composed"]),
     ]
     return _rules_to_mappings(content, rules)
 

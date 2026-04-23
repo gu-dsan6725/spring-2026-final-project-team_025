@@ -14,7 +14,7 @@ except ImportError:  # pragma: no cover
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Use GPT as judge for career signal extraction.")
+    parser = argparse.ArgumentParser(description="Use GPT as judge for career signal extraction (per-turn).")
     parser.add_argument("--extractions", type=Path, default=Path("outputs/career/career_extractions.json"))
     parser.add_argument("--out", type=Path, default=Path("outputs/career/career_judge_scores_openai_gpt4o.json"))
     parser.add_argument("--summary-out", type=Path, default=Path("outputs/career/career_judge_summary_openai_gpt4o.json"))
@@ -34,9 +34,7 @@ def main() -> None:
     rows = json.loads(args.extractions.read_text(encoding="utf-8"))
     sampled = _sample_rows(rows, args.sample, args.seed)
     client = OpenAI()
-    scores = []
-    for row in sampled:
-        scores.append(_judge_row(client, args.model, row))
+    scores = [_judge_row(client, args.model, row) for row in sampled]
 
     summary = _summarize(scores)
     args.out.parent.mkdir(parents=True, exist_ok=True)
@@ -57,11 +55,21 @@ def _judge_row(client: Any, model: str, row: dict[str, Any]) -> dict[str, Any]:
     extraction = {key: value for key, value in row.items() if key not in {"text", "turn_id"}}
     prompt = (
         "You are evaluating a career-development signal extractor.\n\n"
-        "Given a user message and the extracted career signals, score 1-5 on:\n"
-        "1. completeness: did it capture important career-relevant signals such as projects, skills, tools, goals, interests, constraints, and work styles?\n"
-        "2. faithfulness: are the extracted signals supported by the user message, without hallucinated claims?\n"
-        "3. career_utility: would these extracted signals be useful for career recommendation or skill gap analysis?\n\n"
-        "Return JSON only with integer scores and a one-sentence rationale:\n"
+        "Given a user message and the extracted career signals, score each dimension 1–5 "
+        "using the rubric below.\n\n"
+        "Rubric:\n"
+        "• completeness (1–5): Did it capture the important career-relevant signals present in this "
+        "message — such as skills, tools, projects, goals, interests, constraints, and work styles? "
+        "5 = captures nearly everything relevant; 3 = captures main signals, misses some; "
+        "1 = misses most signals. Note: a short message naturally has fewer signals — score relative "
+        "to what is actually present in the text.\n\n"
+        "• faithfulness (1–5): Are the extracted signals supported by the user message, without "
+        "hallucinated claims? 5 = all items grounded in the message; "
+        "3 = mostly grounded, a few questionable items; 1 = many invented items.\n\n"
+        "• career_utility (1–5): Would these extracted signals be useful for career recommendation "
+        "or skill-gap analysis? 5 = clear actionable signals; "
+        "3 = partially useful but vague; 1 = too vague or noisy to be useful.\n\n"
+        'Return JSON only with integer scores and a one-sentence rationale:\n'
         '{"completeness": 1, "faithfulness": 1, "career_utility": 1, "rationale": "..."}\n\n'
         f"User message:\n{row.get('text', '')}\n\n"
         f"Extracted career signals:\n{json.dumps(extraction, ensure_ascii=False, indent=2)}"
@@ -97,4 +105,3 @@ def _summarize(scores: list[dict[str, Any]]) -> dict[str, Any]:
 
 if __name__ == "__main__":
     main()
-

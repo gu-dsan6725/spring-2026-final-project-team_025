@@ -75,7 +75,9 @@ class CareerExtractionAgent:
             f'USER message: "{text}"\n\n'
             "Rules:\n"
             "- Capture both explicit signals and strongly implied latent signals.\n"
-            "- Work styles are behavioral traits such as attention to detail, analytical thinking, persistence, independence.\n"
+            "- Work styles are behavioral traits observable in the message, such as: "
+            "Achievement Orientation, Adaptability, Attention to Detail, Intellectual Curiosity, "
+            "Perseverance, Initiative, Innovation, Cooperation, Dependability, Integrity, Stress Tolerance.\n"
             "- Tools are concrete technologies such as Python, SQL, PyTorch, Excel, FastAPI.\n"
             "- Knowledge areas are broader domains such as data analysis, machine learning, finance, statistics.\n"
             "- Do not fabricate career goals that are not stated or strongly implied.\n"
