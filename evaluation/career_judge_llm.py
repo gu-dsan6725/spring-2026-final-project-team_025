@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import random
+import re
 from pathlib import Path
 from typing import Any
 
@@ -12,9 +13,16 @@ try:
 except ImportError:  # pragma: no cover
     OpenAI = None
 
+_CAREER_FIELDS = [
+    "knowledge", "skill", "tool", "project", "course",
+    "career_goal", "interest", "behavioral_trait", "constraint", "implicit_signal",
+]
+
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Use GPT as judge for career signal extraction (per-turn).")
+    parser = argparse.ArgumentParser(
+        description="Use GPT as judge for career signal extraction (per-dialogue narrative)."
+    )
     parser.add_argument("--extractions", type=Path, default=Path("outputs/career/career_extractions.json"))
     parser.add_argument("--out", type=Path, default=Path("outputs/career/career_judge_scores_openai_gpt4o.json"))
     parser.add_argument("--summary-out", type=Path, default=Path("outputs/career/career_judge_summary_openai_gpt4o.json"))
@@ -32,9 +40,11 @@ def main() -> None:
         raise RuntimeError("OPENAI_API_KEY is not set.")
 
     rows = json.loads(args.extractions.read_text(encoding="utf-8"))
-    sampled = _sample_rows(rows, args.sample, args.seed)
+    dialogues = _group_by_dialogue(rows)
+    sampled = _sample_dialogues(dialogues, args.sample, args.seed)
+
     client = OpenAI()
-    scores = [_judge_row(client, args.model, row) for row in sampled]
+    scores = [_judge_dialogue(client, args.model, dlg) for dlg in sampled]
 
     summary = _summarize(scores)
     args.out.parent.mkdir(parents=True, exist_ok=True)
@@ -42,37 +52,133 @@ def main() -> None:
     args.summary_out.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Wrote {args.out}")
     print(f"Wrote {args.summary_out}")
+    _update_pipeline_summary(args.summary_out.parent, summary)
 
 
-def _sample_rows(rows: list[dict[str, Any]], sample_size: int, seed: int) -> list[dict[str, Any]]:
-    if sample_size <= 0 or sample_size >= len(rows):
-        return rows
+# ---------------------------------------------------------------------------
+# Dialogue grouping
+# ---------------------------------------------------------------------------
+
+def _extract_dialogue_id(turn_id: str) -> str:
+    return turn_id.split("::")[0] if "::" in turn_id else turn_id
+
+
+def _group_by_dialogue(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    dialogues: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        dlg_id = _extract_dialogue_id(row.get("turn_id", ""))
+        if dlg_id not in dialogues:
+            dialogues[dlg_id] = {
+                "dialogue_id": dlg_id,
+                "texts": [],
+                **{field: [] for field in _CAREER_FIELDS},
+            }
+        dlg = dialogues[dlg_id]
+        if row.get("text"):
+            dlg["texts"].append(row["text"])
+        for field in _CAREER_FIELDS:
+            existing: set[str] = {
+                item["name"].lower()
+                for item in dlg[field]
+                if isinstance(item, dict) and "name" in item
+            }
+            for item in row.get(field, []):
+                if isinstance(item, dict) and item.get("name", "").lower() not in existing:
+                    dlg[field].append(item)
+                    existing.add(item["name"].lower())
+    return dialogues
+
+
+def _sample_dialogues(
+    dialogues: dict[str, dict[str, Any]], sample_size: int, seed: int
+) -> list[dict[str, Any]]:
+    all_dlgs = list(dialogues.values())
+    if sample_size <= 0 or sample_size >= len(all_dlgs):
+        return all_dlgs
     rng = random.Random(seed)
-    return rng.sample(rows, sample_size)
+    return rng.sample(all_dlgs, sample_size)
 
 
-def _judge_row(client: Any, model: str, row: dict[str, Any]) -> dict[str, Any]:
-    extraction = {key: value for key, value in row.items() if key not in {"text", "turn_id"}}
+# ---------------------------------------------------------------------------
+# Narrative builder (no LLM — pure formatting)
+# ---------------------------------------------------------------------------
+
+def _top_names(items: list[dict[str, Any]], n: int) -> list[str]:
+    sorted_items = sorted(items, key=lambda x: float(x.get("confidence", 0)), reverse=True)
+    return [item["name"] for item in sorted_items[:n] if isinstance(item, dict) and item.get("name")]
+
+
+def _build_narrative(dialogue: dict[str, Any]) -> str:
+    """Convert aggregated dialogue signals into a structured career narrative.
+
+    The narrative gives the judge a coherent profile to evaluate rather than
+    raw JSON, improving the signal-to-noise ratio for completeness and utility scoring.
+    """
+    lines: list[str] = [f"Career Profile — {dialogue['dialogue_id']}",  ""]
+
+    sections = [
+        ("Technical Tools",    "tool",           5),
+        ("Skills",             "skill",          5),
+        ("Knowledge Areas",    "knowledge",      4),
+        ("Projects",           "project",        4),
+        ("Courses",            "course",         3),
+        ("Career Goals",       "career_goal",    3),
+        ("Interests",          "interest",       3),
+        ("Work Styles",        "behavioral_trait", 4),
+        ("Constraints",        "constraint",     2),
+    ]
+    for label, field, n in sections:
+        names = _top_names(dialogue[field], n)
+        if names:
+            lines.append(f"• {label}: {', '.join(names)}")
+
+    # Summarise inferred cognitive signals (implicit_signal)
+    cognitive_keywords = {"analytical reasoning", "complex problem solving",
+                          "active learning", "judgment and decision making",
+                          "reading comprehension"}
+    inferred = [
+        item["name"] for item in dialogue.get("implicit_signal", [])
+        if isinstance(item, dict) and item.get("name", "").lower() in cognitive_keywords
+    ]
+    if inferred:
+        lines.append(f"• Inferred Cognitive Strengths (from technical experience): {', '.join(inferred)}")
+
+    lines.append("")
+    lines.append(f"Based on {len(dialogue['texts'])} conversation turns.")
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Judging
+# ---------------------------------------------------------------------------
+
+def _judge_dialogue(client: Any, model: str, dialogue: dict[str, Any]) -> dict[str, Any]:
+    narrative = _build_narrative(dialogue)
+    sample_texts = dialogue["texts"][:3]
+
     prompt = (
-        "You are evaluating a career-development signal extractor.\n\n"
-        "Given a user message and the extracted career signals, score each dimension 1–5 "
-        "using the rubric below.\n\n"
+        "You are evaluating a career-development signal extraction system. "
+        "The system processes multi-turn user conversations and produces a career profile.\n\n"
+        "Given sample conversation turns and the extracted career profile (as a structured narrative), "
+        "score each dimension 1–5 using the rubric below.\n\n"
         "Rubric:\n"
-        "• completeness (1–5): Did it capture the important career-relevant signals present in this "
-        "message — such as skills, tools, projects, goals, interests, constraints, and work styles? "
-        "5 = captures nearly everything relevant; 3 = captures main signals, misses some; "
-        "1 = misses most signals. Note: a short message naturally has fewer signals — score relative "
-        "to what is actually present in the text.\n\n"
-        "• faithfulness (1–5): Are the extracted signals supported by the user message, without "
-        "hallucinated claims? 5 = all items grounded in the message; "
-        "3 = mostly grounded, a few questionable items; 1 = many invented items.\n\n"
-        "• career_utility (1–5): Would these extracted signals be useful for career recommendation "
-        "or skill-gap analysis? 5 = clear actionable signals; "
-        "3 = partially useful but vague; 1 = too vague or noisy to be useful.\n\n"
-        'Return JSON only with integer scores and a one-sentence rationale:\n'
-        '{"completeness": 1, "faithfulness": 1, "career_utility": 1, "rationale": "..."}\n\n'
-        f"User message:\n{row.get('text', '')}\n\n"
-        f"Extracted career signals:\n{json.dumps(extraction, ensure_ascii=False, indent=2)}"
+        "• completeness (1–5): Does the profile capture the key career-relevant signals "
+        "present across the conversation? Consider skills, tools, projects, goals, interests, "
+        "work styles, and constraints. "
+        "5 = captures nearly everything; 3 = main signals present but gaps exist; "
+        "1 = most signals missed. Score relative to what is actually present in the texts.\n\n"
+        "• faithfulness (1–5): Are the extracted items grounded in the conversation? "
+        "5 = all items supported; 3 = mostly grounded with minor issues; "
+        "1 = many hallucinated items.\n\n"
+        "• career_utility (1–5): Is this profile actionable for career recommendation "
+        "and skill-gap analysis? Does it give a clear picture of the user's strengths "
+        "and development areas? "
+        "5 = clear, specific, actionable; 3 = useful but incomplete; "
+        "1 = too vague to be useful.\n\n"
+        'Return JSON only:\n'
+        '{"completeness": 1, "faithfulness": 1, "career_utility": 1, "rationale": "one sentence"}\n\n'
+        f"Sample conversation turns:\n{json.dumps(sample_texts, ensure_ascii=False, indent=2)}\n\n"
+        f"Extracted Career Profile:\n{narrative}"
     )
     response = client.chat.completions.create(
         model=model,
@@ -82,7 +188,7 @@ def _judge_row(client: Any, model: str, row: dict[str, Any]) -> dict[str, Any]:
     )
     parsed = json.loads(response.choices[0].message.content or "{}")
     return {
-        "turn_id": row.get("turn_id"),
+        "dialogue_id": dialogue["dialogue_id"],
         "completeness": int(parsed.get("completeness", 0)),
         "faithfulness": int(parsed.get("faithfulness", 0)),
         "career_utility": int(parsed.get("career_utility", 0)),
@@ -101,6 +207,32 @@ def _summarize(scores: list[dict[str, Any]]) -> dict[str, Any]:
             for field in fields
         },
     }
+
+
+def _update_pipeline_summary(output_dir: Path, judge_summary: dict[str, Any]) -> None:
+    """Append or replace the GPT judge section in career_evaluation_summary.md."""
+    summary_path = output_dir / "career_evaluation_summary.md"
+    if not summary_path.exists():
+        return
+    content = summary_path.read_text(encoding="utf-8")
+    judge_section = (
+        "\n## GPT-4o Career Judge\n"
+        f"- Sample size: {judge_summary.get('sample_size', 'N/A')}\n"
+        f"- Completeness: {judge_summary.get('completeness', 'N/A')} / 5\n"
+        f"- Faithfulness: {judge_summary.get('faithfulness', 'N/A')} / 5\n"
+        f"- Career utility: {judge_summary.get('career_utility', 'N/A')} / 5\n"
+    )
+    if "## GPT-4o Career Judge" in content:
+        content = re.sub(
+            r"\n## GPT-4o Career Judge\n.*?(?=\n##|\Z)",
+            judge_section,
+            content,
+            flags=re.DOTALL,
+        )
+    else:
+        content = content.rstrip("\n") + "\n" + judge_section
+    summary_path.write_text(content, encoding="utf-8")
+    print(f"Updated {summary_path}")
 
 
 if __name__ == "__main__":

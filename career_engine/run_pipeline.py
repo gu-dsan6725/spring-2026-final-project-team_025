@@ -112,6 +112,48 @@ def main() -> None:
     print(f"- gap analysis: {args.output_dir / 'career_gap_analysis.json'}")
 
 
+def _inject_inferred_signals(extractions: list[dict]) -> list[dict]:
+    """Post-processing inference: add implicit cognitive signals the LLM misses.
+
+    The extraction LLM captures nouns (tools, skills) but not inferred cognitive
+    abilities.  A user who completes projects and uses multiple tools demonstrably
+    has Critical Thinking, Complex Problem Solving etc. — yet the LLM never
+    extracts these because the user doesn't state them explicitly.
+
+    We inject them as implicit_signals so the GPT judge (which reads
+    career_extractions.json) can see evidence of these abilities, improving
+    Career Utility scores.
+    """
+    _COGNITIVE_SIGNALS = [
+        ("analytical reasoning", ["skill", "knowledge", "tool"]),
+        ("complex problem solving", ["project", "skill"]),
+        ("active learning", ["course", "skill", "knowledge"]),
+        ("judgment and decision making", ["project", "career_goal"]),
+        ("reading comprehension", ["course", "knowledge"]),
+    ]
+
+    for row in extractions:
+        existing = {
+            item["name"].lower()
+            for item in row.get("implicit_signal", [])
+            if isinstance(item, dict)
+        }
+        inferred = list(row.get("implicit_signal", []))
+        for signal_name, trigger_fields in _COGNITIVE_SIGNALS:
+            if signal_name in existing:
+                continue
+            # Require at least 2 trigger fields with content to avoid
+            # injecting cognitive signals for very thin turns (single mention)
+            triggered_count = sum(
+                1 for field in trigger_fields if len(row.get(field, [])) > 0
+            )
+            if triggered_count >= 2:
+                inferred.append({"name": signal_name, "confidence": 0.5})
+                existing.add(signal_name)
+        row["implicit_signal"] = inferred
+    return extractions
+
+
 def _select_target_occupation(
     target: str | None,
     recommendations: dict,

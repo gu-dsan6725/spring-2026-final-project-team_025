@@ -2,53 +2,53 @@
   "user_id": "user_001",
   "recommendations": [
     {
-      "onet_code": "15-1252.00",
-      "title": "Software Developers",
-      "score": 0.7239,
+      "onet_code": "15-1254.00",
+      "title": "Web Developers",
+      "score": 0.7315,
       "component_scores": {
-        "knowledge": 0.6616,
-        "skills": 0.6983,
-        "work_styles": 0.8904
+        "knowledge": 0.658,
+        "skills": 0.7183,
+        "work_styles": 0.8898
       }
     },
     {
-      "onet_code": "15-2031.00",
-      "title": "Operations Research Analysts",
-      "score": 0.7237,
+      "onet_code": "15-1252.00",
+      "title": "Software Developers",
+      "score": 0.728,
       "component_scores": {
-        "knowledge": 0.6711,
-        "skills": 0.704,
-        "work_styles": 0.8599
+        "knowledge": 0.647,
+        "skills": 0.7218,
+        "work_styles": 0.8837
       }
     },
     {
       "onet_code": "15-1221.00",
       "title": "Computer and Information Research Scientists",
-      "score": 0.7234,
+      "score": 0.7272,
       "component_scores": {
-        "knowledge": 0.6605,
-        "skills": 0.695,
-        "work_styles": 0.8974
+        "knowledge": 0.64,
+        "skills": 0.7186,
+        "work_styles": 0.8991
       }
     },
     {
-      "onet_code": "15-1254.00",
-      "title": "Web Developers",
-      "score": 0.7227,
+      "onet_code": "15-2031.00",
+      "title": "Operations Research Analysts",
+      "score": 0.7254,
       "component_scores": {
-        "knowledge": 0.6753,
-        "skills": 0.6957,
-        "work_styles": 0.8667
+        "knowledge": 0.6507,
+        "skills": 0.7276,
+        "work_styles": 0.8512
       }
     },
     {
-      "onet_code": "15-1255.01",
-      "title": "Video Game Designers",
-      "score": 0.7217,
+      "onet_code": "15-1251.00",
+      "title": "Computer Programmers",
+      "score": 0.723,
       "component_scores": {
-        "knowledge": 0.6852,
-        "skills": 0.6755,
-        "work_styles": 0.8897
+        "knowledge": 0.6438,
+        "skills": 0.7319,
+        "work_styles": 0.8415
       }
     }
   ]

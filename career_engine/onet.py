@@ -279,7 +279,30 @@ def build_user_profile(mapped_nodes: list[dict[str, Any]], user_id: str = "user_
                 continue
             contribution = node_conf * float(mapping["confidence"]) * mentions * recency
             profile[vector_name][element] = min(7.0, profile[vector_name][element] + contribution)
+    _apply_cognitive_inference(profile, mapped_nodes)
     return profile
+
+
+def _apply_cognitive_inference(profile: dict[str, Any], mapped_nodes: list[dict[str, Any]]) -> None:
+    """Infer baseline cognitive skill scores that the LLM never extracts explicitly.
+
+    A user with multiple technical skills/tools and projects demonstrably has
+    Critical Thinking and Complex Problem Solving — these should not be 0.
+    """
+    skill_tool_count = sum(
+        1 for n in mapped_nodes if str(n.get("node_type", "")) in {"skill", "tool"}
+    )
+    project_count = sum(
+        1 for n in mapped_nodes if str(n.get("node_type", "")) == "project"
+    )
+    sv = profile["skills_vector"]
+    if skill_tool_count >= 3:
+        sv["Critical Thinking"] = max(sv.get("Critical Thinking", 0.0), 0.8)
+        sv["Complex Problem Solving"] = max(sv.get("Complex Problem Solving", 0.0), 0.7)
+        sv["Active Learning"] = max(sv.get("Active Learning", 0.0), 0.6)
+    if project_count >= 2:
+        sv["Judgment and Decision Making"] = max(sv.get("Judgment and Decision Making", 0.0), 0.6)
+        sv["Reading Comprehension"] = max(sv.get("Reading Comprehension", 0.0), 0.5)
 
 
 def recommend_careers(
