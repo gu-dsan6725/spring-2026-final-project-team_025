@@ -1,27 +1,27 @@
 {
-  "total_non_empty_extractions": 1177,
+  "total_non_empty_extractions": 1178,
   "item_counts": {
-    "knowledge": 290,
-    "skill": 412,
-    "tool": 541,
-    "project": 588,
-    "course": 107,
-    "career_goal": 395,
-    "interest": 81,
-    "behavioral_trait": 336,
-    "constraint": 108,
-    "implicit_signal": 524
+    "knowledge": 294,
+    "skill": 418,
+    "tool": 544,
+    "project": 590,
+    "course": 110,
+    "career_goal": 396,
+    "interest": 84,
+    "behavioral_trait": 337,
+    "constraint": 110,
+    "implicit_signal": 527
   },
   "turn_counts_by_field": {
     "knowledge": 227,
-    "skill": 320,
-    "tool": 328,
-    "project": 561,
-    "course": 106,
+    "skill": 323,
+    "tool": 329,
+    "project": 564,
+    "course": 108,
     "career_goal": 391,
-    "interest": 78,
-    "behavioral_trait": 286,
-    "constraint": 108,
-    "implicit_signal": 447
+    "interest": 79,
+    "behavioral_trait": 289,
+    "constraint": 110,
+    "implicit_signal": 450
   }
 }

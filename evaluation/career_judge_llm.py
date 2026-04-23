@@ -108,6 +108,41 @@ def _top_names(items: list[dict[str, Any]], n: int) -> list[str]:
     return [item["name"] for item in sorted_items[:n] if isinstance(item, dict) and item.get("name")]
 
 
+def _infer_suggestions(dialogue: dict[str, Any]) -> list[str]:
+    """Generate actionable development suggestions from signal patterns (no LLM)."""
+    suggestions = []
+    has_tools = len(dialogue.get("tool", [])) > 0
+    has_projects = len(dialogue.get("project", [])) > 0
+    has_goals = len(dialogue.get("career_goal", [])) > 0
+    tool_names = {i["name"].lower() for i in dialogue.get("tool", []) if isinstance(i, dict)}
+    has_web = any(t in tool_names for t in {"html", "css", "javascript", "react", "vue", "node"})
+    has_data = any(t in tool_names for t in {"python", "sql", "pandas", "pytorch", "tensorflow"})
+
+    if has_tools and not any("communication" in i.get("name","").lower()
+                             for i in dialogue.get("skill", [])):
+        suggestions.append(
+            "Strengthen stakeholder communication: practice translating technical work "
+            "into non-technical summaries (e.g. project write-ups, demos)."
+        )
+    if has_projects and not any("document" in i.get("name","").lower()
+                                for i in dialogue.get("skill", [])):
+        suggestions.append(
+            "Build a documentation habit: READMEs, design docs, and post-mortems "
+            "develop Writing and Communication skills valued in professional roles."
+        )
+    if has_goals and not dialogue.get("course", []):
+        suggestions.append(
+            "Consider structured learning (courses, certifications) to formally validate "
+            "existing skills and fill knowledge gaps for target roles."
+        )
+    if has_web or has_data:
+        suggestions.append(
+            "Seek feedback from end-users or stakeholders on at least one project "
+            "to develop Customer and Personal Service awareness."
+        )
+    return suggestions[:3]  # cap at 3 to keep narrative concise
+
+
 def _build_narrative(dialogue: dict[str, Any]) -> str:
     """Convert aggregated dialogue signals into a structured career narrative.
 
@@ -142,6 +177,14 @@ def _build_narrative(dialogue: dict[str, Any]) -> str:
     ]
     if inferred:
         lines.append(f"• Inferred Cognitive Strengths (from technical experience): {', '.join(inferred)}")
+
+    # Development suggestions based on common gap patterns
+    suggestions = _infer_suggestions(dialogue)
+    if suggestions:
+        lines.append("")
+        lines.append("Suggested Development Areas:")
+        for s in suggestions:
+            lines.append(f"  - {s}")
 
     lines.append("")
     lines.append(f"Based on {len(dialogue['texts'])} conversation turns.")

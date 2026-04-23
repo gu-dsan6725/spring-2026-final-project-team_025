@@ -31,25 +31,25 @@
       "priority": 4
     },
     {
-      "element": "Public Safety and Security",
-      "user_score": 0.0,
-      "required_score": 1.96,
-      "gap": 1.96,
+      "element": "Education and Training",
+      "user_score": 0.337,
+      "required_score": 2.25,
+      "gap": 1.913,
       "priority": 5
     }
   ],
   "skill_gaps": [
     {
-      "element": "Reading Comprehension",
-      "user_score": 0.5,
-      "required_score": 3.62,
-      "gap": 3.12,
+      "element": "Speaking",
+      "user_score": 0.0,
+      "required_score": 3.25,
+      "gap": 3.25,
       "priority": 1
     },
     {
-      "element": "Writing",
-      "user_score": 0.0,
-      "required_score": 3.12,
+      "element": "Reading Comprehension",
+      "user_score": 0.5,
+      "required_score": 3.62,
       "gap": 3.12,
       "priority": 2
     },
@@ -61,17 +61,17 @@
       "priority": 3
     },
     {
-      "element": "Service Orientation",
-      "user_score": 0.093,
+      "element": "Social Perceptiveness",
+      "user_score": 0.0,
       "required_score": 2.88,
-      "gap": 2.787,
+      "gap": 2.88,
       "priority": 4
     },
     {
-      "element": "Speaking",
-      "user_score": 0.465,
-      "required_score": 3.25,
-      "gap": 2.785,
+      "element": "Service Orientation",
+      "user_score": 0.0,
+      "required_score": 2.88,
+      "gap": 2.88,
       "priority": 5
     }
   ],
@@ -85,23 +85,23 @@
     },
     {
       "element": "Cautiousness",
-      "user_score": 0.306,
+      "user_score": 0.414,
       "required_score": 1.56,
-      "gap": 1.254,
+      "gap": 1.146,
       "priority": 2
     },
     {
       "element": "Stress Tolerance",
-      "user_score": 0.0,
+      "user_score": 0.4,
       "required_score": 1.09,
-      "gap": 1.09,
+      "gap": 0.69,
       "priority": 3
     },
     {
-      "element": "Self-Confidence",
-      "user_score": 0.847,
-      "required_score": 1.18,
-      "gap": 0.333,
+      "element": "Cooperation",
+      "user_score": 0.527,
+      "required_score": 0.85,
+      "gap": 0.323,
       "priority": 4
     },
     {

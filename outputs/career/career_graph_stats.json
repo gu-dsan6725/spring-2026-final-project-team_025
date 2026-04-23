@@ -1,17 +1,17 @@
 {
-  "nodes": 833,
-  "edges": 5293,
+  "nodes": 846,
+  "edges": 5327,
   "nodes_by_type": {
     "user": 380,
-    "knowledge": 18,
-    "skill": 34,
-    "tool": 19,
+    "knowledge": 25,
+    "skill": 36,
+    "tool": 17,
     "project": 140,
-    "career_goal": 110,
+    "career_goal": 109,
     "behavioral_trait": 10,
     "implicit_signal": 22,
-    "interest": 39,
-    "constraint": 28,
-    "course": 33
+    "interest": 41,
+    "constraint": 30,
+    "course": 36
   }
 }

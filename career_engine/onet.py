@@ -303,6 +303,13 @@ def _apply_cognitive_inference(profile: dict[str, Any], mapped_nodes: list[dict[
     if project_count >= 2:
         sv["Judgment and Decision Making"] = max(sv.get("Judgment and Decision Making", 0.0), 0.6)
         sv["Reading Comprehension"] = max(sv.get("Reading Comprehension", 0.0), 0.5)
+    # Writing: anyone who codes writes documentation, comments, READMEs
+    if skill_tool_count >= 3:
+        sv["Writing"] = max(sv.get("Writing", 0.0), 0.4)
+    # Stress Tolerance: projects involve deadlines and technical pressure
+    wv = profile["work_styles_vector"]
+    if project_count >= 2:
+        wv["Stress Tolerance"] = max(wv.get("Stress Tolerance", 0.0), 0.4)
 
 
 def recommend_careers(
