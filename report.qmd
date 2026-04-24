@@ -19,8 +19,10 @@ header-includes:
 ---
 
 \begin{center}
-{\LARGE \textbf{Personal Knowledge \\ Graph Memory Engine}}\\[0.8em]
-{\large group 25}
+{\LARGE \textbf{Personal Knowledge Graph Memory Engine and Career Development Assistant}}\\[0.5em]
+{\large Turning conversations into structured long-term memory}\\[0.2em]
+{\large for personalized and evolving career guidance}\\[0.8em]
+{\large Jiayi Peng, Kexin Lyu, Yiran Tao, Chenxi Guo}
 \end{center}
 \vspace{1em}
 
@@ -31,26 +33,28 @@ header-includes:
 
 # Abstract {.unnumbered}
 
-We present a Personal Knowledge Graph Memory Engine that transforms conversational interactions into structured, queryable knowledge representations. Rather than relying on flat retrieval mechanisms, our system automatically identifies and extracts semantically meaningful elements from user dialogues including goals, preferences, active projects, and constraints and organizes them within a graph-based memory architecture. The core pipeline integrates information extraction and entity linking to surface relevant concepts from unstructured conversation, followed by graph storage to preserve relational context between entities. A memory retrieval ranking layer then surfaces the most contextually relevant nodes during subsequent interactions, enabling the system to reason over accumulated user knowledge rather than isolated exchanges. We explore two primary experimental directions: first, the tradeoff between memory size and retrieval quality, examining how graph density affects precision and recall; second, a comparative evaluation between graph-structured memory and pure vector embedding approaches, assessing which better captures relational semantics over long interaction histories. This work sits at the intersection of knowledge representation and cognitive modeling, drawing inspiration from how humans structure personal memory around relationships and context rather than raw similarity. The proposed system offers a principled foundation for building AI assistants with persistent, structured, and interpretable long-term memory.
+We present a Personal Knowledge Graph Memory Engine and Career Development Assistant that transforms conversational interactions into structured, queryable knowledge representations. Rather than relying on flat retrieval mechanisms, our system automatically identifies and extracts semantically meaningful career signals from user dialogues including goals, preferences, active projects, tools, and professional constraints, and organizes them within a graph-based memory architecture. The core pipeline integrates information extraction and entity linking to surface relevant professional concepts from unstructured conversation, followed by graph storage to preserve relational context between entities. A memory retrieval ranking layer then surfaces the most contextually relevant career nodes during subsequent interactions, enabling the system to provide personalized and evolving guidance based on accumulated user knowledge rather than isolated exchanges. This work sits at the intersection of knowledge representation and career counseling, offering a principled foundation for building AI assistants with persistent, structured, and interpretable long-term memory for professional growth.
 
-# Introduction
-
-In the realm of artificial intelligence, particularly in conversational agents and personal assistants, the ability to retain and utilize long-term memory is paramount for delivering personalized and context-aware interactions. Traditional approaches often struggle with the dynamic and relational nature of human conversation, relying on limited context windows or flat retrieval methods that fail to capture the intricate connections between pieces of information. Our project addresses this challenge by introducing a Personal Knowledge Graph Memory Engine designed to transform unstructured conversational data into a structured, queryable knowledge graph. This system aims to move beyond simple keyword matching or vector similarity, instead building a rich, relational memory that can be leveraged for more intelligent and human-like responses.
+In the realm of artificial intelligence, particularly in conversational agents and personal assistants, the ability to retain and utilize long-term memory is paramount for delivering personalized and context-aware interactions. Traditional approaches often struggle with the dynamic and relational nature of human conversation, relying on limited context windows or flat retrieval methods that fail to capture the intricate connections between pieces of information. Our project addresses this challenge by introducing the Personal Knowledge Graph Memory Engine and Career Development Assistant designed to transform unstructured conversational data into a structured, queryable knowledge graph for professional guidance.
 
 # Related Work
 
-The development of our Personal Knowledge Graph Memory Engine draws upon several key areas of research. Knowledge graphs have long been recognized for their ability to represent complex relationships between entities, offering a structured approach to information storage and retrieval that surpasses traditional databases in semantic richness. Recent advancements in Large Language Models have revolutionized natural language understanding and generation, making them powerful tools for information extraction from unstructured text. Techniques in information extraction, including named entity recognition and relation extraction, are critical for populating knowledge graphs from conversational data. Furthermore, the field of information retrieval provides methodologies for efficiently querying and ranking relevant information from large datasets, which is essential for leveraging the knowledge graph in real-time interactions. Our work integrates these disciplines to create a novel system that combines the semantic power of knowledge graphs with the linguistic capabilities of modern language models.
+The development of our system draws upon several key areas of research. Knowledge graphs have long been recognized for their ability to represent complex relationships between entities, offering a structured approach to information storage and retrieval that surpasses traditional databases in semantic richness. Recent advancements in Large Language Models have revolutionized natural language understanding and generation, making them powerful tools for personal information extraction. Techniques in information extraction, including named entity recognition and relation extraction, are critical for populating knowledge graphs from conversational data. Furthermore, the field of career counseling and automated guidance provides the context for applying these technologies to help users navigate their professional paths. Our work integrates these disciplines to create a novel system that combines the semantic power of knowledge graphs with the linguistic capabilities of modern language models for evolving career guidance.
 
 # System Architecture
 
-The Personal Knowledge Graph Memory Engine is designed as a modular, multi-layered system that processes conversational data into a structured knowledge graph and enables intelligent retrieval.
+The Personal Knowledge Graph Memory Engine and Career Development Assistant is designed as a modular, multi-layered system that processes conversational data into a structured knowledge graph and enables intelligent retrieval.
 
 ## Overall Data Flow
 
-The system operates as a pipeline: input data is processed, structured information is extracted, stored in a graph, retrieved, and used to generate responses.
+The system operates as a sophisticated multi-stage pipeline, beginning with the ingestion of raw conversational logs and culminating in the generation of personalized career guidance. The data flow is structured into four primary logical phases:
 
-**Figure 1: High-Level System Architecture Diagram**  
-*(Diagram placeholder)*
+\begin{enumerate}
+    \item \textbf{Ingestion and Normalization}: Raw dialogue data is segmented into individual speaker turns. Each turn is timestamped and assigned a unique identifier to maintain temporal and conversational context throughout the pipeline.
+    \item \textbf{Decomposed Extraction}: The system utilizes a specialized extraction agent to identify professional signals from each human turn. This process is not a simple keyword search; instead, the LLM analyzes the text to extract complex entities and their relational roles, such as associating a specific tool (e.g., Python) with a project context or a behavioral trait with a career goal.
+    \item \textbf{Graph Synthesis}: Extracted signals are passed to the graph memory layer where entity linking is performed. Using a combination of fuzzy matching and type-aware constraints, the system merges new extractions into existing nodes to prevent duplication while updating temporal metadata like 'last seen' timestamps. This results in a consolidated, evolving knowledge representation of the user.
+    \item \textbf{Recommendation Mapping}: At the final stage, the user's career profile—represented as a subgraph of relevant skills, knowledge, and goals—is projected onto the O\*NET professional taxonomy. The system calculates a similarity score across multiple vectors and identifies educational or experiential gaps, which are then used to construct the final response.
+\end{enumerate}
 
 ## Input/Data Layer
 
@@ -96,8 +100,8 @@ The system operates as a pipeline: input data is processed, structured informati
 - **Components:** `response_builder.py`
 - **Functionality:**
   - Summary generation
-  - Optional LLM response
-- **Output:** final response
+  - Personalized career advice generation
+- **Output:** final career guidance response
 
 ## Key Design Choices and Trade-offs
 
@@ -111,42 +115,63 @@ The system operates as a pipeline: input data is processed, structured informati
 
 ## Evaluation Methodology
 
-We compare outputs with hand-labeled datasets.
+To rigorously validate the Personal Knowledge Graph Memory Engine's efficacy in professional development contexts, we established a multi-dimensional evaluation framework. Our primary testing corpus consisted of 380 long-form career-oriented dialogues, encompassing approximately 3,220 individual interaction turns. This dataset was designed to simulate multi-turn, long-term memory accumulation across diverse professional domains.
 
-## Extraction Evaluation
+## Extraction and Grounding Analysis
 
-- Precision / Recall / F1
+The extraction quality was assessed using an **LLM-as-a-judge** methodology. We randomly sampled 30 dialogue clusters and subjected the extracted memory profiles to judicial review by GPT-4o. The evaluation focused on three critical metrics:
+\begin{itemize}
+    \item \textbf{Completeness}: Extent to which all significant career signals (goals, tools, projects) were captured.
+    \item \textbf{Faithfulness}: The degree of textual grounding, ensuring extracted nodes were explicitly supported by the dialogue.
+    \item \textbf{Career Utility}: The degree to which the profile provides actionable information for professional guidance.
+\end{itemize}
 
-## Retrieval Evaluation
+Beyond extraction accuracy, we analyzed **Noise Robustness** by introducing synthetic perturbations, including typographical errors and colloquial filler words, to measure the stability of our entity linking thresholds.
 
-- Hit-rate@k
-- Recall@k
+## Retrieval and Recommendation Performance
 
-## Preliminary Results
+The recommendation engine's performance was evaluated by mapping extracted user profiles to the O\*NET 28.2 database, which contains profiles for 923 occupations. We calculated a weighted similarity score based on three primary O\*NET vectors: Knowledge, Skills, and Work Styles.
 
-*(To be added)*
+# Preliminary Results
+
+## Graph Characteristics
+
+The processing of the career dialogue corpus resulted in the construction of a large-scale relational memory graph. The final graph consists of **846 nodes** and **5,327 edges**, representing a rich network of professional context. A categorical analysis of the graph components reveals that \textit{Projects} (590 nodes) and \textit{Tools} (544 nodes) are the most frequently extracted entities, followed by \textit{Skills} (418 nodes) and \textit{Career Goals} (396 nodes). This high density of relational nodes demonstrates the graph's capability to capture multi-faceted professional identities.
+
+## Quantitative Quality Scores
+
+The Judicial evaluation yielded consistent performance across the designated metrics. On a scale of 1.0 to 5.0, the system achieved an average **Faithfulness score of 3.30**, indicating high reliability in node grounding and a low rate of hallucination in professional signals. Both **Completeness and Career Utility achieved mean scores of 3.13**. Qualitative analysis of the judge's feedback suggests that while the system reliably extracts explicit technical signals (tools and roles), future work should focus on improving the extraction of implicit behavioral traits and soft skills.
+
+## Career Guidance and Gap Analysis
+
+In a case study involving a representative user profile, the system identified \textbf{Web Developers} as the primary career match with a composite similarity score of \textbf{0.7329}. A granular breakdown of this alignment showed a particularly high correlation in \textit{Work Styles} (0.8987), suggesting that the user's behavioral patterns are exceptionally well-suited for this path. Furthermore, the system autonomously identified critical development areas, highlighting significant gaps in \textit{Communications and Media} knowledge and \textit{Reading Comprehension} skills, thereby providing a clear roadmap for the user's career progression.
 
 # Risks and Mitigations
 
-- Extraction noise → fallback + validation
-- Entity merging errors → thresholds + type constraints
-- Schema drift → schema control
-- Cost → sampling + caching
-- Privacy → anonymization
+- **Extraction Noise**: Mitigated through rule-based fallback and type-aware entity linking.
+- **Entity Merging Errors**: Controlled via strict fuzzy-matching thresholds and type constraints.
+- **Hallucinations**: Reduced by using grounding techniques and LLM judicial review.
+- **Cost and Latency**: Optimized using sampling strategies and Groq's high-speed inference engine.
 
 # Conclusion and Future Work
 
 ## Summary of Contributions
 
-We propose a structured memory system combining LLM extraction with graph storage.
+We have developed a Personal Knowledge Graph Memory Engine and Career Development Assistant that bridges the gap between unstructured conversation and structured O\*NET-aligned professional guidance. Our system demonstrates that graph-based relational memory can capture evolving career signals more effectively than flat context windows.
 
 ## Future Directions
 
-- Better embeddings
-- Dynamic updates
-- Visualization tools
-- Human evaluation
+- **Dynamic Embeddings**: Incorporating more sophisticated embedding models for improved O\*NET mapping.
+- **Visualization**: Developing interactive graph visualization tools for user self-exploration.
+- **Human-in-the-loop**: Adding mechanisms for users to manually edit or verify their graph nodes.
 
 # References {.unnumbered}
 
-*(References to be added)*
+\begin{itemize}
+    \item Groq Cloud. (2024). \textit{LPU™ Inference Engine Documentation}. Retrieved from https://groq.com/
+    \item Hagberg, A., Swart, P., \& Schult, D. (2008). \textit{Exploring network structure, dynamics, and function using NetworkX}. Los Alamos, NM: Los Alamos National Laboratory (LANL).
+    \item O\*NET Resource Center. (2024). \textit{The O\*NET 28.2 Database}. Retrieved from https://www.onetcenter.org/
+    \item Reimers, N., \& Gurevych, I. (2019). Sentence-BERT: Sentence embeddings using Siamese BERT-networks. \textit{arXiv preprint arXiv:1908.10084}.
+    \item ShareGPT Dataset. (2023). \textit{Vicuna Unfiltered Cleaned Dataset}. Retrieved from https://huggingface.co/datasets/anon8231489123/ShareGPT\_Vicuna\_unfiltered/
+    \item Zheng, L., Chiang, W. L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., ... \& Stoica, I. (2023). Judging LLM-as-a-judge with MT-bench and chatbot arena. \textit{arXiv preprint arXiv:2306.05685}.
+\end{itemize}

@@ -1,60 +1,167 @@
-# DSAN 6725 Final Project
+# Personal Knowledge Graph Memory Engine and Career Development Assistant
 
-This repository contains information about deliverables, project ideas, and all things related to the final project.
+**Turning conversations into structured long-term memory for personalized and evolving career guidance**
 
 ## Overview
 
-DSAN 6725 is an applied AI course. The focus is on building production-quality AI agent systems that solve real problems. All projects must implement AI agents unless an alternative approach is explicitly approved by the professor.
+Large language model assistants typically rely on short-term context windows or flat retrieval mechanisms (e.g., vector similarity over past messages). While effective for semantic recall, these approaches struggle to preserve **relational context**, maintain **long-term user consistency**, and provide **interpretable personalization**.
 
-This repo provides project ideas but you are not limited to these. You can explore other ideas but it is incumbent upon you (your team) to discuss these ideas and get approval before proceeding. The ideas suggested here are practically useful and have been selected because they have a reasonable chance of success in a 6-week timeframe.
+This project proposes a **Personal Knowledge Graph Memory Engine and Career Development Assistant** that converts conversational interactions into a structured, persistent, and queryable memory representation. Instead of storing conversations as unstructured logs, the system automatically extracts user-relevant information — such as goals, preferences, active projects, and constraints — and organizes them into a graph-based memory.
 
-This repo is organized into the following parts:
+At inference time, a hybrid retrieval-ranking layer surfaces the most relevant memory subgraph and injects it into the LLM context to produce personalized, context-aware responses, specifically tailored for evolving career guidance.
 
-- [Project Ideas](#project-ideas)
-- [Deliverables](#deliverables)
-- [FAQ](#faq)
-- [Resources](#resources)
+---
 
-## Project Ideas
+## Abstract
 
-These project ideas have well-defined problem statements, but the implementation details are flexible and open to creative solutions. Use the descriptions provided as springboards for your own approaches to solving these problems.
+We present a Personal Knowledge Graph Memory Engine and Career Development Assistant that transforms conversational interactions into structured, queryable knowledge representations. Rather than relying on flat retrieval mechanisms, our system automatically identifies and extracts semantically meaningful elements from user dialogues — including goals, preferences, active projects, and constraints — and organizes them within a graph-based memory architecture.
 
-### Spring 2026 Projects
+The core pipeline integrates information extraction and entity linking to surface relevant concepts from unstructured conversation, followed by graph storage to preserve relational context between entities. A memory retrieval ranking layer then surfaces the most contextually relevant nodes during subsequent interactions, enabling the system to reason over accumulated user knowledge rather than isolated exchanges. This architecture allows the assistant to provide evolving career guidance based on a deep understanding of the user's professional journey.
 
-- [AI Tech Debt Forge](./spring-2026/ai-tech-debt-forge.md) - Multi-agent system for codebase modernization with persona-based validation
-- [AI Trading Strategist](./spring-2026/ai-trading-strategist.md) - Paper trading system using Alpaca API for strategy development and backtesting
-- [AI Spark Optimizer](./spring-2026/ai-spark-optimizer.md) - Intelligent Spark job analysis with interpretable performance recommendations
-- [Cloud Cost Refinery](./spring-2026/cloud-cost-refinery.md) - AWS cost optimization agent that generates executable cleanup commands
-- [AI Schema Harmonizer](./spring-2026/ai-schema-harmonizer.md) - Normalize schemas across SaaS tools with observability data focus
-- [AI Data Prep Pipeline](./spring-2026/ai-data-prep-pipeline.md) - Universal document processing for RAG and vector search
+We explore two primary experimental directions: first, the tradeoff between memory size and retrieval quality, examining how graph density affects precision and recall; second, a comparative evaluation between graph-structured memory and pure vector embedding approaches, assessing which better captures relational semantics over long interaction histories.
 
-### Archived Projects
+---
 
-Previous semester project ideas are available in [spring-2025/](./spring-2025/).
+## Agent Architecture
 
-## Deliverables
+### Agent Flow
 
-All deliverables are described in [deliverables.md](./deliverables.md).
+```
+Conversation Turns
+  → [1] Input Layer
+  → [2] Extraction & Linking Layer
+        - Information Extraction
+        - Entity Linking
+  → [3] Graph Memory Layer
+        - Graph Storage
+        - Temporal Updates
+  → [4] Retrieval & Response Layer
+        - Hybrid Retrieval
+        - Ranking
+  → LLM Context Injection
+  → Personalized Career Response
+```
 
-Summary of what you will produce:
-- Project paper (8-12 pages, conference format)
-- Code repository (production quality)
-- Working demo
-- Presentation slides
-- Conference-style poster
+---
 
-## FAQ
+## System Pipeline
 
-**Can I do this project alone or with more than 4 people?**
-No. Teams must have 2-4 members.
+| Step | Module | Description | Output |
+|------|--------|------------|--------|
+| 1 | Input Layer | Ingests and segments conversation turns; normalization and timestamping | Clean conversation chunks |
+| 2 | Information Extraction | Extracts goals, preferences, projects, and constraints | Candidate entities & relations |
+| 3 | Entity Linking | Resolves extracted items to existing graph nodes | Canonical entities |
+| 4 | Graph Storage | Stores nodes and edges with temporal and confidence metadata | Persistent knowledge graph |
+| 5 | Retrieval Ranking | Retrieves and ranks relevant memory subgraphs | Ranked memory context |
+| 6 | Context Injection | Converts subgraph into structured LLM grounding | Memory-aware prompt |
+| 7 | Response | Generates personalized career guidance | Final output |
 
-**Can I use any model provider (OpenAI, Anthropic, Google, etc.)?**
-Yes. Use whatever works best for your project.
+---
 
-**What if I want to propose a different project idea?**
-Discuss with the professor before Milestone 1. Your proposal should have a clear problem statement, feasible scope for 6 weeks, and an AI agent architecture.
+## Memory Schema
 
-## Resources
+### Node Types
 
-- Course [bookmarks](https://github.com/gu-dsan6725/bookmarks/tree/main) repository
-- [LangChain](https://python.langchain.com/), [LlamaIndex](https://docs.llamaindex.ai/), [Claude Agent SDK](https://github.com/anthropics/anthropic-cookbook)
+- **Goal** — long-term or short-term user objectives
+- **Preference** — behavioral or stylistic choices
+- **Project** — ongoing tasks or research topics
+- **Constraint** — time, resource, or contextual limitations
+- **Career Signal** — specific professional interests, skills, or paths
+
+### Edge Types
+
+- `HAS_GOAL`
+- `PREFERS`
+- `WORKS_ON`
+- `CONSTRAINED_BY`
+- `RELATED_TO`
+- `INTERESTED_IN`
+
+---
+
+## Implementation Details
+
+### What is implemented
+
+#### 1) Input layer data pipeline
+Code: `memory_engine/data_pipeline.py`
+- Loads ShareGPT V3 JSON
+- Segments conversations into turn-level records
+- Normalizes turns with metadata (dialogue_id, speaker, text, etc.)
+
+#### 2) Functional agent & entity linking
+Code: `memory_engine/extraction_agent.py`, `memory_engine/graph_memory.py`
+- `MemoryExtractionAgent` processes human turns using **Groq API**
+- Extracts entities, relations, goals, projects, and tools
+- Entity linking with type-aware fuzzy matching to avoid duplicates
+- Graph memory using NetworkX `MultiDiGraph`
+
+---
+
+## Run
+
+### Install dependencies
+```bash
+python -m pip install -r requirements-memory-engine.txt
+```
+
+### Set Groq API key
+```bash
+export GROQ_API_KEY="your_groq_api_key_here"
+```
+
+### Execute the pipeline
+```bash
+python -m memory_engine.run_pipeline \
+  --input data/ShareGPT_V3_unfiltered_cleaned_split_no_imsorry.json \
+  --sample-size 300 \
+  --max-turns 200 \
+  --output-dir outputs
+```
+
+---
+
+## Expected Outputs
+
+Under `outputs/`:
+- `sample_turns.jsonl`
+- `pipeline_stats.json`
+- `extractions.json`
+- `graph_memory.json`
+- `graph_stats.json`
+
+---
+
+## Data Sources
+
+1. **ShareGPT V3 (Primary)**: Large-scale dialogues for memory accumulation.
+2. **Self-Collected Career Conversations**: Evaluates long-term persona consistency for career guidance.
+
+---
+
+## Experimental Plan
+
+### Experiment 1 — Memory Size vs Retrieval Quality
+- Precision@k / Recall@k
+- NDCG@k
+- Retrieval latency vs memory size
+
+### Experiment 2 — Graph Memory vs Vector Memory
+- Relational reasoning capability
+- Long-term consistency
+- Personalization quality
+
+---
+
+## Team
+
+- Jiayi Peng
+- Kexin Lyu  
+- Yiran Tao
+- Chenxi Guo  
+
+---
+
+## License
+
+MIT License

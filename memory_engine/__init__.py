@@ -1,2 +1,2 @@
-"""Personal Knowledge Graph Memory Engine scaffold."""
+"""Personal Knowledge Graph Memory Engine and Career Development Assistant."""
 

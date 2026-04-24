@@ -1,7 +1,7 @@
 [project]
 name = "memory-engine"
 version = "0.1.0"
-description = "Personal Knowledge Graph Memory Engine"
+description = "Personal Knowledge Graph Memory Engine and Career Development Assistant"
 requires-python = ">=3.10"
 dependencies = [
     # networkx 3.3 — March 2024, no known supply chain issues
