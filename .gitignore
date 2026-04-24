@@ -173,7 +173,4 @@ cython_debug/
 # Local generated artifacts
 outputs/
 
-data/
-
-sample1.json
-script_extract.py
+# data/

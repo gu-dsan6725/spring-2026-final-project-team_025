@@ -1,2 +1,4 @@
 networkx
 groq
+openai
+sentence-transformers

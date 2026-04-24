@@ -1,0 +1,100 @@
+{
+  "user_id": "user_001",
+  "target": "Web Developers (15-1254.00)",
+  "knowledge_gaps": [
+    {
+      "element": "Customer and Personal Service",
+      "required_score": 2.96,
+      "gap": 2.96,
+      "priority": 1
+    },
+    {
+      "element": "Communications and Media",
+      "required_score": 3.21,
+      "gap": 2.867,
+      "priority": 2
+    },
+    {
+      "element": "Administrative",
+      "required_score": 2.38,
+      "gap": 2.38,
+      "priority": 3
+    },
+    {
+      "element": "Fine Arts",
+      "required_score": 2.04,
+      "gap": 2.04,
+      "priority": 4
+    },
+    {
+      "element": "Education and Training",
+      "required_score": 2.25,
+      "gap": 1.913,
+      "priority": 5
+    }
+  ],
+  "skill_gaps": [
+    {
+      "element": "Speaking",
+      "required_score": 3.25,
+      "gap": 3.25,
+      "priority": 1
+    },
+    {
+      "element": "Reading Comprehension",
+      "required_score": 3.62,
+      "gap": 3.12,
+      "priority": 2
+    },
+    {
+      "element": "Critical Thinking",
+      "required_score": 3.75,
+      "gap": 2.95,
+      "priority": 3
+    },
+    {
+      "element": "Social Perceptiveness",
+      "required_score": 2.88,
+      "gap": 2.88,
+      "priority": 4
+    },
+    {
+      "element": "Service Orientation",
+      "required_score": 2.88,
+      "gap": 2.88,
+      "priority": 5
+    }
+  ],
+  "work_style_gaps": [
+    {
+      "element": "Tolerance for Ambiguity",
+      "required_score": 1.41,
+      "gap": 1.41,
+      "priority": 1
+    },
+    {
+      "element": "Cautiousness",
+      "required_score": 1.56,
+      "gap": 1.146,
+      "priority": 2
+    },
+    {
+      "element": "Stress Tolerance",
+      "required_score": 1.09,
+      "gap": 0.69,
+      "priority": 3
+    },
+    {
+      "element": "Cooperation",
+      "required_score": 0.85,
+      "gap": 0.323,
+      "priority": 4
+    },
+    {
+      "element": "Sincerity",
+      "required_score": 0.24,
+      "gap": 0.24,
+      "priority": 5
+    }
+  ]
+}

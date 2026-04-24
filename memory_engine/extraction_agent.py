@@ -32,16 +32,19 @@ class MemoryExtractionAgent:
         graph_memory: GraphMemory,
         model: str = "llama-3.1-8b-instant",
         use_relevance_filter: bool = True,
+        temperature: float = 0.0,
     ) -> None:
         self.graph_memory = graph_memory
         self.model = model
         self.use_relevance_filter = use_relevance_filter
+        self.temperature = temperature
         self.api_key = os.getenv("GROQ_API_KEY")
         self.client = (
             Groq(api_key=self.api_key, timeout=8.0, max_retries=0) if self.api_key and Groq else None
         )
         self._groq_failures = 0
-        self._max_groq_failures = 3
+        # Allow more transient failures before disabling Groq; prevents early fallback to rules
+        self._max_groq_failures = 10
 
     def process_turn(self, turn: dict[str, Any]) -> ExtractionOutput:
         extracted = self._extract(turn["text"])
@@ -64,18 +67,19 @@ class MemoryExtractionAgent:
 
     def _extract_with_groq(self, text: str) -> ExtractionOutput:
         prompt = (
-            "You are a personal memory extractor. Your job is to extract ONLY information about the USER "
-            "THEMSELVES from their message — not about third parties, public figures, or general knowledge.\n\n"
+            "You are a personal memory extractor. Your job is to extract the user's tasks/goals/projects, preferences,"
+            " constraints, tools, and skills from their message. If the user gives instructions (write/make/build/create)"
+            " without saying 'I', treat it as the user's project/goal.\n\n"
             f'USER message: "{text}"\n\n'
             "Rules:\n"
-            "- ONLY extract facts that reveal the user's own: goals, preferences, constraints, active projects, "
-            "tools they use, or skills they have.\n"
-            "- If the user merely MENTIONS a person/org/concept without it revealing something personal about "
-            "themselves, SKIP IT.\n"
-            "- Classify each entity with a specific type: PERSON | ORGANIZATION | PROJECT | TOOL | SKILL | TOPIC\n"
-            "- For relations, only include edges where at least one node is the implicit USER.\n"
-            "- Assign confidence: 1.0 = explicitly stated, 0.7 = strongly implied, 0.4 = weakly implied\n"
-            "- If no personal memory signal exists in this message, return all empty arrays. DO NOT fabricate.\n\n"
+            "- Extract facts that reveal the user's goals, preferences, constraints, active projects, "
+            "tools they use/plan to use, or skills they have/are learning.\n"
+            "- Instructions like \"write/make/create/build\" count as user goals/projects even without pronouns.\n"
+            "- If the user merely mentions general knowledge with no task or personal implication, return empty.\n"
+            "- Classify entities: PERSON | ORGANIZATION | PROJECT | TOOL | SKILL | TOPIC.\n"
+            "- Relations: include edges where one node is USER (e.g., USER->WORKS_ON project, USER->USES_TOOL, USER->HAS_GOAL).\n"
+            "- Confidence: 1.0 explicit, 0.7 strongly implied, 0.4 weakly implied.\n"
+            "- If truly no task/personal signal, return all empty arrays. DO NOT fabricate unrelated facts.\n\n"
             "Return strict JSON only, no markdown, no explanation:\n"
             "{\n"
             '  "entities": [{"name": str, "type": str, "confidence": float}],\n'
@@ -89,7 +93,7 @@ class MemoryExtractionAgent:
         )
         completion = self.client.chat.completions.create(
             model=self.model,
-            temperature=0.0,
+            temperature=self.temperature,
             messages=[
                 {"role": "system", "content": prompt},
             ],
@@ -108,9 +112,12 @@ class MemoryExtractionAgent:
         )
 
     def _extract_with_rules(self, text: str) -> ExtractionOutput:
-        lowered = text.lower()
+        normalized_text = _normalize_rule_text(text)
+        lowered = normalized_text.lower()
+        if _looks_like_reference_or_content_dump(text) and not _has_strong_personal_memory_signal(normalized_text):
+            return _empty_output()
         preferences = _find_by_patterns(
-            text,
+            normalized_text,
             [
                 r"\bi prefer ([^.;!\n]+)",
                 r"\bi like ([^.;!\n]+)",
@@ -118,7 +125,7 @@ class MemoryExtractionAgent:
             ],
         )
         constraints = _find_by_patterns(
-            text,
+            normalized_text,
             [
                 r"\bi can(?:not|'t) ([^.;!\n]+)",
                 r"\bi have to ([^.;!\n]+)",
@@ -126,35 +133,54 @@ class MemoryExtractionAgent:
             ],
         )
         goals = _find_by_patterns(
-            text,
+            normalized_text,
             [
                 r"\bmy goal is to ([^.;!\n]+)",
                 r"\bi want to ([^.;!\n]+)",
+                # "I want a/an X" — career goals often use this form
+                r"\bi want (?:a|an|to be|to become) ([^.;!\n]+)",
                 r"\bi need to ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:hoping|planning|trying) to ([^.;!\n]+)",
+                r"\bi(?:'m| am) learning ([^.;!\n]+)",
+                r"\blong[- ]term (?:I |my )?(?:goal|plan|aim)[^,]*[,:]? ([^.;!\n]+)",
+                r"\bi(?:'m| am) interested in (?:moving into|transitioning to|becoming) ([^.;!\n]+)",
             ],
         )
         projects = _find_by_patterns(
-            text,
+            normalized_text,
             [
-                r"\bi(?:'m| am) working on ([^.;!\n]+)",
+                # Allow optional adverbs between "I'm" and the verb ("I'm currently working on")
+                r"\bi(?:'m| am) (?:\w+ )?working on ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:\w+ )?building ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:\w+ )?creating ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:\w+ )?writing ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:\w+ )?developing ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:\w+ )?learning ([^.;!\n]+)",
+                r"\bworking on (?:a |an |the )?([^.;!\n]+)",
                 r"\bmy project(?: is|:)? ([^.;!\n]+)",
                 r"\bfor my (?:class|course|research) ([^.;!\n]+)",
+                r"\bi (?:built|developed|created|implemented) ([^.;!\n]+)",
             ],
         )
 
         tool_keywords = [
-            "python",
-            "neo4j",
-            "networkx",
-            "pandas",
-            "sql",
-            "excel",
-            "docker",
-            "langchain",
-            "llamaindex",
-            "notion",
+            # Languages
+            "python", "javascript", "typescript", "java", "c++", "rust", "go", "scala", "r",
+            # ML / AI
+            "pytorch", "tensorflow", "keras", "scikit-learn", "sklearn", "huggingface",
+            "transformers", "langchain", "llamaindex", "openai", "groq",
+            # Data
+            "pandas", "numpy", "spark", "hadoop", "dbt", "airflow",
+            # Databases
+            "sql", "postgresql", "mysql", "mongodb", "neo4j", "redis", "elasticsearch",
+            # DevOps / infra
+            "docker", "kubernetes", "aws", "gcp", "azure", "terraform",
+            # Web / APIs
+            "fastapi", "flask", "django", "node", "react", "vue", "nextjs",
+            # Tools
+            "git", "networkx", "excel", "notion", "tableau", "powerbi",
         ]
-        tools = [tool for tool in tool_keywords if tool in lowered]
+        tools = [tool for tool in tool_keywords if re.search(rf"\b{re.escape(tool)}\b", lowered)]
 
         preference_objs = [{"description": pref, "confidence": 0.7} for pref in preferences]
         constraint_objs = [{"description": cst, "confidence": 0.7} for cst in constraints]
@@ -328,27 +354,10 @@ def has_memory_output(output: ExtractionOutput) -> bool:
 
 
 def _is_memory_relevant_text(text: str) -> bool:
-    lowered = text.lower()
-    personal_signals = [
-        "i ",
-        "i'm",
-        "i am",
-        "my ",
-        "we ",
-        "our ",
-        "prefer",
-        "preference",
-        "want to",
-        "need to",
-        "working on",
-        "project",
-        "deadline",
-        "cannot",
-        "can't",
-        "please be",
-        "keep it",
-    ]
-    return any(signal in lowered for signal in personal_signals)
+    normalized_text = _normalize_rule_text(text)
+    if _looks_like_reference_or_content_dump(text) and not _has_strong_personal_memory_signal(normalized_text):
+        return False
+    return _has_strong_personal_memory_signal(normalized_text)
 
 
 def _sanitize_output(output: ExtractionOutput) -> ExtractionOutput:
@@ -628,4 +637,68 @@ def _is_good_memory_span(text: str) -> bool:
         return False
     if re.fullmatch(r"[A-Za-z]+", span) and lowered in generic:
         return False
+    if any(marker in lowered for marker in ("url:", "abstract:", "introduction:", "web search results:")):
+        return False
+    if re.search(r"\b(mov|jmp|push|pop|call)\b", lowered) and any(ch in span for ch in "[]*"):
+        return False
+    if len(span.split()) > 12 and not re.search(r"\b(my|i|we|our)\b", lowered):
+        return False
     return True
+
+
+def _has_strong_personal_memory_signal(text: str) -> bool:
+    lowered = _normalize_rule_text(text).lower()
+    strong_patterns = [
+        r"\bi(?:'m| am)?\s+working on\b",
+        r"\bi(?:'m| am)?\s+learning\b",
+        r"\bi(?:'m| am)?\s+building\b",
+        r"\bi(?:'m| am)?\s+creating\b",
+        r"\bi(?:'m| am)?\s+writing\b",
+        r"\bmy project\b",
+        r"\bfor my (?:class|course|research|job|team)\b",
+        r"\bi want to\b",
+        r"\bi need to\b",
+        r"\bi have to\b",
+        r"\bi prefer\b",
+        r"\bi like\b",
+        r"\bi can(?:not|'t)\b",
+        r"\bdeadline(?: is|:)?\b",
+        r"\bplease (?:be|keep)\b",
+        r"\bour project\b",
+        r"\bwe are working on\b",
+    ]
+    return any(re.search(pattern, lowered) for pattern in strong_patterns)
+
+
+def _looks_like_reference_or_content_dump(text: str) -> bool:
+    lowered = text.lower()
+    if "web search results:" in lowered:
+        return True
+    if any(marker in lowered for marker in ("abstract:", "introduction:", "paper name:")):
+        return True
+    if lowered.count("url:") >= 1:
+        return True
+    if re.search(r"\[[0-9]+\]\s+\"", text):
+        return True
+    code_lines = re.findall(r"^(?:[A-Z]{2,6}\b.*|\s*[A-Za-z_]+\s*[\(\[].*)$", text, flags=re.MULTILINE)
+    if len(code_lines) >= 4:
+        return True
+    return False
+
+
+def _normalize_rule_text(text: str) -> str:
+    normalized = text.strip()
+    normalized = normalized.replace("…", " ")
+    normalized = re.sub(r"\.{2,}", " ", normalized)
+    normalized = re.sub(r"[?!]{2,}", " ", normalized)
+    normalized = re.sub(r"\bim\b", "I am", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\bi've been kinda learning\b", "I am learning", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\bi have been kinda learning\b", "I am learning", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\bi'm kind of dealing with this:\s*", "", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\buh,\s*basically,\s*recently,\s*", "", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\bkinda\b", "", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\bpyhton\b", "python", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\banalyss\b", "analysis", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\banalyis\b", "analysis", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\s+", " ", normalized).strip()
+    return normalized

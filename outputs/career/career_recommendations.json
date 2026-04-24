@@ -1,0 +1,55 @@
+{
+  "user_id": "user_001",
+  "recommendations": [
+    {
+      "onet_code": "15-1254.00",
+      "title": "Web Developers",
+      "score": 0.7329,
+      "component_scores": {
+        "knowledge": 0.6676,
+        "skills": 0.7101,
+        "work_styles": 0.8987
+      }
+    },
+    {
+      "onet_code": "15-1252.00",
+      "title": "Software Developers",
+      "score": 0.7299,
+      "component_scores": {
+        "knowledge": 0.6613,
+        "skills": 0.7123,
+        "work_styles": 0.8894
+      }
+    },
+    {
+      "onet_code": "15-1221.00",
+      "title": "Computer and Information Research Scientists",
+      "score": 0.7276,
+      "component_scores": {
+        "knowledge": 0.6493,
+        "skills": 0.7095,
+        "work_styles": 0.9052
+      }
+    },
+    {
+      "onet_code": "15-2031.00",
+      "title": "Operations Research Analysts",
+      "score": 0.7268,
+      "component_scores": {
+        "knowledge": 0.6599,
+        "skills": 0.7201,
+        "work_styles": 0.8587
+      }
+    },
+    {
+      "onet_code": "15-1243.00",
+      "title": "Database Architects",
+      "score": 0.7223,
+      "component_scores": {
+        "knowledge": 0.6673,
+        "skills": 0.7008,
+        "work_styles": 0.8671
+      }
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
+from difflib import SequenceMatcher
 
 
 def _normalize(text: str) -> str:
@@ -52,13 +53,41 @@ def _load_records(path: Path) -> list[dict[str, Any]]:
     return data
 
 
-def score(gold: dict, pred: dict) -> dict[str, float]:
+def _similarity(a: str, b: str) -> float:
+    # token overlap
+    a_tokens = set(a.split())
+    b_tokens = set(b.split())
+    if a_tokens and b_tokens:
+        overlap = len(a_tokens & b_tokens) / max(len(a_tokens), len(b_tokens))
+    else:
+        overlap = 0.0
+    # sequence ratio
+    seq = SequenceMatcher(None, a, b).ratio()
+    return max(overlap, seq)
+
+
+def score(gold: dict, pred: dict, fuzzy_threshold: float = 0.7) -> dict[str, float]:
     tp = fp = fn = 0
     for turn_id, gold_set in gold.items():
-        pred_set = pred.get(turn_id, set())
-        tp += len(gold_set & pred_set)
-        fp += len(pred_set - gold_set)
-        fn += len(gold_set - pred_set)
+        gold_list = list(gold_set)
+        pred_list = list(pred.get(turn_id, set()))
+        matched_pred: set[int] = set()
+        matched_gold: set[int] = set()
+        # greedy fuzzy matching
+        for gi, gval in enumerate(gold_list):
+            best = (-1.0, None)
+            for pi, pval in enumerate(pred_list):
+                if pi in matched_pred:
+                    continue
+                sim = _similarity(str(gval), str(pval))
+                if sim > best[0]:
+                    best = (sim, pi)
+            if best[0] >= fuzzy_threshold and best[1] is not None:
+                matched_gold.add(gi)
+                matched_pred.add(best[1])
+        tp += len(matched_gold)
+        fn += len(gold_list) - len(matched_gold)
+        fp += len(pred_list) - len(matched_pred)
     precision = tp / (tp + fp) if (tp + fp) else 0.0
     recall = tp / (tp + fn) if (tp + fn) else 0.0
     f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 0.0

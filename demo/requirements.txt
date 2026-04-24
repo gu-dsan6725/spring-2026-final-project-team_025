@@ -1,0 +1,12 @@
+# Web demo dependencies — mirrors [project.optional-dependencies].demo in pyproject.toml
+# Prefer installing via uv so the lock file is respected:
+#
+#   uv sync --extra demo
+#
+# Or with plain pip (no lock enforcement):
+#
+#   pip install -e ".[demo]"
+
+fastapi>=0.111.0,<1.0.0
+uvicorn[standard]>=0.29.0,<1.0.0
+python-dotenv>=1.0.0,<2.0.0

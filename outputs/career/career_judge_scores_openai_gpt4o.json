@@ -1,0 +1,212 @@
+[
+  {
+    "dialogue_id": "career_dev_198",
+    "completeness": 3,
+    "faithfulness": 2,
+    "career_utility": 3,
+    "rationale": "Some key signals like interest in portfolio optimization and fast-paced work style are missing or misrepresented, and some extracted items are not grounded in the conversation."
+  },
+  {
+    "dialogue_id": "career_dev_216",
+    "completeness": 3,
+    "faithfulness": 4,
+    "career_utility": 3,
+    "rationale": "The profile captures main signals like tools and projects but misses some details like specific skills and work style; mostly grounded but omits 'Go' and 'fast-paced'; useful but lacks specificity in strengths and development areas."
+  },
+  {
+    "dialogue_id": "career_dev_021",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures some key signals like tools and goals but misses specific projects and has minor inaccuracies in constraints."
+  },
+  {
+    "dialogue_id": "career_dev_133",
+    "completeness": 4,
+    "faithfulness": 4,
+    "career_utility": 4,
+    "rationale": "The profile captures most key signals and is mostly grounded in the conversation, providing actionable insights for career development."
+  },
+  {
+    "dialogue_id": "career_dev_262",
+    "completeness": 4,
+    "faithfulness": 4,
+    "career_utility": 4,
+    "rationale": "The profile captures most key signals like tools, skills, and projects, but misses work style and career goals; all items are grounded in the conversation, and the profile is actionable but could better address career goals."
+  },
+  {
+    "dialogue_id": "career_dev_249",
+    "completeness": 4,
+    "faithfulness": 5,
+    "career_utility": 4,
+    "rationale": "The profile captures most key signals and is grounded in the conversation, providing actionable insights but missing cloud-native security."
+  },
+  {
+    "dialogue_id": "career_dev_208",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures main signals like tools and projects but misses key interests and work styles; some items like 'innovation' are not grounded in the conversation."
+  },
+  {
+    "dialogue_id": "career_dev_156",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures main signals but misses some key details and includes unsupported suggestions."
+  },
+  {
+    "dialogue_id": "career_dev_245",
+    "completeness": 3,
+    "faithfulness": 2,
+    "career_utility": 3,
+    "rationale": "The profile captures some key signals like concurrency and distributed systems but includes unsupported items like Python and FastAPI, affecting faithfulness."
+  },
+  {
+    "dialogue_id": "career_dev_184",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures some key signals like tools and skills but misses interests and work styles; some items are not fully grounded in the conversation."
+  },
+  {
+    "dialogue_id": "career_dev_299",
+    "completeness": 3,
+    "faithfulness": 4,
+    "career_utility": 3,
+    "rationale": "Main skills and projects are captured, but work style and goals are missing; items are mostly grounded in the conversation."
+  },
+  {
+    "dialogue_id": "career_dev_112",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures main signals like tools and goals but misses some details and includes unsupported items."
+  },
+  {
+    "dialogue_id": "career_dev_259",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures main signals like SQL, optimization, and projects but misses some details like C++ and perfectionism; some items like 'Courses' are not grounded in the conversation."
+  },
+  {
+    "dialogue_id": "career_dev_072",
+    "completeness": 3,
+    "faithfulness": 4,
+    "career_utility": 3,
+    "rationale": "The profile captures main signals like tools, projects, and goals but misses some specifics like Wireshark and Splunk; mostly grounded but lacks some details; useful but could be more specific."
+  },
+  {
+    "dialogue_id": "career_dev_145",
+    "completeness": 4,
+    "faithfulness": 5,
+    "career_utility": 4,
+    "rationale": "The profile captures most key signals from the conversation, is well-grounded in the text, and provides actionable insights, though it could include more specific career path suggestions."
+  },
+  {
+    "dialogue_id": "career_dev_049",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures main signals like tools and goals but misses some details and includes unsupported suggestions."
+  },
+  {
+    "dialogue_id": "career_dev_317",
+    "completeness": 3,
+    "faithfulness": 4,
+    "career_utility": 3,
+    "rationale": "The profile captures key tools and projects but misses some signals like collaboration and edge AI; mostly grounded but some development areas are not directly supported."
+  },
+  {
+    "dialogue_id": "career_dev_129",
+    "completeness": 3,
+    "faithfulness": 2,
+    "career_utility": 3,
+    "rationale": "The profile captures some key signals but includes unsupported items and lacks clarity in development areas."
+  },
+  {
+    "dialogue_id": "career_dev_273",
+    "completeness": 3,
+    "faithfulness": 2,
+    "career_utility": 3,
+    "rationale": "The profile captures some key projects but includes unsupported items and lacks depth in skills and goals."
+  },
+  {
+    "dialogue_id": "career_dev_362",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures main signals like tools, skills, and projects but misses key interests and work styles; some items like 'Courses' are unsupported, and the utility is moderate but lacks depth in development areas."
+  },
+  {
+    "dialogue_id": "career_dev_309",
+    "completeness": 3,
+    "faithfulness": 4,
+    "career_utility": 3,
+    "rationale": "The profile captures key signals like the project and work style but misses tools and interests; it's mostly grounded but lacks some details for full utility."
+  },
+  {
+    "dialogue_id": "career_dev_076",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures main signals but includes unsupported items like Python and machine learning, and some goals and constraints are misrepresented."
+  },
+  {
+    "dialogue_id": "career_dev_159",
+    "completeness": 4,
+    "faithfulness": 4,
+    "career_utility": 4,
+    "rationale": "The profile captures most key signals and is mostly grounded, providing actionable insights but misses some specific gaps in optimization skills."
+  },
+  {
+    "dialogue_id": "career_dev_051",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures main signals like tools and goals but misses some specifics and includes unsupported suggestions."
+  },
+  {
+    "dialogue_id": "career_dev_374",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures some key signals like projects and interests but misses specific tools like NVIDIA Jetson and overstates work styles not mentioned in the conversation."
+  },
+  {
+    "dialogue_id": "career_dev_038",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures main tools and goals but misses some skills and projects; some items are not fully grounded in the conversation."
+  },
+  {
+    "dialogue_id": "career_dev_351",
+    "completeness": 2,
+    "faithfulness": 3,
+    "career_utility": 2,
+    "rationale": "The profile captures the project but misses key signals like work style and role relevance, and the development suggestion is not directly supported by the conversation."
+  },
+  {
+    "dialogue_id": "career_dev_170",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures main signals like projects and goals but misses tools and constraints; some development suggestions are not grounded in the conversation."
+  },
+  {
+    "dialogue_id": "career_dev_242",
+    "completeness": 3,
+    "faithfulness": 3,
+    "career_utility": 3,
+    "rationale": "The profile captures some key signals like system design and a project but misses others like Kafka, Redis, and interest in Cloud Architect roles."
+  },
+  {
+    "dialogue_id": "career_dev_287",
+    "completeness": 3,
+    "faithfulness": 4,
+    "career_utility": 3,
+    "rationale": "Main signals are present but the suggestion for development areas is not directly supported by the conversation."
+  }
+]
