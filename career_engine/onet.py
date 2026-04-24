@@ -234,6 +234,13 @@ def load_occupation_profiles(data_dir: Path | None = None) -> list[OccupationPro
     skills = _load_onet_xlsx(skills_path, scale_id="IM")
     work_styles = _load_onet_xlsx(work_styles_path, scale_id="WI") if work_styles_path.exists() else {}
     occupation_keys = sorted(set(knowledge) | set(skills) | set(work_styles))
+
+    # Index built-in profiles for patching: some newer O*NET occupations (e.g.
+    # "Data Scientists" 15-2051.00) have empty knowledge/skills vectors in the
+    # xlsx IM-scale data, which makes cosine similarity return 0 and buries them
+    # in rankings.  We supplement those gaps with the curated built-in vectors.
+    _builtin_by_code = {p.onet_code: p for p in load_builtin_occupation_profiles()}
+
     profiles: list[OccupationProfile] = []
     for code in occupation_keys:
         title = (
@@ -242,13 +249,27 @@ def load_occupation_profiles(data_dir: Path | None = None) -> list[OccupationPro
             or work_styles.get(code, {}).get("title")
             or code
         )
+        kv = dict(knowledge.get(code, {}).get("vector", {}))
+        sv = dict(skills.get(code, {}).get("vector", {}))
+        wsv = dict(work_styles.get(code, {}).get("vector", {}))
+
+        # If xlsx returned zero vectors, fall back to built-in curated data
+        builtin = _builtin_by_code.get(code)
+        if builtin:
+            if not any(v > 0 for v in kv.values()):
+                kv = dict(builtin.knowledge_vector)
+            if not any(v > 0 for v in sv.values()):
+                sv = dict(builtin.skills_vector)
+            if not any(v > 0 for v in wsv.values()):
+                wsv = dict(builtin.work_styles_vector)
+
         profiles.append(
             OccupationProfile(
                 onet_code=code,
                 title=title,
-                knowledge_vector=dict(knowledge.get(code, {}).get("vector", {})),
-                skills_vector=dict(skills.get(code, {}).get("vector", {})),
-                work_styles_vector=dict(work_styles.get(code, {}).get("vector", {})),
+                knowledge_vector=kv,
+                skills_vector=sv,
+                work_styles_vector=wsv,
             )
         )
     return profiles
@@ -484,30 +505,55 @@ def _map_node(node: dict[str, Any]) -> list[dict[str, Any]]:
     else:
         return []
 
+    # 1. Keyword rules first — high precision for known tech/ML/CS terms.
+    #    SBERT embeddings are trained on general text and mismap modern tooling
+    #    (e.g. "machine learning" → "English Language", "fastapi" → "Coordination").
+    if category == "knowledge":
+        kw = _knowledge_mappings(content)
+    elif category == "skills":
+        kw = _skill_mappings(content)
+    else:
+        kw = _work_style_mappings(content)
+    kw.sort(key=lambda m: m["confidence"], reverse=True)
+    if kw and kw[0]["confidence"] >= 0.85:
+        return kw[:1]  # confident keyword hit — skip SBERT
+
+    # 2. SBERT for genuinely unknown terms (top_k=1 only; secondary matches add noise)
     if _SBERT_AVAILABLE:
         try:
-            return _EmbeddingMapper.get().map(content, category, top_k=2)
+            emb = _EmbeddingMapper.get().map(content, category, top_k=1)
+            if emb and emb[0]["confidence"] >= 0.45:
+                return emb[:1]
         except Exception:  # pragma: no cover
             pass
 
-    # fallback: keyword rules
-    if category == "knowledge":
-        mappings = _knowledge_mappings(content)
-    elif category == "skills":
-        mappings = _skill_mappings(content)
-    else:
-        mappings = _work_style_mappings(content)
-    mappings.sort(key=lambda item: item["confidence"], reverse=True)
-    return mappings[:3]
+    # 3. Low-confidence keyword fallback
+    return kw[:1] if kw else []
 
 
 def _knowledge_mappings(content: str) -> list[dict[str, Any]]:
     rules = [
-        ("Computers and Electronics", ["computer", "software", "database", "cloud", "api", "python", "sql"]),
-        ("Mathematics", ["math", "statistics", "statistical", "model", "quantitative"]),
+        # CS / software — catches modern tooling before generic "design" or "English"
+        ("Computers and Electronics", [
+            "computer", "software", "database", "cloud", "api", "python", "sql",
+            "computer vision", "image recognition", "ocr", "neural", "nlp",
+            "natural language", "cv ", "llm", "transformer", "bert", "gpt",
+            "reinforcement learning", "data engineering", "data pipeline",
+        ]),
+        # Math / ML — explicit terms that SBERT tends to misclassify
+        ("Mathematics", [
+            "math", "statistics", "statistical", "quantitative", "probability",
+            "machine learning", "deep learning", "linear algebra", "calculus",
+            "regression", "classification", "clustering", "gradient", "optimization",
+            "data science", "ml ", "ai ", "artificial intelligence",
+        ]),
         ("Economics and Accounting", ["finance", "financial", "economics", "accounting", "quant"]),
-        ("Engineering and Technology", ["engineering", "machine learning", "deep learning", "deployment"]),
-        ("Design", ["design", "dashboard", "visualization", "interface"]),
+        ("Engineering and Technology", [
+            "engineering", "deployment", "mlops", "devops", "infrastructure",
+            "distributed system", "microservice", "backend", "system design",
+        ]),
+        ("Design", ["ui design", "ux design", "graphic design", "interface design",
+                    "product design", "visual design"]),
         ("Communications and Media", ["writing", "presentation", "communication", "media"]),
     ]
     return _rules_to_mappings(content, rules)
@@ -515,14 +561,30 @@ def _knowledge_mappings(content: str) -> list[dict[str, Any]]:
 
 def _skill_mappings(content: str) -> list[dict[str, Any]]:
     rules = [
-        ("Programming", ["python", "sql", "r", "pytorch", "tensorflow", "fastapi", "programming", "docker"]),
-        ("Mathematics", ["math", "statistics", "quantitative", "statistical"]),
-        ("Complex Problem Solving", ["problem solving", "debugging", "optimization", "troubleshooting"]),
-        ("Quality Control Analysis", ["quality", "edge cases", "evaluation", "testing", "reliable"]),
-        ("Systems Analysis", ["system design", "distributed systems", "api", "deployment"]),
-        ("Systems Evaluation", ["model evaluation", "evaluation", "monitoring"]),
-        ("Technology Design", ["design", "build", "develop", "architecture"]),
-        ("Critical Thinking", ["analysis", "analytical", "reasoning", "decision"]),
+        ("Programming", [
+            "python", "sql", "r ", "pytorch", "tensorflow", "keras", "fastapi",
+            "flask", "django", "node", "react", "typescript", "javascript", "java",
+            "c++", "rust", "go ", "scala", "spark", "hadoop", "dbt", "airflow",
+            "docker", "kubernetes", "git", "programming", "coding", "software development",
+            "huggingface", "langchain", "sklearn", "scikit",
+        ]),
+        ("Mathematics", ["math", "statistics", "quantitative", "statistical", "linear algebra",
+                         "calculus", "probability", "numerical"]),
+        ("Complex Problem Solving", [
+            "problem solving", "debugging", "optimization", "troubleshooting",
+            "machine learning", "deep learning", "model training", "training",
+        ]),
+        ("Quality Control Analysis", ["quality", "edge cases", "evaluation", "testing",
+                                      "reliable", "validation", "unit test"]),
+        ("Systems Analysis", ["system design", "distributed system", "api design",
+                               "deployment", "architecture", "mlops", "devops"]),
+        ("Systems Evaluation", ["model evaluation", "evaluation", "monitoring", "metrics",
+                                 "benchmark", "performance", "accuracy"]),
+        ("Technology Design", ["build", "develop", "architect", "design system",
+                                "pipeline", "workflow"]),
+        ("Critical Thinking", ["analysis", "analytical", "reasoning", "decision", "research"]),
+        ("Active Learning", ["learning", "studying", "course", "reading papers",
+                             "keeping up", "new techniques"]),
     ]
     return _rules_to_mappings(content, rules)
 

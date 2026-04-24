@@ -15,10 +15,26 @@ dependencies = [
     # sentence-transformers — used for O*NET embedding mapping (career_engine/onet.py)
     # 3.0.x released July 2024, within the exclude-newer window; torch pulled in transitively
     "sentence-transformers>=3.0.0,<4.0.0",
+    "fastapi>=0.112.2",
+    "uvicorn>=0.30.6",
+    "python-dotenv>=1.0.1",
 ]
 
 [project.optional-dependencies]
 eval = []  # eval scripts are stdlib-only, no extra deps
+
+# Web demo: uvicorn + FastAPI server for the interactive UI in demo/
+# Versions are capped by [tool.uv] exclude-newer = "2024-09-01" so only
+# releases audited before that date can be resolved.
+#   fastapi  0.111.x  — May 2024, no known CVEs at time of pin
+#   uvicorn  0.29.x   — April 2024, stable async server; [standard] pulls
+#                       httptools + uvloop for production-grade performance
+#   python-dotenv 1.0.1 — March 2024, stdlib-thin .env loader
+demo = [
+    "fastapi>=0.111.0,<1.0.0",
+    "uvicorn[standard]>=0.29.0,<1.0.0",
+    "python-dotenv>=1.0.0,<2.0.0",
+]
 
 [build-system]
 requires = ["hatchling"]

@@ -40,14 +40,18 @@ class CareerExtractionAgent:
         self.graph_memory = graph_memory
         self.model = model
         self.temperature = temperature
-        self.api_key = os.getenv("GROQ_API_KEY")
-        self.client = (
-            Groq(api_key=self.api_key, timeout=10.0, max_retries=0)
-            if use_llm and self.api_key and Groq
-            else None
-        )
+        self._use_llm = use_llm
         self._groq_failures = 0
         self._max_groq_failures = 1000
+
+    def _get_client(self):
+        """Lazily create Groq client so GROQ_API_KEY added after import is picked up."""
+        if not self._use_llm or not Groq or self._groq_failures >= self._max_groq_failures:
+            return None
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            return None
+        return Groq(api_key=api_key, timeout=10.0, max_retries=0)
 
     def process_turn(self, turn: dict[str, Any]) -> CareerExtractionOutput:
         extracted = self.extract(turn["text"])
@@ -58,16 +62,15 @@ class CareerExtractionAgent:
     def extract(self, text: str) -> CareerExtractionOutput:
         if not _looks_career_relevant(text):
             return empty_output()
-        if self.client:
+        client = self._get_client()
+        if client:
             try:
-                return sanitize_output(self._extract_with_groq(text))
+                return sanitize_output(self._extract_with_groq(client, text))
             except Exception:  # pylint: disable=broad-exception-caught
                 self._groq_failures += 1
-                if self._groq_failures >= self._max_groq_failures:
-                    self.client = None
         return sanitize_output(_extract_with_rules(text))
 
-    def _extract_with_groq(self, text: str) -> CareerExtractionOutput:
+    def _extract_with_groq(self, client: "Groq", text: str) -> CareerExtractionOutput:
         prompt = (
             "You extract career-development signals from natural user conversation. "
             "Extract explicit and implicit evidence about the user's coursework, projects, skills, tools, "
@@ -96,7 +99,7 @@ class CareerExtractionAgent:
             '  "relations": [{"source": "USER", "target": str, "relation_type": str}]\n'
             "}"
         )
-        completion = self.client.chat.completions.create(
+        completion = client.chat.completions.create(
             model=self.model,
             temperature=self.temperature,
             messages=[{"role": "system", "content": prompt}],

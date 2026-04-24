@@ -173,4 +173,4 @@ cython_debug/
 # Local generated artifacts
 outputs/
 
-data/
+# data/

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import time
 from pathlib import Path
 
@@ -8,6 +9,7 @@ from memory_engine.data_pipeline import build_sample_turns, load_sharegpt, write
 
 from .extraction_agent import CareerExtractionAgent, extraction_sections, has_career_output
 from .graph import CareerGraphMemory
+from .groq_reranker import GroqCareerReranker
 from .onet import (
     align_nodes_to_onet,
     analyze_skill_gaps,
@@ -55,7 +57,7 @@ def main() -> None:
         temperature=args.temperature,
         use_llm=not args.disable_llm,
     )
-    print(f"Career extraction mode: {'Groq + rules fallback' if agent.client else 'Rules only'}")
+    print(f"Career extraction mode: {'Groq + rules fallback' if os.getenv('GROQ_API_KEY') else 'Rules only'}")
 
     extractions = []
     human_processed = 0
@@ -86,12 +88,23 @@ def main() -> None:
     profile = build_user_profile(mapped_nodes)
     write_json(args.output_dir / "career_user_profile.json", profile)
 
-    recommendations = recommend_careers(profile, occupations, top_k=args.top_k)
+    # Stage 1: cosine similarity shortlist (top-20 candidates)
+    shortlist = recommend_careers(profile, occupations, top_k=max(20, args.top_k))
+
+    # Stage 2: Groq re-ranker — reorders shortlist using conversation context
+    #          and attaches a reasoning trace to every recommendation
+    reranker = GroqCareerReranker(model=args.model)
+    reranked = reranker.rerank(shortlist["recommendations"], extractions, top_k=args.top_k)
+    recommendations = {"user_id": shortlist["user_id"], "recommendations": reranked}
     write_json(args.output_dir / "career_recommendations.json", recommendations)
 
     target = _select_target_occupation(args.target_career, recommendations, occupations)
     gap_analysis = analyze_skill_gaps(profile, target, top_k=args.top_k)
     write_json(args.output_dir / "career_gap_analysis.json", gap_analysis)
+
+    # Stage 3: Personalized learning roadmap from gap analysis
+    roadmap = reranker.generate_learning_roadmap(gap_analysis, extractions, gap_analysis["target"])
+    write_json(args.output_dir / "career_learning_roadmap.json", roadmap)
 
     summary = _build_summary(
         stats.__dict__,
@@ -99,6 +112,7 @@ def main() -> None:
         extractions,
         recommendations,
         gap_analysis,
+        roadmap,
         occupation_count=len(occupations),
         onet_dir=args.onet_dir,
         output_dir=args.output_dir,
@@ -108,8 +122,9 @@ def main() -> None:
     print("Career pipeline finished.")
     print(f"- output dir: {args.output_dir}")
     print(f"- career graph: {args.output_dir / 'career_graph_memory.json'}")
-    print(f"- recommendations: {args.output_dir / 'career_recommendations.json'}")
+    print(f"- recommendations (Groq re-ranked): {args.output_dir / 'career_recommendations.json'}")
     print(f"- gap analysis: {args.output_dir / 'career_gap_analysis.json'}")
+    print(f"- learning roadmap: {args.output_dir / 'career_learning_roadmap.json'}")
 
 
 def _inject_inferred_signals(extractions: list[dict]) -> list[dict]:
@@ -174,6 +189,7 @@ def _build_summary(
     extractions: list[dict],
     recommendations: dict,
     gap_analysis: dict,
+    roadmap: dict,
     occupation_count: int,
     onet_dir: Path,
     output_dir: Path | None = None,
@@ -214,18 +230,35 @@ def _build_summary(
         lines.append(f"- {key}: {field_counts[key]}")
 
     component_scores = top.get("component_scores", {})
+    top_reasoning = top.get("reasoning", "")
+    all_recs = recommendations.get("recommendations", [])
     lines.extend(
         [
             "",
-            "## Career Recommendation",
+            "## Stage 1 — O*NET Cosine Similarity",
             f"- O*NET occupation profiles loaded: {occupation_count}",
             f"- O*NET source directory: {onet_dir}",
             f"- Work Styles.xlsx: {work_styles_status}",
+            f"- Shortlist top-20 candidates generated for Groq re-ranking",
+            "",
+            "## Stage 2 — Groq Re-Ranking",
             f"- Top recommendation: {top.get('title', 'N/A')}",
-            f"- Top score: {top.get('score', 0)}",
+            f"- Groq rank: {top.get('groq_rank', 'N/A')}  |  Cosine score: {top.get('score', 0)}",
             f"- knowledge score: {component_scores.get('knowledge', 0.0)}",
             f"- skills score: {component_scores.get('skills', 0.0)}",
             f"- work_styles score: {work_styles_score}{work_styles_note}",
+            f"- Reasoning trace: {top_reasoning}",
+            "",
+            "### All Re-ranked Recommendations",
+        ]
+    )
+    for rec in all_recs:
+        lines.append(
+            f"  {rec.get('groq_rank', '?')}. {rec.get('title', '?')} "
+            f"(score: {rec.get('score', 0):.4f}) — {rec.get('reasoning', '')}"
+        )
+    lines.extend(
+        [
             "",
             "## Gap Analysis Target",
             f"- Target: {gap_analysis.get('target', 'N/A')}",
@@ -233,10 +266,25 @@ def _build_summary(
             f"- Top skill gaps: {gap_analysis.get('skill_gaps', [])[:3]}",
             f"- Top work style gaps: {gap_analysis.get('work_style_gaps', [])[:3]}",
             "",
+            "## Stage 3 — Personalized Learning Roadmap",
+            f"- Target: {roadmap.get('target_career', 'N/A')}",
+            f"- Summary: {roadmap.get('summary', '')}",
+            f"- Phases: {len(roadmap.get('phases', []))}",
+        ]
+    )
+    for phase in roadmap.get("phases", []):
+        lines.append(
+            f"  Phase {phase.get('phase', '?')}: {phase.get('name', '?')} "
+            f"({phase.get('duration', '?')}) — milestone: {phase.get('milestone', '?')}"
+        )
+    lines.extend(
+        [
+            "",
             "## Data Sources",
             "- Knowledge.xlsx and Skills.xlsx: real O*NET data (loaded)",
             f"- Work Styles.xlsx: {work_styles_status}",
             "- Node-to-O*NET mapping: sentence-transformers (all-MiniLM-L6-v2) with keyword fallback",
+            "- Stage 2 re-ranking and Stage 3 roadmap: Groq LLM with conversation context",
         ]
     )
 

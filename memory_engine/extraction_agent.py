@@ -137,34 +137,48 @@ class MemoryExtractionAgent:
             [
                 r"\bmy goal is to ([^.;!\n]+)",
                 r"\bi want to ([^.;!\n]+)",
+                # "I want a/an X" — career goals often use this form
+                r"\bi want (?:a|an|to be|to become) ([^.;!\n]+)",
                 r"\bi need to ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:hoping|planning|trying) to ([^.;!\n]+)",
                 r"\bi(?:'m| am) learning ([^.;!\n]+)",
+                r"\blong[- ]term (?:I |my )?(?:goal|plan|aim)[^,]*[,:]? ([^.;!\n]+)",
+                r"\bi(?:'m| am) interested in (?:moving into|transitioning to|becoming) ([^.;!\n]+)",
             ],
         )
         projects = _find_by_patterns(
             normalized_text,
             [
-                r"\bi(?:'m| am) working on ([^.;!\n]+)",
-                r"\bi(?:'m| am) building ([^.;!\n]+)",
-                r"\bi(?:'m| am) creating ([^.;!\n]+)",
-                r"\bi(?:'m| am) writing ([^.;!\n]+)",
-                r"\bi(?:'m| am) learning ([^.;!\n]+)",
+                # Allow optional adverbs between "I'm" and the verb ("I'm currently working on")
+                r"\bi(?:'m| am) (?:\w+ )?working on ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:\w+ )?building ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:\w+ )?creating ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:\w+ )?writing ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:\w+ )?developing ([^.;!\n]+)",
+                r"\bi(?:'m| am) (?:\w+ )?learning ([^.;!\n]+)",
+                r"\bworking on (?:a |an |the )?([^.;!\n]+)",
                 r"\bmy project(?: is|:)? ([^.;!\n]+)",
                 r"\bfor my (?:class|course|research) ([^.;!\n]+)",
+                r"\bi (?:built|developed|created|implemented) ([^.;!\n]+)",
             ],
         )
 
         tool_keywords = [
-            "python",
-            "neo4j",
-            "networkx",
-            "pandas",
-            "sql",
-            "excel",
-            "docker",
-            "langchain",
-            "llamaindex",
-            "notion",
+            # Languages
+            "python", "javascript", "typescript", "java", "c++", "rust", "go", "scala", "r",
+            # ML / AI
+            "pytorch", "tensorflow", "keras", "scikit-learn", "sklearn", "huggingface",
+            "transformers", "langchain", "llamaindex", "openai", "groq",
+            # Data
+            "pandas", "numpy", "spark", "hadoop", "dbt", "airflow",
+            # Databases
+            "sql", "postgresql", "mysql", "mongodb", "neo4j", "redis", "elasticsearch",
+            # DevOps / infra
+            "docker", "kubernetes", "aws", "gcp", "azure", "terraform",
+            # Web / APIs
+            "fastapi", "flask", "django", "node", "react", "vue", "nextjs",
+            # Tools
+            "git", "networkx", "excel", "notion", "tableau", "powerbi",
         ]
         tools = [tool for tool in tool_keywords if re.search(rf"\b{re.escape(tool)}\b", lowered)]
 

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Engine Demo</title>
+  <style>
+    /* ── Reset ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Tokens ─────────────────────────────────────────────────── */
+    :root {
+      --indigo:    #4f46e5;
+      --indigo-d:  #3730a3;
+      --indigo-l:  #eef2ff;
+      --slate-50:  #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --radius-sm: 8px;
+      --radius:    14px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
+      --shadow:    0 4px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05);
+    }
+
+    /* ── Base ───────────────────────────────────────────────────── */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      background: var(--slate-100);
+      color: var(--slate-800);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #3730a3 0%, #4f46e5 60%, #6d28d9 100%);
+      color: white;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      box-shadow: 0 2px 12px rgba(55,48,163,.35);
+    }
+    .hdr-left { display: flex; align-items: center; gap: 10px; }
+    .hdr-logo {
+      width: 30px; height: 30px;
+      background: rgba(255,255,255,.15);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hdr-logo svg { width: 17px; height: 17px; }
+    .hdr-title { font-size: 15px; font-weight: 700; letter-spacing: -.3px; }
+    .hdr-sub { font-size: 11px; color: rgba(255,255,255,.55); margin-left: 2px; }
+    .hdr-stats { display: flex; gap: 20px; font-size: 11px; color: rgba(255,255,255,.6); }
+    .hdr-stats strong { color: white; font-weight: 600; }
+    .hdr-badge {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 10px;
+      letter-spacing: .3px;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────────── */
+    main { display: flex; flex: 1; overflow: hidden; gap: 0; }
+
+    /* ── Left: Chat ─────────────────────────────────────────────── */
+    .chat-panel {
+      width: 54%;
+      display: flex;
+      flex-direction: column;
+      background: white;
+      border-right: 1px solid var(--slate-200);
+    }
+
+    /* ─ messages ─ */
+    #chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 20px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--slate-200) transparent;
+    }
+
+    /* welcome state */
+    .welcome {
+      margin: auto;
+      text-align: center;
+      padding: 32px 24px;
+      max-width: 380px;
+    }
+    .welcome-icon {
+      width: 56px; height: 56px;
+      background: var(--indigo-l);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .welcome-icon svg { width: 28px; height: 28px; color: var(--indigo); }
+    .welcome h2 { font-size: 16px; font-weight: 700; color: var(--slate-800); margin-bottom: 6px; }
+    .welcome p  { font-size: 13px; color: var(--slate-500); line-height: 1.6; }
+    .welcome-examples {
+      display: flex; flex-direction: column; gap: 6px;
+      margin-top: 16px;
+    }
+    .welcome-ex {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-sm);
+      padding: 7px 12px;
+      font-size: 12px;
+      color: var(--slate-600);
+      text-align: left;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+    .welcome-ex:hover { background: var(--indigo-l); border-color: #c7d2fe; color: var(--indigo); }
+
+    /* message rows */
+    .msg { display: flex; align-items: flex-end; gap: 8px; }
+    .msg.user  { flex-direction: row-reverse; }
+
+    .avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
+    }
+    .avatar.user { background: var(--indigo); color: white; }
+    .avatar.ai   {
+      background: linear-gradient(135deg,#4f46e5,#7c3aed);
+      color: white; font-size: 10px;
+    }
+
+    .bubble {
+      max-width: 78%;
+      padding: 10px 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      word-break: break-word;
+    }
+    .msg.user .bubble {
+      background: linear-gradient(135deg, var(--indigo) 0%, #6d28d9 100%);
+      color: white;
+      border-radius: var(--radius-lg) var(--radius-lg) 4px var(--radius-lg);
+      box-shadow: 0 2px 8px rgba(79,70,229,.3);
+    }
+    .msg.ai .bubble {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      color: var(--slate-700);
+      border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 4px;
+      box-shadow: var(--shadow-sm);
+    }
+    .msg.error .bubble {
+      background: #fef2f2; border: 1px solid #fecaca;
+      color: #b91c1c; border-radius: var(--radius-sm);
+    }
+
+    /* thinking dots */
+    .dots { display: flex; align-items: center; gap: 4px; padding: 2px 0; }
+    .dots span {
+      display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--slate-400);
+      animation: dotpulse 1.3s infinite ease-in-out;
+    }
+    .dots span:nth-child(2) { animation-delay: .18s; }
+    .dots span:nth-child(3) { animation-delay: .36s; }
+
+    /* ─ input area ─ */
+    .input-wrap {
+      padding: 12px 16px 14px;
+      border-top: 1px solid var(--slate-200);
+      background: white;
+      flex-shrink: 0;
+    }
+    .input-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      background: var(--slate-50);
+      border: 1.5px solid var(--slate-200);
+      border-radius: var(--radius);
+      padding: 8px 8px 8px 14px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .input-row:focus-within {
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px rgba(79,70,229,.12);
+    }
+    #user-input {
+      flex: 1; resize: none; border: none; background: transparent;
+      font-size: 13px; font-family: inherit; outline: none;
+      color: var(--slate-800); max-height: 120px; min-height: 20px;
+      line-height: 1.5;
+    }
+    #user-input::placeholder { color: var(--slate-400); }
+    #send-btn {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: var(--indigo); color: white;
+      border: none; cursor: pointer; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s, transform .1s;
+    }
+    #send-btn:hover:not(:disabled) { background: var(--indigo-d); transform: scale(1.05); }
+    #send-btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+    #send-btn svg { width: 16px; height: 16px; }
+
+    /* ── Right: Signals ─────────────────────────────────────────── */
+    .results-panel {
+      width: 46%;
+      display: flex;
+      flex-direction: column;
+      background: var(--slate-50);
+    }
+
+    /* tab bar */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      padding: 10px 14px 0;
+      background: white;
+      border-bottom: 1px solid var(--slate-200);
+      flex-shrink: 0;
+    }
+    .tab-btn {
+      padding: 7px 14px 9px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--slate-500);
+      background: none; border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer; font-family: inherit;
+      transition: color .15s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--indigo); }
+    .tab-btn.active {
+      color: var(--indigo);
+      border-bottom-color: var(--indigo);
+      font-weight: 600;
+    }
+
+    /* panels */
+    .tab-panel { flex: 1; overflow-y: auto; padding: 14px; scrollbar-width: thin; }
+    .tab-panel.hidden { display: none; }
+
+    .empty-state {
+      text-align: center; padding: 40px 20px;
+      color: var(--slate-400); font-size: 12px; line-height: 1.7;
+    }
+    .empty-state svg { width: 32px; height: 32px; margin: 0 auto 10px; display: block; opacity: .4; }
+
+    /* ── Signal chips ───────────────────────────────────────────── */
+    .sig-group { margin-bottom: 16px; }
+    .sig-label {
+      font-size: 10px; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; margin-bottom: 7px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .sig-label::after {
+      content: ''; flex: 1; height: 1px; background: currentColor; opacity: .15;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 4px 10px; border-radius: 20px;
+      font-size: 11px; font-weight: 500;
+      border: 1px solid transparent;
+      animation: fadeUp .25s ease both;
+      transition: transform .1s;
+    }
+    .chip:hover { transform: translateY(-1px); }
+    .chip-pct { opacity: .45; font-size: 9.5px; margin-left: 1px; }
+
+    /* ── Career cards ───────────────────────────────────────────── */
+    .career-card {
+      background: white; border: 1px solid var(--slate-200);
+      border-radius: var(--radius); padding: 14px;
+      margin-bottom: 10px; box-shadow: var(--shadow-sm);
+      animation: fadeUp .3s ease both;
+    }
+    .career-card:first-child { border-color: #c7d2fe; box-shadow: 0 2px 8px rgba(79,70,229,.1); }
+    .cc-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .cc-left { display: flex; align-items: flex-start; gap: 8px; }
+    .cc-medal { font-size: 18px; line-height: 1; margin-top: 1px; flex-shrink: 0; }
+    .cc-title { font-size: 13px; font-weight: 600; color: var(--slate-800); line-height: 1.3; }
+    .cc-code { font-size: 10px; color: var(--slate-400); margin-top: 2px; }
+    .cc-score { font-size: 20px; font-weight: 800; color: var(--indigo); line-height: 1; white-space: nowrap; }
+    .cc-pct { font-size: 11px; font-weight: 500; color: var(--slate-400); }
+    .bar-track { background: var(--slate-100); border-radius: 4px; height: 4px; margin-bottom: 12px; overflow: hidden; }
+    .bar-fill  { height: 4px; border-radius: 4px; background: linear-gradient(90deg,#6366f1,#8b5cf6); transition: width .7s ease; }
+    .cc-comps { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+    .cc-comp { text-align: center; padding: 6px 0; border-right: 1px solid var(--slate-100); }
+    .cc-comp:last-child { border-right: none; }
+    .cc-comp-val { font-size: 13px; font-weight: 700; color: var(--slate-700); }
+    .cc-comp-lbl { font-size: 10px; color: var(--slate-400); margin-top: 1px; }
+    .cc-reasoning {
+      margin-top: 10px;
+      padding: 8px 10px;
+      background: var(--indigo-l);
+      border-left: 3px solid var(--indigo);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .cc-reasoning-label {
+      font-size: 9px; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; color: var(--indigo);
+      margin-bottom: 3px; display: flex; align-items: center; gap: 4px;
+    }
+    .cc-reasoning-text {
+      font-size: 11.5px; color: var(--slate-600); line-height: 1.55;
+    }
+
+    /* ── Memory nodes ───────────────────────────────────────────── */
+    .mem-node {
+      background: white; border: 1px solid var(--slate-200);
+      border-radius: var(--radius-sm); padding: 10px 12px;
+      margin-bottom: 7px; display: flex; align-items: flex-start; gap: 10px;
+      animation: fadeUp .25s ease both;
+    }
+    .mem-badge {
+      background: var(--indigo-l); color: var(--indigo);
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; padding: 2px 7px; border-radius: 4px;
+      white-space: nowrap; flex-shrink: 0; margin-top: 1px;
+    }
+    .mem-body { flex: 1; min-width: 0; }
+    .mem-text { font-size: 12px; color: var(--slate-600); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mem-row  { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+    .mem-bar  { flex: 1; background: var(--slate-100); border-radius: 2px; height: 3px; }
+    .mem-fill { background: #818cf8; height: 3px; border-radius: 2px; }
+    .mem-cnt  { font-size: 9px; color: var(--slate-400); }
+
+    /* ── Utility ─────────────────────────────────────────────────── */
+    .hidden { display: none !important; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(5px); }
+      to   { opacity: 1; transform: translateY(0);   }
+    }
+    @keyframes dotpulse {
+      0%, 80%, 100% { transform: scale(.5); opacity: .3; }
+      40%           { transform: scale(1);  opacity: 1;  }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────────── -->
+  <header>
+    <div class="hdr-left">
+      <div class="hdr-logo">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 9m0 8V9m0 0L9 7"/>
+        </svg>
+      </div>
+      <div>
+        <div class="hdr-title">Career &amp; Memory Engine</div>
+      </div>
+      <span class="hdr-sub">Interactive Demo</span>
+    </div>
+    <div class="hdr-stats">
+      <span>Career graph: <strong id="stat-cn">0</strong> nodes</span>
+      <span>Memory: <strong id="stat-mn">0</strong> nodes</span>
+      <span class="hdr-badge">Session <strong id="stat-sid">—</strong></span>
+    </div>
+  </header>
+
+  <!-- ── Main ────────────────────────────────────────────────────── -->
+  <main>
+
+    <!-- Left: Chat -->
+    <section class="chat-panel">
+      <div id="chat-messages">
+        <div class="welcome" id="welcome">
+          <div class="welcome-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 9m0 8V9m0 0L9 7"/>
+            </svg>
+          </div>
+          <h2>Career &amp; Memory Engine</h2>
+          <p>Chat freely — the system extracts career signals in real time, builds a personal memory graph, and surfaces matching career paths from O*NET.</p>
+          <div class="welcome-pill-row" style="display:flex;gap:8px;justify-content:center;margin:12px 0 4px;flex-wrap:wrap">
+            <span style="background:#eef2ff;color:#4338ca;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px">📌 Career Extraction</span>
+            <span style="background:#f0fdf4;color:#047857;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px">🧠 Memory Graph</span>
+            <span style="background:#fdf2f8;color:#be185d;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px">🎯 O*NET Matching</span>
+          </div>
+          <div class="welcome-examples">
+            <div class="welcome-ex" onclick="prefill(this)">I'm a CS student working on ML projects, mostly using PyTorch and Python.</div>
+            <div class="welcome-ex" onclick="prefill(this)">I've been doing backend development with Node.js for 2 years, and I'm interested in moving into data engineering.</div>
+            <div class="welcome-ex" onclick="prefill(this)">I'm finishing my MBA and want to move into product management in the tech industry.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-wrap">
+        <div class="input-row">
+          <textarea id="user-input" rows="1"
+            placeholder="Ask about careers, share your background…"
+            onkeydown="handleKey(event)"
+            oninput="autoResize(this)"></textarea>
+          <button id="send-btn" onclick="sendMessage()" title="Send (Enter)">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: Results -->
+    <section class="results-panel">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('extraction',this)">Extracted Signals</button>
+        <button class="tab-btn"        onclick="switchTab('careers',this)">Career Matches</button>
+        <button class="tab-btn"        onclick="switchTab('memory',this)">Memory</button>
+      </div>
+
+      <div id="tab-extraction" class="tab-panel">
+        <div class="empty-state" id="ex-empty">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/>
+          </svg>
+          Signals extracted from your messages will appear here.
+        </div>
+        <div id="ex-content" class="hidden"></div>
+      </div>
+
+      <div id="tab-careers" class="tab-panel hidden">
+        <div class="empty-state" id="ca-empty">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0"/>
+          </svg>
+          Career matches will appear once signals are extracted.
+        </div>
+        <div id="ca-content" class="hidden"></div>
+      </div>
+
+      <div id="tab-memory" class="tab-panel hidden">
+        <div class="empty-state" id="me-empty">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"/>
+          </svg>
+          Recalled memory context will appear here.
+        </div>
+        <div id="me-content" class="hidden"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    /* ── Signal palette ──────────────────────────────────────────── */
+    const SIG = {
+      knowledge:       {label:"Knowledge Areas", c:"#1d4ed8", bg:"#eff6ff", b:"#bfdbfe"},
+      skill:           {label:"Skills",           c:"#047857", bg:"#ecfdf5", b:"#6ee7b7"},
+      tool:            {label:"Tools",            c:"#6d28d9", bg:"#f5f3ff", b:"#ddd6fe"},
+      project:         {label:"Projects",         c:"#b45309", bg:"#fffbeb", b:"#fcd34d"},
+      career_goal:     {label:"Career Goals",     c:"#be185d", bg:"#fdf2f8", b:"#f9a8d4"},
+      course:          {label:"Courses",          c:"#0f766e", bg:"#f0fdfa", b:"#5eead4"},
+      interest:        {label:"Interests",        c:"#92400e", bg:"#fefce8", b:"#fde68a"},
+      work_style:      {label:"Work Styles",      c:"#4338ca", bg:"#eef2ff", b:"#a5b4fc"},
+      constraint:      {label:"Constraints",      c:"#374151", bg:"#f9fafb", b:"#d1d5db"},
+      implicit_signal: {label:"Implicit Signals", c:"#7e22ce", bg:"#faf5ff", b:"#d8b4fe"},
+    };
+    const MEM_SIG = [
+      {key:"goals",       label:"Goals",           c:"#be185d", bg:"#fdf2f8", b:"#f9a8d4"},
+      {key:"preferences", label:"Preferences",     c:"#0369a1", bg:"#f0f9ff", b:"#bae6fd"},
+      {key:"constraints", label:"Constraints",     c:"#374151", bg:"#f9fafb", b:"#d1d5db"},
+      {key:"projects",    label:"Projects (mem)",  c:"#b45309", bg:"#fffbeb", b:"#fcd34d"},
+      {key:"tools",       label:"Tools (mem)",     c:"#6d28d9", bg:"#f5f3ff", b:"#ddd6fe"},
+    ];
+
+    /* ── State ────────────────────────────────────────────────────── */
+    let sessionId = null, busy = false;
+
+    /* ── Init ─────────────────────────────────────────────────────── */
+    async function init() {
+      try {
+        const r = await fetch("/api/session", {method:"POST"});
+        if (!r.ok) throw new Error(r.status);
+        const d = await r.json();
+        sessionId = d.session_id;
+        document.getElementById("stat-sid").textContent = sessionId;
+      } catch(e) {
+        showSystemMsg("Cannot reach the backend — is uvicorn running?", "error");
+      }
+    }
+
+    /* ── Send ─────────────────────────────────────────────────────── */
+    async function sendMessage() {
+      if (busy || !sessionId) return;
+      const ta   = document.getElementById("user-input");
+      const text = ta.value.trim();
+      if (!text) return;
+      ta.value = "";
+      autoResize(ta);
+      document.getElementById("welcome")?.remove();
+      addBubble("user", text);
+      setBusy(true);
+      const tid = addThinking();
+      try {
+        const r = await fetch("/api/chat", {
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify({session_id:sessionId, message:text}),
+        });
+        if (!r.ok) { const e=await r.json(); throw new Error(e.detail||"Server error"); }
+        const data = await r.json();
+        removeThinking(tid);
+        addBubble("ai", data.reply || "");
+        renderPanel(data);
+        updateStats(data.graph_stats);
+      } catch(e) {
+        removeThinking(tid);
+        addBubble("error", "Error: "+e.message);
+      } finally {
+        setBusy(false);
+      }
+    }
+
+    function prefill(el) {
+      const ta = document.getElementById("user-input");
+      ta.value = el.textContent.trim();
+      autoResize(ta);
+      ta.focus();
+    }
+
+    function handleKey(e) {
+      if (e.key==="Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    }
+    function autoResize(ta) {
+      ta.style.height = "auto";
+      ta.style.height = Math.min(ta.scrollHeight, 120) + "px";
+    }
+
+    /* ── Bubbles ──────────────────────────────────────────────────── */
+    function addBubble(role, content) {
+      const wrap = document.getElementById("chat-messages");
+      const row  = document.createElement("div");
+      row.className = "msg " + role;
+      const av   = document.createElement("div");
+      av.className = "avatar " + (role==="user"?"user":"ai");
+      av.textContent = role==="user" ? "You" : "AI";
+      const bub  = document.createElement("div");
+      bub.className = "bubble";
+      bub.innerHTML = role==="user" ? esc(content) : content;
+      if (role==="user") { row.append(av,bub); } else { row.append(av,bub); }
+      wrap.appendChild(row);
+      wrap.scrollTop = wrap.scrollHeight;
+    }
+
+    let _tc=0;
+    function addThinking() {
+      const id = "think-"+(++_tc);
+      const wrap = document.getElementById("chat-messages");
+      const row  = document.createElement("div");
+      row.id = id; row.className = "msg ai";
+      row.innerHTML = `<div class="avatar ai">AI</div><div class="bubble"><div class="dots"><span></span><span></span><span></span></div></div>`;
+      wrap.appendChild(row);
+      wrap.scrollTop = wrap.scrollHeight;
+      return id;
+    }
+    function removeThinking(id) { document.getElementById(id)?.remove(); }
+
+    function showSystemMsg(msg, type="error") {
+      document.getElementById("chat-messages").innerHTML =
+        `<div style="text-align:center;padding:40px 20px;color:${type==="error"?"#ef4444":"#64748b"};font-size:13px">${esc(msg)}</div>`;
+    }
+
+    /* ── Right panel ──────────────────────────────────────────────── */
+    function renderPanel(data) {
+      renderExtraction(data.extraction, data.memory_extraction);
+      renderCareers(data.recommendations);
+      renderMemory(data.memory_context);
+    }
+
+    /* extraction */
+    function renderExtraction(ext, memExt) {
+      const el = document.getElementById("ex-content");
+      const em = document.getElementById("ex-empty");
+      let html="", any=false;
+
+      for (const [k,items] of Object.entries(ext||{})) {
+        if (!items?.length) continue;
+        any=true;
+        const s = SIG[k]||{label:k,c:"#555",bg:"#f5f5f5",b:"#ccc"};
+        html += `<div class="sig-group">
+          <div class="sig-label" style="color:${s.c}">${s.label}</div>
+          <div class="chips">${items.map(i=>chip(i.name,i.confidence,s)).join("")}</div>
+        </div>`;
+      }
+      for (const ms of MEM_SIG) {
+        const items=(memExt||{})[ms.key];
+        if (!items?.length) continue;
+        any=true;
+        html += `<div class="sig-group">
+          <div class="sig-label" style="color:${ms.c}">${ms.label}</div>
+          <div class="chips">${items.map(i=>chip(i.name||i.description||"",i.confidence||.7,ms)).join("")}</div>
+        </div>`;
+      }
+
+      if (any) { el.innerHTML=html; el.classList.remove("hidden"); em.classList.add("hidden"); }
+      else { el.classList.add("hidden"); em.classList.remove("hidden"); }
+    }
+
+    function chip(name,conf,s) {
+      const p=Math.round((conf||.7)*100);
+      return `<span class="chip" style="color:${s.c};background:${s.bg};border-color:${s.b}" title="${p}% confidence">
+        ${esc(name)}<span class="chip-pct">${p}%</span></span>`;
+    }
+
+    /* careers */
+    function renderCareers(recs) {
+      const el=document.getElementById("ca-content"), em=document.getElementById("ca-empty");
+      if (!recs?.length) { el.classList.add("hidden"); em.classList.remove("hidden"); return; }
+      const top=recs[0].score||1;
+      const md=["🥇","🥈","🥉"];
+      el.innerHTML=recs.map((r,i)=>{
+        const bp=top>0?(r.score/top*100).toFixed(1):0;
+        const sp=(r.score*100).toFixed(1);
+        const c=r.component_scores||{};
+        const reasoning = (r.reasoning||"").trim();
+        const isFallback = reasoning.startsWith("Ranked by O*NET cosine similarity") || reasoning.startsWith("Included from cosine similarity");
+        const reasoningHtml = (reasoning && !isFallback)
+          ? `<div class="cc-reasoning">
+               <div class="cc-reasoning-label">
+                 <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+                 </svg>
+                 AI Reasoning
+               </div>
+               <div class="cc-reasoning-text">${esc(reasoning)}</div>
+             </div>`
+          : "";
+        return `<div class="career-card">
+          <div class="cc-head">
+            <div class="cc-left">
+              <span class="cc-medal">${md[i]||"·"}</span>
+              <div><div class="cc-title">${esc(r.title)}</div><div class="cc-code">${esc(r.onet_code)}</div></div>
+            </div>
+            <div style="text-align:right">
+              <div class="cc-score">${sp}</div>
+              <div class="cc-pct">% match</div>
+            </div>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:${bp}%"></div></div>
+          <div class="cc-comps">
+            ${ccomp("Knowledge",c.knowledge)}${ccomp("Skills",c.skills)}${ccomp("Work Style",c.work_styles)}
+          </div>
+          ${reasoningHtml}
+        </div>`;
+      }).join("");
+      el.classList.remove("hidden"); em.classList.add("hidden");
+    }
+
+    function ccomp(label,val) {
+      return `<div class="cc-comp"><div class="cc-comp-val">${((val||0)*100).toFixed(0)}%</div><div class="cc-comp-lbl">${label}</div></div>`;
+    }
+
+    /* memory */
+    function renderMemory(nodes) {
+      const el=document.getElementById("me-content"), em=document.getElementById("me-empty");
+      const list=(nodes||[]).filter(n=>n.node_type!=="User");
+      if (!list.length) { el.classList.add("hidden"); em.classList.remove("hidden"); return; }
+      el.innerHTML=list.map(n=>{
+        const bw=Math.min(100,Math.round(n.score*25));
+        return `<div class="mem-node">
+          <span class="mem-badge">${esc(n.node_type)}</span>
+          <div class="mem-body">
+            <div class="mem-text" title="${esc(n.content)}">${esc(n.content)}</div>
+            <div class="mem-row">
+              <div class="mem-bar"><div class="mem-fill" style="width:${bw}%"></div></div>
+              <span class="mem-cnt">×${n.mention_count}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join("");
+      el.classList.remove("hidden"); em.classList.add("hidden");
+    }
+
+    /* ── Tab switching ────────────────────────────────────────────── */
+    function switchTab(name, btn) {
+      document.querySelectorAll(".tab-panel").forEach(p=>p.classList.add("hidden"));
+      document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+      document.getElementById("tab-"+name).classList.remove("hidden");
+      btn.classList.add("active");
+    }
+
+    /* ── Helpers ──────────────────────────────────────────────────── */
+    function updateStats(s) {
+      if(!s) return;
+      document.getElementById("stat-cn").textContent=s.career_nodes||0;
+      document.getElementById("stat-mn").textContent=s.memory_nodes||0;
+    }
+    function setBusy(v) {
+      busy=v;
+      const b=document.getElementById("send-btn");
+      b.disabled=v;
+      b.innerHTML = v
+        ? `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-dasharray="56" stroke-dashoffset="14" style="animation:spin 1s linear infinite;transform-origin:center"/></svg>`
+        : `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>`;
+    }
+    function esc(s) {
+      return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    }
+
+    /* spin keyframe for loading icon */
+    const style=document.createElement("style");
+    style.textContent="@keyframes spin{to{stroke-dashoffset:-56}}";
+    document.head.appendChild(style);
+
+    init();
+  </script>
+</body>
+</html>
