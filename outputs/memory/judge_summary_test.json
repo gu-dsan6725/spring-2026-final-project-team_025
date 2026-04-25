@@ -1,0 +1,9 @@
+{
+  "total_scored": 16,
+  "completeness_avg": 3.5,
+  "faithfulness_avg": 4.312,
+  "utility_avg": 3.938,
+  "null_entries": 0,
+  "judge_model": "gpt-4o",
+  "judge_provider": "openai"
+}

@@ -76,6 +76,8 @@ class MemoryExtractionAgent:
             "tools they use/plan to use, or skills they have/are learning.\n"
             "- Instructions like \"write/make/create/build\" count as user goals/projects even without pronouns.\n"
             "- If the user merely mentions general knowledge with no task or personal implication, return empty.\n"
+            "- List EVERY named tool, service, library, language, framework, or technology individually — "
+            "do not collapse multiple tools into one entity.\n"
             "- Classify entities: PERSON | ORGANIZATION | PROJECT | TOOL | SKILL | TOPIC.\n"
             "- Relations: include edges where one node is USER (e.g., USER->WORKS_ON project, USER->USES_TOOL, USER->HAS_GOAL).\n"
             "- Confidence: 1.0 explicit, 0.7 strongly implied, 0.4 weakly implied.\n"

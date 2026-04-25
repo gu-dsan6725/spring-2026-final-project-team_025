@@ -1,0 +1,432 @@
+{
+  "summary": {
+    "variants_tested": 5,
+    "avg_jaccard_vs_clean": 1.0,
+    "linked_non_user_node_count": 1,
+    "max_mention_count": 5
+  },
+  "variants": [
+    {
+      "label": "clean",
+      "text": "I am learning Python data analysis.",
+      "extraction": {
+        "entities": [
+          {
+            "name": "Python data analysis",
+            "type": "PROJECT",
+            "confidence": 0.7
+          }
+        ],
+        "relations": [
+          {
+            "source": "USER",
+            "target": "Python data analysis",
+            "relation_type": "HAS_GOAL"
+          },
+          {
+            "source": "USER",
+            "target": "Python data analysis",
+            "relation_type": "WORKS_ON"
+          }
+        ],
+        "preferences": [],
+        "constraints": [],
+        "goals": [
+          {
+            "description": "Python data analysis",
+            "confidence": 0.7
+          }
+        ],
+        "projects": [
+          {
+            "name": "Python data analysis",
+            "description": "Python data analysis",
+            "confidence": 0.7
+          }
+        ],
+        "tools": [
+          {
+            "name": "python",
+            "use_case": "mentioned in user message",
+            "confidence": 0.7
+          }
+        ]
+      },
+      "jaccard_vs_clean": 1.0,
+      "graph_non_user_nodes_after_turn": [
+        {
+          "node_id": "project::1",
+          "node_type": "PROJECT",
+          "content": "Python data analysis",
+          "confidence": 0.7,
+          "created_at": "2026-04-24T21:48:48.920162+00:00",
+          "last_seen": "2026-04-24T21:48:48.920164+00:00",
+          "mention_count": 1
+        }
+      ]
+    },
+    {
+      "label": "typo",
+      "text": "Im learning pyhton data analyss.",
+      "extraction": {
+        "entities": [
+          {
+            "name": "python data analysis",
+            "type": "PROJECT",
+            "confidence": 0.7
+          }
+        ],
+        "relations": [
+          {
+            "source": "USER",
+            "target": "python data analysis",
+            "relation_type": "HAS_GOAL"
+          },
+          {
+            "source": "USER",
+            "target": "python data analysis",
+            "relation_type": "WORKS_ON"
+          }
+        ],
+        "preferences": [],
+        "constraints": [],
+        "goals": [
+          {
+            "description": "python data analysis",
+            "confidence": 0.7
+          }
+        ],
+        "projects": [
+          {
+            "name": "python data analysis",
+            "description": "python data analysis",
+            "confidence": 0.7
+          }
+        ],
+        "tools": [
+          {
+            "name": "python",
+            "use_case": "mentioned in user message",
+            "confidence": 0.7
+          }
+        ]
+      },
+      "jaccard_vs_clean": 1.0,
+      "graph_non_user_nodes_after_turn": [
+        {
+          "node_id": "project::1",
+          "node_type": "PROJECT",
+          "content": "Python data analysis",
+          "confidence": 0.7,
+          "created_at": "2026-04-24T21:48:48.920162+00:00",
+          "last_seen": "2026-04-24T21:48:48.920655+00:00",
+          "mention_count": 2
+        }
+      ]
+    },
+    {
+      "label": "filler",
+      "text": "Uh, basically, recently, I'm kind of dealing with this: I am learning Python data analysis.",
+      "extraction": {
+        "entities": [
+          {
+            "name": "Python data analysis",
+            "type": "PROJECT",
+            "confidence": 0.7
+          }
+        ],
+        "relations": [
+          {
+            "source": "USER",
+            "target": "Python data analysis",
+            "relation_type": "HAS_GOAL"
+          },
+          {
+            "source": "USER",
+            "target": "Python data analysis",
+            "relation_type": "WORKS_ON"
+          }
+        ],
+        "preferences": [],
+        "constraints": [],
+        "goals": [
+          {
+            "description": "Python data analysis",
+            "confidence": 0.7
+          }
+        ],
+        "projects": [
+          {
+            "name": "Python data analysis",
+            "description": "Python data analysis",
+            "confidence": 0.7
+          }
+        ],
+        "tools": [
+          {
+            "name": "python",
+            "use_case": "mentioned in user message",
+            "confidence": 0.7
+          }
+        ]
+      },
+      "jaccard_vs_clean": 1.0,
+      "graph_non_user_nodes_after_turn": [
+        {
+          "node_id": "project::1",
+          "node_type": "PROJECT",
+          "content": "Python data analysis",
+          "confidence": 0.7,
+          "created_at": "2026-04-24T21:48:48.920162+00:00",
+          "last_seen": "2026-04-24T21:48:48.921062+00:00",
+          "mention_count": 3
+        }
+      ]
+    },
+    {
+      "label": "colloquial",
+      "text": "Lately I've been kinda learning Python data analysis.",
+      "extraction": {
+        "entities": [
+          {
+            "name": "Python data analysis",
+            "type": "PROJECT",
+            "confidence": 0.7
+          }
+        ],
+        "relations": [
+          {
+            "source": "USER",
+            "target": "Python data analysis",
+            "relation_type": "HAS_GOAL"
+          },
+          {
+            "source": "USER",
+            "target": "Python data analysis",
+            "relation_type": "WORKS_ON"
+          }
+        ],
+        "preferences": [],
+        "constraints": [],
+        "goals": [
+          {
+            "description": "Python data analysis",
+            "confidence": 0.7
+          }
+        ],
+        "projects": [
+          {
+            "name": "Python data analysis",
+            "description": "Python data analysis",
+            "confidence": 0.7
+          }
+        ],
+        "tools": [
+          {
+            "name": "python",
+            "use_case": "mentioned in user message",
+            "confidence": 0.7
+          }
+        ]
+      },
+      "jaccard_vs_clean": 1.0,
+      "graph_non_user_nodes_after_turn": [
+        {
+          "node_id": "project::1",
+          "node_type": "PROJECT",
+          "content": "Python data analysis",
+          "confidence": 0.7,
+          "created_at": "2026-04-24T21:48:48.920162+00:00",
+          "last_seen": "2026-04-24T21:48:48.921470+00:00",
+          "mention_count": 4
+        }
+      ]
+    },
+    {
+      "label": "punctuation",
+      "text": "I ... am ... learning ... Python ... data ... analysis. ???",
+      "extraction": {
+        "entities": [
+          {
+            "name": "Python data analysis",
+            "type": "PROJECT",
+            "confidence": 0.7
+          }
+        ],
+        "relations": [
+          {
+            "source": "USER",
+            "target": "Python data analysis",
+            "relation_type": "HAS_GOAL"
+          },
+          {
+            "source": "USER",
+            "target": "Python data analysis",
+            "relation_type": "WORKS_ON"
+          }
+        ],
+        "preferences": [],
+        "constraints": [],
+        "goals": [
+          {
+            "description": "Python data analysis",
+            "confidence": 0.7
+          }
+        ],
+        "projects": [
+          {
+            "name": "Python data analysis",
+            "description": "Python data analysis",
+            "confidence": 0.7
+          }
+        ],
+        "tools": [
+          {
+            "name": "python",
+            "use_case": "mentioned in user message",
+            "confidence": 0.7
+          }
+        ]
+      },
+      "jaccard_vs_clean": 1.0,
+      "graph_non_user_nodes_after_turn": [
+        {
+          "node_id": "project::1",
+          "node_type": "PROJECT",
+          "content": "Python data analysis",
+          "confidence": 0.7,
+          "created_at": "2026-04-24T21:48:48.920162+00:00",
+          "last_seen": "2026-04-24T21:48:48.921856+00:00",
+          "mention_count": 5
+        }
+      ]
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "node_id": "user::robustness_eval_dialogue",
+        "node_type": "User",
+        "content": "robustness_eval_dialogue",
+        "created_at": "2026-04-24T21:48:48.920120+00:00",
+        "last_seen": "2026-04-24T21:48:48.920138+00:00"
+      },
+      {
+        "node_id": "project::1",
+        "node_type": "PROJECT",
+        "content": "Python data analysis",
+        "confidence": 0.7,
+        "created_at": "2026-04-24T21:48:48.920162+00:00",
+        "last_seen": "2026-04-24T21:48:48.921856+00:00",
+        "mention_count": 5
+      }
+    ],
+    "edges": [
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "MENTIONS",
+        "evidence_turn_id": "robustness::0",
+        "timestamp_utc": "2026-04-24T21:48:48.920174+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "HAS_GOAL",
+        "evidence_turn_id": "robustness::0",
+        "timestamp_utc": "2026-04-24T21:48:48.920201+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "WORKS_ON",
+        "evidence_turn_id": "robustness::0",
+        "timestamp_utc": "2026-04-24T21:48:48.920209+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "MENTIONS",
+        "evidence_turn_id": "robustness::1",
+        "timestamp_utc": "2026-04-24T21:48:48.920663+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "HAS_GOAL",
+        "evidence_turn_id": "robustness::1",
+        "timestamp_utc": "2026-04-24T21:48:48.920671+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "WORKS_ON",
+        "evidence_turn_id": "robustness::1",
+        "timestamp_utc": "2026-04-24T21:48:48.920676+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "MENTIONS",
+        "evidence_turn_id": "robustness::2",
+        "timestamp_utc": "2026-04-24T21:48:48.921069+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "HAS_GOAL",
+        "evidence_turn_id": "robustness::2",
+        "timestamp_utc": "2026-04-24T21:48:48.921076+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "WORKS_ON",
+        "evidence_turn_id": "robustness::2",
+        "timestamp_utc": "2026-04-24T21:48:48.921081+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "MENTIONS",
+        "evidence_turn_id": "robustness::3",
+        "timestamp_utc": "2026-04-24T21:48:48.921477+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "HAS_GOAL",
+        "evidence_turn_id": "robustness::3",
+        "timestamp_utc": "2026-04-24T21:48:48.921483+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "WORKS_ON",
+        "evidence_turn_id": "robustness::3",
+        "timestamp_utc": "2026-04-24T21:48:48.921488+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "MENTIONS",
+        "evidence_turn_id": "robustness::4",
+        "timestamp_utc": "2026-04-24T21:48:48.921862+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "HAS_GOAL",
+        "evidence_turn_id": "robustness::4",
+        "timestamp_utc": "2026-04-24T21:48:48.921869+00:00"
+      },
+      {
+        "source": "user::robustness_eval_dialogue",
+        "target": "project::1",
+        "relation_type": "WORKS_ON",
+        "evidence_turn_id": "robustness::4",
+        "timestamp_utc": "2026-04-24T21:48:48.921873+00:00"
+      }
+    ]
+  }
+}

@@ -1,0 +1,631 @@
+{
+  "summary": {
+    "sampled_turns": 10,
+    "runs": 5,
+    "model": "llama-3.1-8b-instant",
+    "temperature": 0.0,
+    "avg_jaccard_all": 1.0,
+    "avg_jaccard_entities": 1.0,
+    "avg_jaccard_relations": 1.0,
+    "avg_jaccard_preferences": 1.0,
+    "avg_jaccard_constraints": 1.0,
+    "avg_jaccard_goals": 1.0,
+    "avg_jaccard_projects": 1.0,
+    "avg_jaccard_tools": 1.0,
+    "exact_match_turn_ratio": 1.0
+  },
+  "sample_turn_ids": [
+    "flC1xRk_13::turn_7",
+    "KafNR77_9::turn_3",
+    "CipTWlm_49::turn_3",
+    "fcxU0TT_0::turn_4",
+    "W4wL13P_0::turn_0",
+    "nsrVEnT_10::turn_4",
+    "b5AqyBf_0::turn_0",
+    "v8bw2f3_0::turn_2",
+    "w31Bk3K_15::turn_5",
+    "SWdKUmo_0::turn_16"
+  ],
+  "pairwise_scores": [
+    {
+      "turn_id": "flC1xRk_13::turn_7",
+      "run_a": 1,
+      "run_b": 2,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "flC1xRk_13::turn_7",
+      "run_a": 1,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "flC1xRk_13::turn_7",
+      "run_a": 1,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "flC1xRk_13::turn_7",
+      "run_a": 1,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "flC1xRk_13::turn_7",
+      "run_a": 2,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "flC1xRk_13::turn_7",
+      "run_a": 2,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "flC1xRk_13::turn_7",
+      "run_a": 2,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "flC1xRk_13::turn_7",
+      "run_a": 3,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "flC1xRk_13::turn_7",
+      "run_a": 3,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "flC1xRk_13::turn_7",
+      "run_a": 4,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "KafNR77_9::turn_3",
+      "run_a": 1,
+      "run_b": 2,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "KafNR77_9::turn_3",
+      "run_a": 1,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "KafNR77_9::turn_3",
+      "run_a": 1,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "KafNR77_9::turn_3",
+      "run_a": 1,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "KafNR77_9::turn_3",
+      "run_a": 2,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "KafNR77_9::turn_3",
+      "run_a": 2,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "KafNR77_9::turn_3",
+      "run_a": 2,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "KafNR77_9::turn_3",
+      "run_a": 3,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "KafNR77_9::turn_3",
+      "run_a": 3,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "KafNR77_9::turn_3",
+      "run_a": 4,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "CipTWlm_49::turn_3",
+      "run_a": 1,
+      "run_b": 2,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "CipTWlm_49::turn_3",
+      "run_a": 1,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "CipTWlm_49::turn_3",
+      "run_a": 1,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "CipTWlm_49::turn_3",
+      "run_a": 1,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "CipTWlm_49::turn_3",
+      "run_a": 2,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "CipTWlm_49::turn_3",
+      "run_a": 2,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "CipTWlm_49::turn_3",
+      "run_a": 2,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "CipTWlm_49::turn_3",
+      "run_a": 3,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "CipTWlm_49::turn_3",
+      "run_a": 3,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "CipTWlm_49::turn_3",
+      "run_a": 4,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "fcxU0TT_0::turn_4",
+      "run_a": 1,
+      "run_b": 2,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "fcxU0TT_0::turn_4",
+      "run_a": 1,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "fcxU0TT_0::turn_4",
+      "run_a": 1,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "fcxU0TT_0::turn_4",
+      "run_a": 1,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "fcxU0TT_0::turn_4",
+      "run_a": 2,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "fcxU0TT_0::turn_4",
+      "run_a": 2,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "fcxU0TT_0::turn_4",
+      "run_a": 2,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "fcxU0TT_0::turn_4",
+      "run_a": 3,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "fcxU0TT_0::turn_4",
+      "run_a": 3,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "fcxU0TT_0::turn_4",
+      "run_a": 4,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "W4wL13P_0::turn_0",
+      "run_a": 1,
+      "run_b": 2,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "W4wL13P_0::turn_0",
+      "run_a": 1,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "W4wL13P_0::turn_0",
+      "run_a": 1,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "W4wL13P_0::turn_0",
+      "run_a": 1,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "W4wL13P_0::turn_0",
+      "run_a": 2,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "W4wL13P_0::turn_0",
+      "run_a": 2,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "W4wL13P_0::turn_0",
+      "run_a": 2,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "W4wL13P_0::turn_0",
+      "run_a": 3,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "W4wL13P_0::turn_0",
+      "run_a": 3,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "W4wL13P_0::turn_0",
+      "run_a": 4,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "nsrVEnT_10::turn_4",
+      "run_a": 1,
+      "run_b": 2,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "nsrVEnT_10::turn_4",
+      "run_a": 1,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "nsrVEnT_10::turn_4",
+      "run_a": 1,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "nsrVEnT_10::turn_4",
+      "run_a": 1,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "nsrVEnT_10::turn_4",
+      "run_a": 2,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "nsrVEnT_10::turn_4",
+      "run_a": 2,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "nsrVEnT_10::turn_4",
+      "run_a": 2,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "nsrVEnT_10::turn_4",
+      "run_a": 3,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "nsrVEnT_10::turn_4",
+      "run_a": 3,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "nsrVEnT_10::turn_4",
+      "run_a": 4,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "b5AqyBf_0::turn_0",
+      "run_a": 1,
+      "run_b": 2,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "b5AqyBf_0::turn_0",
+      "run_a": 1,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "b5AqyBf_0::turn_0",
+      "run_a": 1,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "b5AqyBf_0::turn_0",
+      "run_a": 1,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "b5AqyBf_0::turn_0",
+      "run_a": 2,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "b5AqyBf_0::turn_0",
+      "run_a": 2,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "b5AqyBf_0::turn_0",
+      "run_a": 2,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "b5AqyBf_0::turn_0",
+      "run_a": 3,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "b5AqyBf_0::turn_0",
+      "run_a": 3,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "b5AqyBf_0::turn_0",
+      "run_a": 4,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "v8bw2f3_0::turn_2",
+      "run_a": 1,
+      "run_b": 2,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "v8bw2f3_0::turn_2",
+      "run_a": 1,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "v8bw2f3_0::turn_2",
+      "run_a": 1,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "v8bw2f3_0::turn_2",
+      "run_a": 1,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "v8bw2f3_0::turn_2",
+      "run_a": 2,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "v8bw2f3_0::turn_2",
+      "run_a": 2,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "v8bw2f3_0::turn_2",
+      "run_a": 2,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "v8bw2f3_0::turn_2",
+      "run_a": 3,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "v8bw2f3_0::turn_2",
+      "run_a": 3,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "v8bw2f3_0::turn_2",
+      "run_a": 4,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "w31Bk3K_15::turn_5",
+      "run_a": 1,
+      "run_b": 2,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "w31Bk3K_15::turn_5",
+      "run_a": 1,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "w31Bk3K_15::turn_5",
+      "run_a": 1,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "w31Bk3K_15::turn_5",
+      "run_a": 1,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "w31Bk3K_15::turn_5",
+      "run_a": 2,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "w31Bk3K_15::turn_5",
+      "run_a": 2,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "w31Bk3K_15::turn_5",
+      "run_a": 2,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "w31Bk3K_15::turn_5",
+      "run_a": 3,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "w31Bk3K_15::turn_5",
+      "run_a": 3,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "w31Bk3K_15::turn_5",
+      "run_a": 4,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "SWdKUmo_0::turn_16",
+      "run_a": 1,
+      "run_b": 2,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "SWdKUmo_0::turn_16",
+      "run_a": 1,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "SWdKUmo_0::turn_16",
+      "run_a": 1,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "SWdKUmo_0::turn_16",
+      "run_a": 1,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "SWdKUmo_0::turn_16",
+      "run_a": 2,
+      "run_b": 3,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "SWdKUmo_0::turn_16",
+      "run_a": 2,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "SWdKUmo_0::turn_16",
+      "run_a": 2,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "SWdKUmo_0::turn_16",
+      "run_a": 3,
+      "run_b": 4,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "SWdKUmo_0::turn_16",
+      "run_a": 3,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    },
+    {
+      "turn_id": "SWdKUmo_0::turn_16",
+      "run_a": 4,
+      "run_b": 5,
+      "jaccard_all": 1.0
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+Memory summary based on your query:
+1. [TOPIC] do a road trip from Pune to Gujarat (score=0.90, mentions=1)
+2. [User] A5AbcES_0 (score=0.82, mentions=1)
+3. [TOOL] java (score=0.76, mentions=1)
+4. [User] eL3wWKe_0 (score=0.76, mentions=1)
+Related links:
+- user::a5abces_0 --MENTIONS--> tool::1
+- user::a5abces_0 --USES_TOOL--> tool::1
+- user::el3wwke_0 --MENTIONS--> topic::2
+- user::el3wwke_0 --HAS_GOAL--> topic::2
+Justification: Keyword/semantic match with recency and mention_count; query='what programming tools does the user know'; latency=0.6ms

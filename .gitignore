@@ -171,6 +171,6 @@ cython_debug/
 .pypirc
 
 # Local generated artifacts
-outputs/
+# outputs/
 
-# data/
+data/

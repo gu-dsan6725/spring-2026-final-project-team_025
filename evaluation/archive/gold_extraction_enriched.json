@@ -1,0 +1,463 @@
+[
+  {
+    "turn_id": "eL3wWKe_0::turn_0",
+    "text": "I want to do a road trip from Pune to Gujarat. Me and my wife will be travelling and we dont prefer very long driving sessions. Can you suggest a plan starting from Thursday early morning and ending in Pune on Sunday late night.",
+    "entities": [
+      {
+        "name": "road trip from pune to gujarat",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "do a road trip from Pune to Gujarat",
+        "relation_type": "HAS_GOAL"
+      }
+    ]
+  },
+  {
+    "turn_id": "idMLILF_0::turn_10",
+    "text": "how could i implement this in python?",
+    "entities": [
+      {
+        "name": "python",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "python",
+        "relation_type": "USES_TOOL"
+      }
+    ]
+  },
+  {
+    "turn_id": "sUO0XFL_0::turn_0",
+    "text": "trying to connect grapgql-engine with dogital ocean database i linux server,\nbut I am gettin this error. In my local machine it is working\n\n{\"detail\":{\"info\":{\"database\\_url\":\"postgresql://doadmin:...@ips-backend-db-do-user-13678898-0.b.db.ondigitalocean.com:25060/Verlagg?sslmode=require\",\"retries\":1},\"kind\":\"postgres\\_connection\"},\"level\":\"info\",\"timestamp\":\"2023-03-27T10:40:29.956+0000\",\"type\":\"startup\"}\nbackend-graphql-engine-1 | {\"timestamp\":\"2023-03-27T10:41:29.000+0000\",\"level\":\"info\",\"type\":\"startup\",\"detail\":{\"kind\":\"migrations-startup\",\"info\":\"failed waiting for 9691, try increasing HASURA\\_GRAPHQL\\_MIGRATIONS\\_SERVER\\_TIMEOUT (default: 30)\"}",
+    "entities": [
+      {
+        "name": "postgresql",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "sql",
+        "relation_type": "USES_TOOL"
+      }
+    ]
+  },
+  {
+    "turn_id": "jbL4U2H_0::turn_0",
+    "text": "Hi, can you help me download 2000 portrait sketch images from Pinterest website with resolution at least 512 \\* 512? using python code",
+    "entities": [
+      {
+        "name": "python",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "python",
+        "relation_type": "USES_TOOL"
+      }
+    ]
+  },
+  {
+    "turn_id": "Ez4Up7Z_0::turn_0",
+    "text": "I want some geological database structure with some example data for practicing my SQL query skills. Would you generate that for me?",
+    "entities": [
+      {
+        "name": "sql",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "sql",
+        "relation_type": "USES_TOOL"
+      }
+    ]
+  },
+  {
+    "turn_id": "fcxU0TT_0::turn_6",
+    "text": "what is SQL",
+    "entities": [
+      {
+        "name": "sql",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "sql",
+        "relation_type": "USES_TOOL"
+      }
+    ]
+  },
+  {
+    "turn_id": "fcxU0TT_0::turn_8",
+    "text": "is phpmyadmin similar to sql?",
+    "entities": [
+      {
+        "name": "sql",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "sql",
+        "relation_type": "USES_TOOL"
+      }
+    ]
+  },
+  {
+    "turn_id": "BmS3AX0_0::turn_0",
+    "text": "Rewrite and improve this story: Well, I have always liked helping people since I was a small child...",
+    "entities": [
+      {
+        "name": "brown suga wellness",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "licensed professional counselor",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "life coach",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "take care of myself",
+        "relation_type": "HAS_GOAL"
+      }
+    ]
+  },
+  {
+    "turn_id": "UGg8d44_4::turn_0",
+    "text": "here is part 1\n\n----\nDaySculpting is a program...",
+    "entities": [
+      {
+        "name": "daysculpting",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "to call it a MindState Re-Boot that will inspire U to re-ignite your imagination…this only takes 5 minutes",
+        "relation_type": "PREFERS"
+      }
+    ]
+  },
+  {
+    "turn_id": "UGg8d44_9::turn_11",
+    "text": "I want to create a brand website for this; What pages should I need to create on this website?",
+    "entities": [
+      {
+        "name": "brand website",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "create a brand website for this",
+        "relation_type": "HAS_GOAL"
+      },
+      {
+        "source": "USER",
+        "target": "create on this website?",
+        "relation_type": "HAS_GOAL"
+      }
+    ]
+  },
+  {
+    "turn_id": "UGg8d44_37::turn_5",
+    "text": "Write me the screenplay that I can use for a 3 minutes explainer video for \"Day Sculpting\"\n\nWhen suggesting footage, please be specific if we should use image or video.",
+    "entities": [
+      {
+        "name": "explainer video",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "specific if we should use image or video",
+        "relation_type": "PREFERS"
+      }
+    ]
+  },
+  {
+    "turn_id": "UGg8d44_37::turn_7",
+    "text": "I love this thank you. Now write me one more. But this time use the \n\n\"Meet Bob, meet sally \" Framework...",
+    "entities": [
+      {
+        "name": "illustration animations",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "day sculpting program",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "voice over script",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "animator instructions",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "use illustration animations so please tell me what each slide animation should be",
+        "relation_type": "HAS_GOAL"
+      }
+    ]
+  },
+  {
+    "turn_id": "UGg8d44_47::turn_1",
+    "text": "I want create a funnel. I want to give away a sample program. What type of funnel should I use and what pages are needed in this funnel?",
+    "entities": [
+      {
+        "name": "sample program",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "give away a sample program",
+        "relation_type": "HAS_GOAL"
+      }
+    ]
+  },
+  {
+    "turn_id": "Ys4AKnP_0::turn_0",
+    "text": "I am planning to give you a voice, and communicate through the speech medium. I need a speech recognizer, a wake call detector, and a speech synthesizer for your voice. Suggest a python script utilizing existing libraries to achieves the goal.",
+    "entities": [
+      {
+        "name": "python",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "python",
+        "relation_type": "USES_TOOL"
+      }
+    ]
+  },
+  {
+    "turn_id": "ACt45V7_0::turn_0",
+    "text": "I aim to emulate a NLU/ENR module as part as part of a business application...",
+    "entities": [
+      {
+        "name": "nlu/enr module",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "conversational flow",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "mobile tariffs",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "oauth2",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "tariff upgrade",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "upgrade my current tariff and get a new smartphone\"",
+        "relation_type": "HAS_GOAL"
+      }
+    ]
+  },
+  {
+    "turn_id": "ACt45V7_0::turn_4",
+    "text": "ok. this is the traditional way NLU / NER is facilitated. Lets be more creative and imagine a new approach that could be offered by large language models like yours. I want to facilitate as much of the preexisting world knowlege in your model and not train things that you already are capable of. What would that be?",
+    "entities": [
+      {
+        "name": "nlu",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "ner",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "large language models",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "facilitate as much of the preexisting world knowlege in your model and not train things that you already are capable of",
+        "relation_type": "HAS_GOAL"
+      }
+    ]
+  },
+  {
+    "turn_id": "ACt45V7_11::turn_7",
+    "text": "!f user can order new tariffs with one or multiple sim cards... !u I want to buy a horse with white hair",
+    "entities": [
+      {
+        "name": "buy a horse with white hair",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "buy a horse with white hair",
+        "relation_type": "HAS_GOAL"
+      }
+    ]
+  },
+  {
+    "turn_id": "ACt45V7_11::turn_9",
+    "text": "Do not output anything other than what the emulated software would... !u I want to buy a smartphone",
+    "entities": [
+      {
+        "name": "buy a smartphone",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "buy a smartphone",
+        "relation_type": "HAS_GOAL"
+      }
+    ]
+  },
+  {
+    "turn_id": "o67mG13_0::turn_0",
+    "text": "Write a python program which accept a command line param as question and send it to server via HTTP get method",
+    "entities": [
+      {
+        "name": "python",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "python",
+        "relation_type": "USES_TOOL"
+      }
+    ]
+  },
+  {
+    "turn_id": "2wtLdZm_0::turn_6",
+    "text": "My data contains counts aggregated by areas in my state. I want to use a proc summary to add together all the counts for each area. Can you show me an example of that please?",
+    "entities": [
+      {
+        "name": "proc summary",
+        "type": "ENTITY",
+        "confidence": 1.0
+      },
+      {
+        "name": "data aggregation by area",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "use a proc summary to add together all the counts for each area",
+        "relation_type": "HAS_GOAL"
+      }
+    ]
+  },
+  {
+    "turn_id": "2wtLdZm_0::turn_8",
+    "text": "Now, how can I output these results to an excel file?",
+    "entities": [
+      {
+        "name": "excel",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "excel",
+        "relation_type": "USES_TOOL"
+      }
+    ]
+  },
+  {
+    "turn_id": "uXyoBKr_0::turn_4",
+    "text": "can you help with the python script and high tech looking interface?",
+    "entities": [
+      {
+        "name": "python",
+        "type": "ENTITY",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "python",
+        "relation_type": "USES_TOOL"
+      }
+    ]
+  }
+]

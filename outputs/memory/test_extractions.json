@@ -1,0 +1,473 @@
+[
+  {
+    "turn_id": "eL3wWKe_0::turn_0",
+    "entities": [
+      {
+        "name": "do a road trip from Pune to Gujarat",
+        "type": "TOPIC",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "do a road trip from Pune to Gujarat",
+        "relation_type": "HAS_GOAL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [
+      {
+        "description": "do a road trip from Pune to Gujarat",
+        "confidence": 0.7
+      }
+    ],
+    "projects": [],
+    "tools": []
+  },
+  {
+    "turn_id": "idMLILF_0::turn_10",
+    "entities": [
+      {
+        "name": "python",
+        "type": "TOOL",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "python",
+        "relation_type": "USES_TOOL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [],
+    "projects": [],
+    "tools": [
+      {
+        "name": "python",
+        "use_case": "mentioned in user message",
+        "confidence": 0.7
+      }
+    ]
+  },
+  {
+    "turn_id": "sUO0XFL_0::turn_0",
+    "entities": [
+      {
+        "name": "postgresql",
+        "type": "TOOL",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "postgresql",
+        "relation_type": "USES_TOOL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [],
+    "projects": [],
+    "tools": [
+      {
+        "name": "postgresql",
+        "use_case": "mentioned in user message",
+        "confidence": 0.7
+      }
+    ]
+  },
+  {
+    "turn_id": "jbL4U2H_0::turn_0",
+    "entities": [
+      {
+        "name": "python",
+        "type": "TOOL",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "python",
+        "relation_type": "USES_TOOL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [],
+    "projects": [],
+    "tools": [
+      {
+        "name": "python",
+        "use_case": "mentioned in user message",
+        "confidence": 0.7
+      }
+    ]
+  },
+  {
+    "turn_id": "Ez4Up7Z_0::turn_0",
+    "entities": [
+      {
+        "name": "sql",
+        "type": "TOOL",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "sql",
+        "relation_type": "USES_TOOL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [],
+    "projects": [],
+    "tools": [
+      {
+        "name": "sql",
+        "use_case": "mentioned in user message",
+        "confidence": 0.7
+      }
+    ]
+  },
+  {
+    "turn_id": "fcxU0TT_0::turn_6",
+    "entities": [
+      {
+        "name": "sql",
+        "type": "TOOL",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "sql",
+        "relation_type": "USES_TOOL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [],
+    "projects": [],
+    "tools": [
+      {
+        "name": "sql",
+        "use_case": "mentioned in user message",
+        "confidence": 0.7
+      }
+    ]
+  },
+  {
+    "turn_id": "fcxU0TT_0::turn_8",
+    "entities": [
+      {
+        "name": "sql",
+        "type": "TOOL",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "sql",
+        "relation_type": "USES_TOOL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [],
+    "projects": [],
+    "tools": [
+      {
+        "name": "sql",
+        "use_case": "mentioned in user message",
+        "confidence": 0.7
+      }
+    ]
+  },
+  {
+    "turn_id": "UGg8d44_9::turn_11",
+    "entities": [
+      {
+        "name": "create a brand website for this",
+        "type": "TOPIC",
+        "confidence": 0.7
+      },
+      {
+        "name": "create on this website?",
+        "type": "TOPIC",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "create a brand website for this",
+        "relation_type": "HAS_GOAL"
+      },
+      {
+        "source": "USER",
+        "target": "create on this website?",
+        "relation_type": "HAS_GOAL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [
+      {
+        "description": "create a brand website for this",
+        "confidence": 0.7
+      },
+      {
+        "description": "create on this website?",
+        "confidence": 0.7
+      }
+    ],
+    "projects": [],
+    "tools": []
+  },
+  {
+    "turn_id": "UGg8d44_37::turn_5",
+    "entities": [
+      {
+        "name": "specific if we should use image or video",
+        "type": "TOPIC",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "specific if we should use image or video",
+        "relation_type": "PREFERS"
+      }
+    ],
+    "preferences": [
+      {
+        "description": "specific if we should use image or video",
+        "confidence": 0.7
+      }
+    ],
+    "constraints": [],
+    "goals": [],
+    "projects": [],
+    "tools": []
+  },
+  {
+    "turn_id": "UGg8d44_47::turn_1",
+    "entities": [
+      {
+        "name": "give away a sample program",
+        "type": "TOPIC",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "give away a sample program",
+        "relation_type": "HAS_GOAL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [
+      {
+        "description": "give away a sample program",
+        "confidence": 0.7
+      }
+    ],
+    "projects": [],
+    "tools": []
+  },
+  {
+    "turn_id": "Ys4AKnP_0::turn_0",
+    "entities": [
+      {
+        "name": "python",
+        "type": "TOOL",
+        "confidence": 0.7
+      },
+      {
+        "name": "give you a voice, and communicate through the speech medium",
+        "type": "TOPIC",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "give you a voice, and communicate through the speech medium",
+        "relation_type": "HAS_GOAL"
+      },
+      {
+        "source": "USER",
+        "target": "python",
+        "relation_type": "USES_TOOL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [
+      {
+        "description": "give you a voice, and communicate through the speech medium",
+        "confidence": 0.7
+      }
+    ],
+    "projects": [],
+    "tools": [
+      {
+        "name": "python",
+        "use_case": "mentioned in user message",
+        "confidence": 0.7
+      }
+    ]
+  },
+  {
+    "turn_id": "ACt45V7_11::turn_7",
+    "entities": [
+      {
+        "name": "buy a horse with white hair",
+        "type": "TOPIC",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "buy a horse with white hair",
+        "relation_type": "HAS_GOAL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [
+      {
+        "description": "buy a horse with white hair",
+        "confidence": 0.7
+      }
+    ],
+    "projects": [],
+    "tools": []
+  },
+  {
+    "turn_id": "ACt45V7_11::turn_9",
+    "entities": [
+      {
+        "name": "buy a smartphone",
+        "type": "TOPIC",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "buy a smartphone",
+        "relation_type": "HAS_GOAL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [
+      {
+        "description": "buy a smartphone",
+        "confidence": 0.7
+      }
+    ],
+    "projects": [],
+    "tools": []
+  },
+  {
+    "turn_id": "o67mG13_0::turn_0",
+    "entities": [
+      {
+        "name": "python",
+        "type": "TOOL",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "python",
+        "relation_type": "USES_TOOL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [],
+    "projects": [],
+    "tools": [
+      {
+        "name": "python",
+        "use_case": "mentioned in user message",
+        "confidence": 0.7
+      }
+    ]
+  },
+  {
+    "turn_id": "2wtLdZm_0::turn_8",
+    "entities": [
+      {
+        "name": "excel",
+        "type": "TOOL",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "excel",
+        "relation_type": "USES_TOOL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [],
+    "projects": [],
+    "tools": [
+      {
+        "name": "excel",
+        "use_case": "mentioned in user message",
+        "confidence": 0.7
+      }
+    ]
+  },
+  {
+    "turn_id": "uXyoBKr_0::turn_4",
+    "entities": [
+      {
+        "name": "python",
+        "type": "TOOL",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "python",
+        "relation_type": "USES_TOOL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [],
+    "projects": [],
+    "tools": [
+      {
+        "name": "python",
+        "use_case": "mentioned in user message",
+        "confidence": 0.7
+      }
+    ]
+  }
+]

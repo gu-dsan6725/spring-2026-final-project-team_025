@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {
+      "node_id": "user::a5abces_0",
+      "node_type": "User",
+      "content": "A5AbcES_0",
+      "created_at": "2026-04-24T21:48:40.413469+00:00",
+      "last_seen": "2026-04-24T21:48:40.413485+00:00"
+    },
+    {
+      "node_id": "tool::1",
+      "node_type": "TOOL",
+      "content": "java",
+      "confidence": 0.7,
+      "created_at": "2026-04-24T21:48:40.413511+00:00",
+      "last_seen": "2026-04-24T21:48:40.413514+00:00",
+      "mention_count": 1
+    },
+    {
+      "node_id": "user::el3wwke_0",
+      "node_type": "User",
+      "content": "eL3wWKe_0",
+      "created_at": "2026-04-24T21:48:40.425339+00:00",
+      "last_seen": "2026-04-24T21:48:40.425349+00:00"
+    },
+    {
+      "node_id": "topic::2",
+      "node_type": "TOPIC",
+      "content": "do a road trip from Pune to Gujarat",
+      "confidence": 0.7,
+      "created_at": "2026-04-24T21:48:40.425367+00:00",
+      "last_seen": "2026-04-24T21:48:40.425370+00:00",
+      "mention_count": 1
+    }
+  ],
+  "edges": [
+    {
+      "source": "user::a5abces_0",
+      "target": "tool::1",
+      "relation_type": "MENTIONS",
+      "evidence_turn_id": "A5AbcES_0::turn_0",
+      "timestamp_utc": "2026-04-24T21:48:40.413524+00:00"
+    },
+    {
+      "source": "user::a5abces_0",
+      "target": "tool::1",
+      "relation_type": "USES_TOOL",
+      "evidence_turn_id": "A5AbcES_0::turn_0",
+      "timestamp_utc": "2026-04-24T21:48:40.413536+00:00"
+    },
+    {
+      "source": "user::el3wwke_0",
+      "target": "topic::2",
+      "relation_type": "MENTIONS",
+      "evidence_turn_id": "eL3wWKe_0::turn_0",
+      "timestamp_utc": "2026-04-24T21:48:40.425377+00:00"
+    },
+    {
+      "source": "user::el3wwke_0",
+      "target": "topic::2",
+      "relation_type": "HAS_GOAL",
+      "evidence_turn_id": "eL3wWKe_0::turn_0",
+      "timestamp_utc": "2026-04-24T21:48:40.425387+00:00"
+    }
+  ]
+}

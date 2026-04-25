@@ -1,0 +1,28 @@
+{
+  "Entities": {
+    "precision": 0.8333333333333334,
+    "recall": 0.9375,
+    "f1": 0.8823529411764706,
+    "tp": 15,
+    "fp": 3,
+    "fn": 1,
+    "n_predicted_turns": 16,
+    "recall_all_turns": 0.4411764705882353,
+    "f1_all_turns": 0.576923076923077,
+    "fn_all": 19,
+    "n_total_turns": 22
+  },
+  "Relations": {
+    "precision": 0.9444444444444444,
+    "recall": 1.0,
+    "f1": 0.9714285714285714,
+    "tp": 17,
+    "fp": 1,
+    "fn": 0,
+    "n_predicted_turns": 16,
+    "recall_all_turns": 0.7391304347826086,
+    "f1_all_turns": 0.8292682926829269,
+    "fn_all": 6,
+    "n_total_turns": 22
+  }
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "turn_id": "A5AbcES_0::turn_0",
+    "entities": [
+      {
+        "name": "java",
+        "type": "TOOL",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "java",
+        "relation_type": "USES_TOOL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [],
+    "projects": [],
+    "tools": [
+      {
+        "name": "java",
+        "use_case": "mentioned in user message",
+        "confidence": 0.7
+      }
+    ]
+  },
+  {
+    "turn_id": "eL3wWKe_0::turn_0",
+    "entities": [
+      {
+        "name": "do a road trip from Pune to Gujarat",
+        "type": "TOPIC",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "USER",
+        "target": "do a road trip from Pune to Gujarat",
+        "relation_type": "HAS_GOAL"
+      }
+    ],
+    "preferences": [],
+    "constraints": [],
+    "goals": [
+      {
+        "description": "do a road trip from Pune to Gujarat",
+        "confidence": 0.7
+      }
+    ],
+    "projects": [],
+    "tools": []
+  }
+]

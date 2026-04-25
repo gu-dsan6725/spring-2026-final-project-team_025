@@ -1,0 +1,11 @@
+{
+  "samples_tested": 10,
+  "non_trivial_pairs": 28,
+  "avg_jaccard_vs_clean": 1.0,
+  "by_variant": {
+    "typo": 1.0,
+    "filler": 1.0,
+    "colloquial": 1.0,
+    "punctuation": 1.0
+  }
+}

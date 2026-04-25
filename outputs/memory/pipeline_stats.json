@@ -1,0 +1,7 @@
+{
+  "total_dialogues_seen": 300,
+  "dialogues_kept": 287,
+  "turns_kept": 1988,
+  "turns_dropped_too_short": 22,
+  "turns_dropped_noisy": 3
+}
