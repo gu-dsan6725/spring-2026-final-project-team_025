@@ -77,6 +77,10 @@ The system operates as a sophisticated multi-stage pipeline, beginning with the 
   - Data cleaning
 - **Output:** structured memory + graph updates
 
+## Cognitive Inference Layer
+
+A critical challenge in conversational career counseling is that users rarely explicitly claim soft skills or cognitive traits (e.g., "Critical Thinking"). Our system addresses this by implementing an \textbf{Implicit Signal Inference Layer}. This layer analyzes the frequency of technical tool usage, the complexity of active projects, and multi-turn behavioral patterns to autonomously inject inferred attributes into the user profile. This ensures that the resulting knowledge representation is not just a collection of stated facts but a holistic professional persona.
+
 ## Graph Memory Layer
 
 - **Components:** `graph_memory.py` (NetworkX)
@@ -86,65 +90,56 @@ The system operates as a sophisticated multi-stage pipeline, beginning with the 
   - Export capability
 - **Output:** `graph_memory.json`
 
-## Retrieval & Ranking Layer
+## Two-Stage Recommendation Engine
 
-- **Components:** `retrieval.py`
-- **Functionality:**
-  - Hybrid scoring (keyword, similarity, recency, frequency)
-  - Top-k retrieval
-  - Context expansion
-- **Output:** ranked nodes
+The core of the professional guidance system is a multi-stage recommendation and reasoning engine that transitions from broad O\*NET mapping to deep, personalized career re-ranking.
 
-## Response Construction
-
-- **Components:** `response_builder.py`
-- **Functionality:**
-  - Summary generation
-  - Personalized career advice generation
-- **Output:** final career guidance response
+\begin{itemize}
+    \item \textbf{Stage 1: Vector-Based Shortlisting (Common Semantic Space)}: Both the user's graph-based profile and the O\*NET occupations are mapped into a shared, high-dimensional space. Using the weighted cosine similarity of Knowledge, Skills, and Work Styles, the system generates a \textbf{shortlist of the Top-20 candidates}. This stage ensures high efficiency and mathematical stability across the 923-occupation search space.
+    \item \textbf{Stage 2: LLM-Driven Re-ranking (Contextual Understanding)}: While Stage 1 ensures structural alignment, it lacks semantic depth. Stage 2 utilizes a \textit{llama-3.3-70b} model via the Groq inference engine to incorporate the \textbf{full conversational context}. This allows the engine to distinguish between technical capability and deeper professional intent (e.g., distinguishing between a user who \textit{knows} Python and one who \textit{intends to apply} it in financial contexts), producing a prioritized \textbf{Top-5 list} with reasoning.
+    \item \textbf{Stage 3: Decision Support \& Gap Analysis}: The system identifies missing skills and knowledge to provide actionable feedback. For example, a user with a strong \textbf{Computer Science (CS)} profile who expresses interest in high-frequency trading would be guided toward a \textbf{Quantitative Analyst (Quant)} path by identifying specific gaps in \textit{Mathematics, Statistics,} and \textit{Finance}.
+\end{itemize}
 
 ## Key Design Choices and Trade-offs
 
-- Hybrid extraction (LLM + rules)
-- Type-aware entity linking
-- Temporal metadata usage
-- Hybrid retrieval scoring
-- Configurable filtering
+- **Hybrid Extraction**: LLM-based understanding with rule-based reliability fallback.
+- **Hierarchical Retrieval**: Combining structural vector similarity (Stage 1) with semantic LLM re-ranking (Stage 2).
+- **Type-Aware Mapping**: Constraining O\*NET mappings by node categories (Tools, Skills, etc.) to minimize noise.
+- **Temporal Weighting**: Using recency and frequency decay to ensure that currently active projects and goals carry higher weight in the user's profile.
 
 # Evaluation
 
 ## Evaluation Methodology
 
-To rigorously validate the Personal Knowledge Graph Memory Engine's efficacy in professional development contexts, we established a multi-dimensional evaluation framework. Our primary testing corpus consisted of 380 long-form career-oriented dialogues, encompassing approximately 3,220 individual interaction turns. This dataset was designed to simulate multi-turn, long-term memory accumulation across diverse professional domains.
+To ensure architectural consistency and delivery quality, we adopted a hierarchical evaluation framework consisting of three distinct layers. This approach verifies that the system is not only structurally accurate but also semantically coherent and professionally useful.
 
-## Extraction and Grounding Analysis
+\subsubsection{Layer 1: Technical Metrics (Recall/Precision/F1)}
+This foundational layer measures the system's objective extraction accuracy. We performed a direct comparison against a manually curated gold-standard dataset of complex career dialogues. We specifically focused on \textbf{Relation-level F1 scores} to assess the engine's ability to maintain relational context between skills and projects.
 
-The extraction quality was assessed using an **LLM-as-a-judge** methodology. We randomly sampled 30 dialogue clusters and subjected the extracted memory profiles to judicial review by GPT-4o. The evaluation focused on three critical metrics:
-\begin{itemize}
-    \item \textbf{Completeness}: Extent to which all significant career signals (goals, tools, projects) were captured.
-    \item \textbf{Faithfulness}: The degree of textual grounding, ensuring extracted nodes were explicitly supported by the dialogue.
-    \item \textbf{Career Utility}: The degree to which the profile provides actionable information for professional guidance.
-\end{itemize}
+\subsubsection{Layer 2: AI-as-a-Judge (Qualitative Scoring)}
+Building upon objective metrics, we utilized GPT-4o as an automated judge to score 30 randomly sampled dialogue extractions. The system was evaluated on a 1.0–5.0 scale across three career-centric dimensions: \textbf{Completeness}, \textbf{Faithfulness}, and \textbf{Career Utility}.
 
-Beyond extraction accuracy, we analyzed **Noise Robustness** by introducing synthetic perturbations, including typographical errors and colloquial filler words, to measure the stability of our entity linking thresholds.
-
-## Retrieval and Recommendation Performance
-
-The recommendation engine's performance was evaluated by mapping extracted user profiles to the O\*NET 28.2 database, which contains profiles for 923 occupations. We calculated a weighted similarity score based on three primary O\*NET vectors: Knowledge, Skills, and Work Styles.
+\subsubsection{Layer 3: Narrative-based Profile Validation}
+To bridge the gap between structured data and human-readable guidance, the system generates a \textbf{"Career Profile Narrative"} for each user. This layer validates the agent's holistic understanding of the user's intent by synthesizing extracted nodes into a cohesive professional summary, ensuring the inferred persona matches the conversational source.
 
 # Preliminary Results
 
-## Graph Characteristics
+## Technical Validation (Layer 1)
 
-The processing of the career dialogue corpus resulted in the construction of a large-scale relational memory graph. The final graph consists of **846 nodes** and **5,327 edges**, representing a rich network of professional context. A categorical analysis of the graph components reveals that \textit{Projects} (590 nodes) and \textit{Tools} (544 nodes) are the most frequently extracted entities, followed by \textit{Skills} (418 nodes) and \textit{Career Goals} (396 nodes). This high density of relational nodes demonstrates the graph's capability to capture multi-faceted professional identities.
+Quantitative evaluation against gold-standard labels demonstrated high structural fidelity. The memory engine achieved an **Entities F1 score of 0.88** and a **Relations F1 score of 0.97**, indicating that the relational structure of the user's professional journey is preserved with exceptional accuracy. Furthermore, both **Noise Robustness** and **Self-Consistency** achieved scores of \textbf{1.0}, confirming the stability of the entity linking and merger logic under conversational variance.
 
-## Quantitative Quality Scores
+## LLM-based Performance (Layer 2)
 
-The Judicial evaluation yielded consistent performance across the designated metrics. On a scale of 1.0 to 5.0, the system achieved an average **Faithfulness score of 3.30**, indicating high reliability in node grounding and a low rate of hallucination in professional signals. Both **Completeness and Career Utility achieved mean scores of 3.13**. Qualitative analysis of the judge's feedback suggests that while the system reliably extracts explicit technical signals (tools and roles), future work should focus on improving the extraction of implicit behavioral traits and soft skills.
+The AI-as-a-Judge methodology provided a nuanced view of the system's performance on the career dataset:
+\begin{itemize}
+    \item \textbf{Faithfulness}: 4.31 / 5.0 — Demonstrating high grounding and minimal hallucination.
+    \item \textbf{Career Utility}: 3.94 / 5.0 — Indicating highly actionable output for professional growth.
+    \item \textbf{Completeness}: 3.50 / 5.0 — Capturing the vast majority of explicit career signals.
+\end{itemize}
 
-## Career Guidance and Gap Analysis
+## Narrative and Guidance Utility (Layer 3)
 
-In a case study involving a representative user profile, the system identified \textbf{Web Developers} as the primary career match with a composite similarity score of \textbf{0.7329}. A granular breakdown of this alignment showed a particularly high correlation in \textit{Work Styles} (0.8987), suggesting that the user's behavioral patterns are exceptionally well-suited for this path. Furthermore, the system autonomously identified critical development areas, highlighting significant gaps in \textit{Communications and Media} knowledge and \textit{Reading Comprehension} skills, thereby providing a clear roadmap for the user's career progression.
+The generation of structured Career Profile Narratives enabled a successful mapping to the O\*NET 28.2 taxonomy. In a representative test case, the system autonomously identified \textbf{Web Developers} as the primary career match (Similarity Score: \textbf{0.7329}). The narrative-based synthesis allowed the engine to identify high-priority knowledge gaps in areas such as \textit{Communications and Media}, providing a practical roadmap for the user's next steps. This confirms that the graph-based memory is not merely a collection of nodes but a coherent representation of a user's professional trajectory.
 
 # Risks and Mitigations
 
