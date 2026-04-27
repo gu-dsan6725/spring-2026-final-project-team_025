@@ -39,7 +39,21 @@ In the realm of artificial intelligence, particularly in conversational agents a
 
 # Related Work
 
-The development of our system draws upon several key areas of research. Knowledge graphs have long been recognized for their ability to represent complex relationships between entities, offering a structured approach to information storage and retrieval that surpasses traditional databases in semantic richness. Recent advancements in Large Language Models have revolutionized natural language understanding and generation, making them powerful tools for personal information extraction. Techniques in information extraction, including named entity recognition and relation extraction, are critical for populating knowledge graphs from conversational data. Furthermore, the field of career counseling and automated guidance provides the context for applying these technologies to help users navigate their professional paths. Our work integrates these disciplines to create a novel system that combines the semantic power of knowledge graphs with the linguistic capabilities of modern language models for evolving career guidance.
+## Knowledge Graphs and Relational Memory
+
+Knowledge graphs have long been recognized for their ability to represent complex relationships between entities, offering a structured approach to information storage and retrieval that surpasses traditional databases in semantic richness. Seminal work by Bordes et al. (2013) introduced TransE, a foundational embedding model that represents entities and relations in a shared vector space, enabling scalable inference over large knowledge bases. More recently, Pan et al. (2024) provided a comprehensive survey of integrating LLMs with knowledge graphs, demonstrating that hybrid architectures achieve superior performance on knowledge-intensive tasks compared to either approach in isolation. Our system builds on this tradition by using NetworkX MultiDiGraphs to represent user-specific relational facts extracted from conversation, with typed nodes (Tool, Skill, Project, Goal) and temporally weighted edges.
+
+## Persistent and Long-Term Memory in Conversational Agents
+
+A central limitation of current LLM-based assistants is that context is discarded at the end of each session. Packer et al. (2023) introduced MemGPT, which addresses this by treating the LLM's finite context window as a virtual operating system with explicit memory management: facts are moved between in-context and external storage based on relevance. Wang et al. (2023) proposed LongMem, a retrieval-augmented framework that enables LLMs to recall arbitrary-length conversation history via a side-memory module. Our work shares the objective of persistent, cross-session memory but focuses specifically on \textbf{career-domain} signals and organizes them in a typed knowledge graph rather than a flat vector store, enabling structured queries such as "what tools has this user actively used?" or "which career goals have been mentioned more than once?".
+
+## Information Extraction and Named Entity Recognition
+
+Populating knowledge graphs from raw conversation requires robust information extraction. Honnibal \& Montani (2017) demonstrated with spaCy that rule-augmented neural pipelines achieve strong NER performance with minimal labeling overhead, a design choice mirrored in our hybrid LLM-plus-rule extraction architecture. Devlin et al. (2019) showed that BERT-based fine-tuning achieves state-of-the-art results across a range of NER benchmarks, establishing the paradigm of transformer-based extraction that we leverage through Groq-hosted inference. Our extractor follows a dual-path strategy: an LLM-based path (llama-3.3-70b-versatile) for semantic understanding and a regex/rule-based fallback for reliability, with entity linking using fuzzy matching to merge surface-form variants into canonical graph nodes.
+
+## Career Counseling and O\*NET-Aligned Guidance
+
+Automated career guidance systems have increasingly relied on occupational taxonomies for structured recommendation. The O\*NET database (U.S. Department of Labor, 2024) provides a rich 923-occupation taxonomy covering Knowledge, Skills, Abilities, Work Styles, and Interests, making it a natural target for skill-gap analysis. Zheng et al. (2023) introduced LLM-as-a-Judge evaluation, which we adopt to score our system across Completeness, Faithfulness, and Career Utility dimensions, providing a scalable qualitative assessment beyond precision/recall alone.
 
 # System Architecture
 
@@ -67,7 +81,7 @@ The system operates as a sophisticated multi-stage pipeline, beginning with the 
   - Sampling
 - **Output:** JSONL conversational turns
 
-## Extraction & Linking Layer
+## Extraction \& Linking Layer
 
 - **Components:** `extraction_agent.py`, `graph_memory.py`
 - **Functionality:**
@@ -96,7 +110,7 @@ The core of the professional guidance system is a multi-stage recommendation and
 
 \begin{itemize}
     \item \textbf{Stage 1: Vector-Based Shortlisting (Common Semantic Space)}: Both the user's graph-based profile and the O\*NET occupations are mapped into a shared, high-dimensional space. Using the weighted cosine similarity of Knowledge, Skills, and Work Styles, the system generates a \textbf{shortlist of the Top-20 candidates}. This stage ensures high efficiency and mathematical stability across the 923-occupation search space.
-    \item \textbf{Stage 2: LLM-Driven Re-ranking (Contextual Understanding)}: While Stage 1 ensures structural alignment, it lacks semantic depth. Stage 2 utilizes a \textit{llama-3.3-70b} model via the Groq inference engine to incorporate the \textbf{full conversational context}. This allows the engine to distinguish between technical capability and deeper professional intent (e.g., distinguishing between a user who \textit{knows} Python and one who \textit{intends to apply} it in financial contexts), producing a prioritized \textbf{Top-5 list} with reasoning.
+    \item \textbf{Stage 2: LLM-Driven Re-ranking (Contextual Understanding)}: While Stage 1 ensures structural alignment, it lacks semantic depth. Stage 2 utilizes a \textit{llama-3.3-70b-versatile} model (Meta, 2024) via the Groq inference engine to incorporate the \textbf{full conversational context}. This allows the engine to distinguish between technical capability and deeper professional intent (e.g., distinguishing between a user who \textit{knows} Python and one who \textit{intends to apply} it in financial contexts), producing a prioritized \textbf{Top-5 list} with reasoning.
     \item \textbf{Stage 3: Decision Support \& Gap Analysis}: The system identifies missing skills and knowledge to provide actionable feedback. For example, a user with a strong \textbf{Computer Science (CS)} profile who expresses interest in high-frequency trading would be guided toward a \textbf{Quantitative Analyst (Quant)} path by identifying specific gaps in \textit{Mathematics, Statistics,} and \textit{Finance}.
 \end{itemize}
 
@@ -114,10 +128,17 @@ The core of the professional guidance system is a multi-stage recommendation and
 To ensure architectural consistency and delivery quality, we adopted a hierarchical evaluation framework consisting of three distinct layers. This approach verifies that the system is not only structurally accurate but also semantically coherent and professionally useful.
 
 \subsubsection{Layer 1: Technical Metrics (Recall/Precision/F1)}
-This foundational layer measures the system's objective extraction accuracy. We performed a direct comparison against a manually curated gold-standard dataset of complex career dialogues. We specifically focused on \textbf{Relation-level F1 scores} to assess the engine's ability to maintain relational context between skills and projects.
+This foundational layer measures the system's objective extraction accuracy. We performed a direct comparison against a \textbf{manually curated gold-standard dataset} of 22 dialogue turns drawn from the ShareGPT Vicuna Unfiltered dataset (\texttt{gold\_extraction\_enriched.json}). Each turn was hand-labeled with entity spans and relation triples (source, target, relation\_type) and then manually reviewed and enriched by the team to ensure quality. The extractor was evaluated using the \textit{llama-3.1-8b-instant} model via Groq. We specifically focused on \textbf{Relation-level F1 scores} to assess the engine's ability to maintain relational context between skills and projects, using a fuzzy-match threshold of 0.5 (token overlap or SequenceMatcher ratio).
 
 \subsubsection{Layer 2: AI-as-a-Judge (Qualitative Scoring)}
-Building upon objective metrics, we utilized GPT-4o as an automated judge to score 30 randomly sampled dialogue extractions. The system was evaluated on a 1.0–5.0 scale across three career-centric dimensions: \textbf{Completeness}, \textbf{Faithfulness}, and \textbf{Career Utility}.
+Building upon objective metrics, we employed GPT-4o as an automated judge (Zheng et al., 2023) across two independent evaluation sets, each targeting a different system component:
+
+\begin{itemize}
+    \item \textbf{Memory Engine Sub-evaluation} (16 turns, ShareGPT gold set): The same 22-turn ShareGPT gold set used for Layer 1 was re-evaluated qualitatively. GPT-4o scored each turn's extraction on Completeness, Faithfulness, and Utility relative to the original user message. 16 of the 22 turns produced non-empty extractions and were therefore scored.
+    \item \textbf{Career Pipeline Sub-evaluation} (30 dialogues, purpose-built career dataset): 30 complete multi-turn dialogues were randomly sampled (fixed seed = 0) from the full 380-dialogue purpose-built career dataset (\texttt{career\_dialogues\_380.json}, IDs \texttt{career\_dev\_001} through \texttt{career\_dev\_380}). GPT-4o scored each dialogue's aggregated career profile across Completeness, Faithfulness, and Career Utility dimensions. This dataset is entirely separate from the ShareGPT gold set used in the memory engine evaluation.
+\end{itemize}
+
+This two-track design allows us to separately assess extraction accuracy at the turn level (memory engine) and end-to-end profile quality at the dialogue level (career pipeline).
 
 \subsubsection{Layer 3: Narrative-based Profile Validation}
 To bridge the gap between structured data and human-readable guidance, the system generates a \textbf{"Career Profile Narrative"} for each user. This layer validates the agent's holistic understanding of the user's intent by synthesizing extracted nodes into a cohesive professional summary, ensuring the inferred persona matches the conversational source.
@@ -130,12 +151,37 @@ Quantitative evaluation against gold-standard labels demonstrated high structura
 
 ## LLM-based Performance (Layer 2)
 
-The AI-as-a-Judge methodology provided a nuanced view of the system's performance on the career dataset:
+### Memory Engine Sub-evaluation (16 gold turns, GPT-4o judge)
+
+At the extraction level, the memory engine performed strongly:
 \begin{itemize}
-    \item \textbf{Faithfulness}: 4.31 / 5.0 — Demonstrating high grounding and minimal hallucination.
-    \item \textbf{Career Utility}: 3.94 / 5.0 — Indicating highly actionable output for professional growth.
-    \item \textbf{Completeness}: 3.50 / 5.0 — Capturing the vast majority of explicit career signals.
+    \item \textbf{Faithfulness}: 4.31 / 5.0 — High grounding with minimal hallucination at the turn level.
+    \item \textbf{Utility}: 3.94 / 5.0 — Extracted facts are largely actionable for downstream profiling.
+    \item \textbf{Completeness}: 3.50 / 5.0 — The system captures most explicit signals per turn, but misses implicit context.
 \end{itemize}
+
+### Career Pipeline Sub-evaluation (30 career dialogues, GPT-4o judge)
+
+When evaluated end-to-end at the full-dialogue level, scores are more conservative, reflecting the compounding difficulty of aggregating signals across multiple turns:
+\begin{itemize}
+    \item \textbf{Faithfulness}: 3.30 / 5.0 — Some hallucinated items appear during profile aggregation, where the system infers attributes not directly grounded in any individual turn.
+    \item \textbf{Career Utility}: 3.13 / 5.0 — Profiles are useful but lack specificity in development area suggestions.
+    \item \textbf{Completeness}: 3.13 / 5.0 — The weakest metric, indicating systematic gaps in capturing the full breadth of career signals across a dialogue.
+\end{itemize}
+
+The gap between the turn-level Completeness (3.50) and the dialogue-level Completeness (3.13) indicates that signal loss compounds across turns: information captured correctly in isolation is not always successfully aggregated into the final career profile.
+
+### Analysis of Completeness Gaps
+
+A review of per-turn and per-dialogue judge comments identifies two primary failure modes:
+
+\begin{enumerate}
+    \item \textbf{Implicit and Latent Career Signals}: The extractor consistently surfaces explicit entities (e.g., "Python", "FastAPI") but misses inferred behavioral or contextual signals. For example, a user describing repeated iteration over a high-frequency trading model implicitly signals quantitative aptitude and risk-tolerance — signals that require multi-turn reasoning rather than single-turn pattern matching. The judge flagged recurring gaps in "portfolio optimization" interest and "fast-paced work style" even when these were evident from the conversational arc.
+
+    \item \textbf{Multi-Entity Tool Contexts}: When a user describes a complex technical environment — e.g., "connecting GraphQL-engine to a Digital Ocean PostgreSQL database on a Linux server" — the extractor captured only \textit{postgresql} and omitted \textit{GraphQL-engine}, \textit{Digital Ocean}, and \textit{Linux server}. This pattern recurs across technical setup messages, suggesting the relevance filter (which gates on first-person signals) over-prunes informationally dense third-person technical descriptions.
+\end{enumerate}
+
+These failure modes share a common root cause: the current architecture processes each turn in isolation without a cross-turn inference pass. Addressing this is a primary target for future work.
 
 ## Narrative and Guidance Utility (Layer 3)
 
@@ -156,17 +202,40 @@ We have developed a Personal Knowledge Graph Memory Engine and Career Developmen
 
 ## Future Directions
 
-- **Dynamic Embeddings**: Incorporating more sophisticated embedding models for improved O\*NET mapping.
-- **Visualization**: Developing interactive graph visualization tools for user self-exploration.
-- **Human-in-the-loop**: Adding mechanisms for users to manually edit or verify their graph nodes.
+- \textbf{Improving Implicit Signal Inference}: The dialogue-level Completeness score of 3.13/5.0 (career pipeline) reveals a systematic gap in capturing latent career signals — behavioral patterns, inferred cognitive strengths, and tool-environment context that are implied across multiple turns rather than explicitly stated in any single turn. Future work will introduce a dedicated \textit{cross-turn inference pass} that aggregates per-turn extractions into a running profile and uses the LLM to infer implicit traits (e.g., "quantitative aptitude" from repeated references to statistical modeling tools). This directly addresses the primary bottleneck identified in our evaluation.
+
+- \textbf{Dynamic Embeddings}: Incorporating temporally-aware or task-specific embedding models (e.g., fine-tuned Sentence-BERT variants) for more precise O\*NET concept mapping, particularly in emerging technical domains not well-represented in static embedding spaces.
+
+- \textbf{Visualization}: Developing interactive graph visualization tools for user self-exploration, enabling users to inspect, confirm, or correct their inferred knowledge graph—supporting a human-in-the-loop feedback loop.
+
+- \textbf{Human-in-the-loop}: Adding mechanisms for users to manually edit or verify their graph nodes, which would simultaneously improve personalization and generate a curated dataset for future fine-tuning.
 
 # References {.unnumbered}
 
 \begin{itemize}
+    \item Bordes, A., Usunier, N., Garcia-Durán, A., Weston, J., \& Yakhnenko, O. (2013). Translating embeddings for modeling multi-relational data. \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 26.
+
+    \item Devlin, J., Chang, M.-W., Lee, K., \& Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers for language understanding. \textit{arXiv preprint arXiv:1810.04805}.
+
     \item Groq Cloud. (2024). \textit{LPU™ Inference Engine Documentation}. Retrieved from https://groq.com/
+
     \item Hagberg, A., Swart, P., \& Schult, D. (2008). \textit{Exploring network structure, dynamics, and function using NetworkX}. Los Alamos, NM: Los Alamos National Laboratory (LANL).
+
+    \item Honnibal, M., \& Montani, I. (2017). spaCy 2: Natural language understanding with Bloom embeddings, convolutional neural networks and incremental parsing. \textit{To appear}.
+
+    \item Meta AI. (2024). \textit{Llama 3: Open Foundation and Fine-Tuned Chat Models}. Retrieved from https://ai.meta.com/blog/meta-llama-3/
+
     \item O\*NET Resource Center. (2024). \textit{The O\*NET 28.2 Database}. Retrieved from https://www.onetcenter.org/
+
+    \item Packer, C., Wooders, S., Lin, K., Fang, V., Patil, S. G., Stoica, I., \& Gonzalez, J. E. (2023). MemGPT: Towards LLMs as operating systems. \textit{arXiv preprint arXiv:2310.08560}.
+
+    \item Pan, S., Luo, L., Wang, Y., Chen, C., Wang, J., \& Wu, X. (2024). Unifying large language models and knowledge graphs: A roadmap. \textit{IEEE Transactions on Knowledge and Data Engineering}.
+
     \item Reimers, N., \& Gurevych, I. (2019). Sentence-BERT: Sentence embeddings using Siamese BERT-networks. \textit{arXiv preprint arXiv:1908.10084}.
+
     \item ShareGPT Dataset. (2023). \textit{Vicuna Unfiltered Cleaned Dataset}. Retrieved from https://huggingface.co/datasets/anon8231489123/ShareGPT\_Vicuna\_unfiltered/
+
+    \item Wang, Z., Jin, Q., Yu, W., Xu, K., Xu, J., Shang, J., \& Ji, H. (2023). Augmenting language models with long-term memory. \textit{arXiv preprint arXiv:2306.07174}.
+
     \item Zheng, L., Chiang, W. L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., ... \& Stoica, I. (2023). Judging LLM-as-a-judge with MT-bench and chatbot arena. \textit{arXiv preprint arXiv:2306.05685}.
 \end{itemize}
