@@ -110,7 +110,7 @@ The core of the professional guidance system is a multi-stage recommendation and
 
 \begin{itemize}
     \item \textbf{Stage 1: Vector-Based Shortlisting (Common Semantic Space)}: Both the user's graph-based profile and the O\*NET occupations are mapped into a shared, high-dimensional space. Using the weighted cosine similarity of Knowledge, Skills, and Work Styles, the system generates a \textbf{shortlist of the Top-20 candidates}. This stage ensures high efficiency and mathematical stability across the 923-occupation search space.
-    \item \textbf{Stage 2: LLM-Driven Re-ranking (Contextual Understanding)}: While Stage 1 ensures structural alignment, it lacks semantic depth. Stage 2 utilizes a \textit{llama-3.3-70b-versatile} model (Meta, 2024) via the Groq inference engine to incorporate the \textbf{full conversational context}. This allows the engine to distinguish between technical capability and deeper professional intent (e.g., distinguishing between a user who \textit{knows} Python and one who \textit{intends to apply} it in financial contexts), producing a prioritized \textbf{Top-5 list} with reasoning.
+    \item \textbf{Stage 2: LLM-Driven Re-ranking (Contextual Understanding)}: While Stage 1 ensures structural alignment, it lacks semantic depth. Stage 2 utilizes a \textit{llama-3.3-70b-versatile} model (Dubey et al., 2024) via the Groq inference engine to incorporate the \textbf{full conversational context}. This allows the engine to distinguish between technical capability and deeper professional intent (e.g., distinguishing between a user who \textit{knows} Python and one who \textit{intends to apply} it in financial contexts), producing a prioritized \textbf{Top-5 list} with reasoning.
     \item \textbf{Stage 3: Decision Support \& Gap Analysis}: The system identifies missing skills and knowledge to provide actionable feedback. For example, a user with a strong \textbf{Computer Science (CS)} profile who expresses interest in high-frequency trading would be guided toward a \textbf{Quantitative Analyst (Quant)} path by identifying specific gaps in \textit{Mathematics, Statistics,} and \textit{Finance}.
 \end{itemize}
 
@@ -215,27 +215,27 @@ We have developed a Personal Knowledge Graph Memory Engine and Career Developmen
 \begin{itemize}
     \item Bordes, A., Usunier, N., Garcia-Durán, A., Weston, J., \& Yakhnenko, O. (2013). Translating embeddings for modeling multi-relational data. \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 26.
 
-    \item Devlin, J., Chang, M.-W., Lee, K., \& Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers for language understanding. \textit{arXiv preprint arXiv:1810.04805}.
+    \item Devlin, J., Chang, M.-W., Lee, K., \& Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers for language understanding. In \textit{Proceedings of NAACL-HLT 2019} (pp. 4171--4186). Association for Computational Linguistics.
+
+    \item Dubey, A., Jauhri, A., Pandey, A., Kadian, A., Al-Dahle, A., Letman, A., et al. (2024). The Llama 3 herd of models. arXiv:2407.21783.
 
     \item Groq Cloud. (2024). \textit{LPU™ Inference Engine Documentation}. Retrieved from https://groq.com/
 
-    \item Hagberg, A., Swart, P., \& Schult, D. (2008). \textit{Exploring network structure, dynamics, and function using NetworkX}. Los Alamos, NM: Los Alamos National Laboratory (LANL).
+    \item Hagberg, A., Schult, D., \& Swart, P. (2008). Exploring network structure, dynamics, and function using NetworkX. In \textit{Proceedings of the 7th Python in Science Conference (SciPy 2008)} (pp. 11--15).
 
-    \item Honnibal, M., \& Montani, I. (2017). spaCy 2: Natural language understanding with Bloom embeddings, convolutional neural networks and incremental parsing. \textit{To appear}.
-
-    \item Meta AI. (2024). \textit{Llama 3: Open Foundation and Fine-Tuned Chat Models}. Retrieved from https://ai.meta.com/blog/meta-llama-3/
+    \item Honnibal, M., \& Montani, I. (2017). spaCy 2: Natural language understanding with Bloom embeddings, convolutional neural networks and incremental parsing. \textit{Unpublished technical report}.
 
     \item O\*NET Resource Center. (2024). \textit{The O\*NET 28.2 Database}. Retrieved from https://www.onetcenter.org/
 
-    \item Packer, C., Wooders, S., Lin, K., Fang, V., Patil, S. G., Stoica, I., \& Gonzalez, J. E. (2023). MemGPT: Towards LLMs as operating systems. \textit{arXiv preprint arXiv:2310.08560}.
+    \item Packer, C., Fang, V., Patil, S. G., Lin, K., Wooders, S., \& Gonzalez, J. E. (2023). MemGPT: Towards LLMs as operating systems. arXiv:2310.08560.
 
-    \item Pan, S., Luo, L., Wang, Y., Chen, C., Wang, J., \& Wu, X. (2024). Unifying large language models and knowledge graphs: A roadmap. \textit{IEEE Transactions on Knowledge and Data Engineering}.
+    \item Pan, S., Luo, L., Wang, Y., Chen, C., Wang, J., \& Wu, X. (2024). Unifying large language models and knowledge graphs: A roadmap. \textit{IEEE Transactions on Knowledge and Data Engineering}, 36(7), 3580--3599.
 
-    \item Reimers, N., \& Gurevych, I. (2019). Sentence-BERT: Sentence embeddings using Siamese BERT-networks. \textit{arXiv preprint arXiv:1908.10084}.
+    \item Reimers, N., \& Gurevych, I. (2019). Sentence-BERT: Sentence embeddings using Siamese BERT-networks. In \textit{Proceedings of EMNLP 2019} (pp. 3982--3992). Association for Computational Linguistics.
 
     \item ShareGPT Dataset. (2023). \textit{Vicuna Unfiltered Cleaned Dataset}. Retrieved from https://huggingface.co/datasets/anon8231489123/ShareGPT\_Vicuna\_unfiltered/
 
-    \item Wang, Z., Jin, Q., Yu, W., Xu, K., Xu, J., Shang, J., \& Ji, H. (2023). Augmenting language models with long-term memory. \textit{arXiv preprint arXiv:2306.07174}.
+    \item Wang, W., Dong, L., Cheng, H., Liu, X., Yan, X., Gao, J., \& Wei, F. (2023). Augmenting language models with long-term memory. arXiv:2306.07174.
 
-    \item Zheng, L., Chiang, W. L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., ... \& Stoica, I. (2023). Judging LLM-as-a-judge with MT-bench and chatbot arena. \textit{arXiv preprint arXiv:2306.05685}.
+    \item Zheng, L., Chiang, W. L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., ... \& Stoica, I. (2023). Judging LLM-as-a-judge with MT-bench and chatbot arena. \textit{Advances in Neural Information Processing Systems}, 36.
 \end{itemize}
