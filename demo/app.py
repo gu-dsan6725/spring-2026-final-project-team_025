@@ -37,6 +37,7 @@ from career_engine.graph import CareerGraphMemory
 from career_engine.groq_reranker import GroqCareerReranker
 from career_engine.onet import (
     align_nodes_to_onet,
+    analyze_skill_gaps,
     build_user_profile,
     load_occupation_profiles,
     recommend_careers,
@@ -240,6 +241,7 @@ async def chat(req: ChatRequest):
     # 2. Career recommendations (Stage 1: cosine shortlist → Stage 2: Groq re-rank)
     career_graph: CareerGraphMemory = sess["career_graph"]
     recommendations: list[dict] = []
+    profile: dict = {}
     if _occupations:
         nodes = career_graph.signal_nodes()
         if nodes:
@@ -253,6 +255,20 @@ async def chat(req: ChatRequest):
                 )
             except Exception as exc:
                 print(f"Recommendation error: {exc}")
+
+    # Gap analysis for each recommended career
+    occ_by_code = {o.onet_code: o for o in _occupations}
+    for rec in recommendations:
+        occ = occ_by_code.get(rec["onet_code"])
+        if occ and profile:
+            try:
+                gaps = analyze_skill_gaps(profile, occ, top_k=3)
+                rec["gaps"] = {
+                    "skill_gaps":      gaps.get("skill_gaps", []),
+                    "knowledge_gaps":  gaps.get("knowledge_gaps", []),
+                }
+            except Exception:
+                rec["gaps"] = {"skill_gaps": [], "knowledge_gaps": []}
 
     # 3. Memory retrieval
     memory_graph: GraphMemory = sess["memory_graph"]
