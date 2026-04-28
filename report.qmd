@@ -33,9 +33,16 @@ header-includes:
 
 # Abstract {.unnumbered}
 
-We present a Personal Knowledge Graph Memory Engine and Career Development Assistant that transforms conversational interactions into structured, queryable knowledge representations. Rather than relying on flat retrieval mechanisms, our system automatically identifies and extracts semantically meaningful career signals from user dialogues including goals, preferences, active projects, tools, and professional constraints, and organizes them within a graph-based memory architecture. The core pipeline integrates information extraction and entity linking to surface relevant professional concepts from unstructured conversation, followed by graph storage to preserve relational context between entities. A memory retrieval ranking layer then surfaces the most contextually relevant career nodes during subsequent interactions, enabling the system to provide personalized and evolving guidance based on accumulated user knowledge rather than isolated exchanges. This work sits at the intersection of knowledge representation and career counseling, offering a principled foundation for building AI assistants with persistent, structured, and interpretable long-term memory for professional growth.
+We present an Orchestrator-Driven Personal Knowledge Graph Memory Engine and Career Development Assistant that transforms conversational interactions into structured, queryable knowledge representations. Our system marks a significant transition from a static, multi-engine retrieval-augmented generation (RAG) pipeline to an autonomous agentic architecture managed by a central Orchestrator Agent. This orchestrator leverages a Groq-hosted Large Language Model (LLM) to perform real-time assessment of conversational state, generate reasoning traces for transparency, and execute strategic activation of downstream recommendation agents. The system automatically extracts semantically meaningful career signals—including goals, professional preferences, active projects, and technical toolsets—and organizes them within a temporally-aware, graph-based memory architecture using NetworkX. By integrating information extraction with fuzzy entity linking, we ensure that professional concepts are accurately merged across multi-turn dialogues, preserving relational context that is often lost in flat retrieval mechanisms. Our evaluation framework utilizes a three-layered approach: technical metrics (achieving an Entities F1 of 0.88 and Relations F1 of 0.97), qualitative AI-as-a-Judge scoring for faithfulness and utility, and narrative-based profile validation. The results demonstrate that the orchestrator-driven approach significantly reduces redundant processing and improves the groundedness of career guidance by mapping user profiles to the O*NET occupational taxonomy. This work contributes a principled foundation for autonomous agents with persistent, structured, and interpretable long-term memory, addressing the critical "context-window" limitation of modern LLMs in the domain of professional growth and career counseling. Our findings suggest that agentic orchestration is essential for bridging the gap between disconnected processing engines and a cohesive, personalized user experience.
 
-In the realm of artificial intelligence, particularly in conversational agents and personal assistants, the ability to retain and utilize long-term memory is paramount for delivering personalized and context-aware interactions. Traditional approaches often struggle with the dynamic and relational nature of human conversation, relying on limited context windows or flat retrieval methods that fail to capture the intricate connections between pieces of information. Our project addresses this challenge by introducing the Personal Knowledge Graph Memory Engine and Career Development Assistant designed to transform unstructured conversational data into a structured, queryable knowledge graph for professional guidance.
+In the realm of artificial intelligence, particularly in conversational agents and personal assistants, the ability to retain and utilize long-term memory is paramount for delivering personalized and context-aware interactions. Traditional approaches often struggle with the dynamic and relational nature of human conversation, relying on limited context windows or flat retrieval methods that fail to capture the intricate connections between pieces of information. Our project addresses this challenge by introducing the Personal Knowledge Graph Memory Engine and Career Development Assistant, an orchestrator-driven system designed to transform unstructured conversational data into a structured, queryable knowledge graph for professional guidance. By centralizing control within an autonomous Orchestrator Agent, we ensure that memory extraction and career recommendations are executed with transparent reasoning and strategic activation.
+
+## Research Questions
+Our work is driven by three primary research questions:
+1. **Structural Fidelity**: Can a graph-based memory architecture more accurately represent the relational complexity of a user's professional journey compared to flat context windows?
+2. **Agentic Orchestration**: How can a central orchestrator improve the efficiency and utility of a multi-agent career counseling system by conditionally activating domain-specific engines?
+3. **Implicit Signal Inference**: To what extent can an LLM-driven extraction layer surface latent professional signals (e.g., work styles, soft skills) from unstructured technical dialogue?
+
 
 # Related Work
 
@@ -57,6 +64,31 @@ Automated career guidance systems have increasingly relied on occupational taxon
 
 # System Architecture
 
+## Orchestrator Agent
+
+We introduce `OrchestratorAgent` (~80 LOC) that makes per‑turn decisions using a Groq‑hosted LLM. If the Groq service is unavailable, it falls back to a deterministic rule‑based policy. The orchestrator determines whether to activate the `RecommendationAgent` (`run\_recommender` flag) and generates a `reasoning\_trace` describing its decision process.
+
+### Session State Updates
+
+The session schema now includes two additional fields:
+- `orchestrator`: object containing the latest `reasoning` (string) and `run\_recommender` (boolean).
+- `reasoning\_trace`: list of strings documenting the step‑by‑step reasoning for debugging and auditability.
+
+### /api/chat Flow Adjustments
+
+1. **Orchestrator Decision** – The orchestrator runs first, setting `run\_recommender` and producing `orchestrator.reasoning`.
+2. **Memory & Career Agents** – These agents always execute to update the knowledge graph.
+3. **Recommendation Agent** – Executes conditionally only if `run\_recommender` is true and sufficient signals have been collected.
+
+### Updated Response Payload
+
+The API response now includes:
+- `orchestrator.reasoning`: the textual reasoning from the orchestrator.
+- `orchestrator.run\_recommender`: boolean flag indicating whether recommendations were generated.
+- Existing fields (`memory`, `career`, `recommendations`, etc.) remain unchanged.
+
+## Core Components and Responsibilities
+
 The Personal Knowledge Graph Memory Engine and Career Development Assistant is designed as a modular, multi-layered system that processes conversational data into a structured knowledge graph and enables intelligent retrieval.
 
 ## Overall Data Flow
@@ -72,7 +104,7 @@ The system operates as a sophisticated multi-stage pipeline, beginning with the 
 
 ## Input/Data Layer
 
-- **Components:** `data_pipeline.py`
+- **Components:** `data\_pipeline.py`
 - **Functionality:**
   - Data loading
   - Turn segmentation
@@ -83,7 +115,7 @@ The system operates as a sophisticated multi-stage pipeline, beginning with the 
 
 ## Extraction \& Linking Layer
 
-- **Components:** `extraction_agent.py`, `graph_memory.py`
+- **Components:** `extraction\_agent.py`, `graph\_memory.py`
 - **Functionality:**
   - LLM-based extraction
   - Rule-based fallback
@@ -97,12 +129,12 @@ A critical challenge in conversational career counseling is that users rarely ex
 
 ## Graph Memory Layer
 
-- **Components:** `graph_memory.py` (NetworkX)
+- **Components:** `graph\_memory.py` (NetworkX)
 - **Functionality:**
   - Graph storage (MultiDiGraph)
   - Node and edge attributes
   - Export capability
-- **Output:** `graph_memory.json`
+- **Output:** `graph\_memory.json`
 
 ## Two-Stage Recommendation Engine
 
@@ -120,6 +152,17 @@ The core of the professional guidance system is a multi-stage recommendation and
 - **Hierarchical Retrieval**: Combining structural vector similarity (Stage 1) with semantic LLM re-ranking (Stage 2).
 - **Type-Aware Mapping**: Constraining O\*NET mappings by node categories (Tools, Skills, etc.) to minimize noise.
 - **Temporal Weighting**: Using recency and frequency decay to ensure that currently active projects and goals carry higher weight in the user's profile.
+
+## Evolution to Agentic Behavior
+
+A pivotal development in our project was the transition from a traditional multi-engine pipeline to a unified **agentic architecture**. Initially, the memory and career engines functioned as independent, sequential modules with limited cross-communication. This "passive pipeline" approach presented several **unexpected challenges**:
+- **Redundant Processing**: The system would attempt recommendations even when no new career signals were present, leading to generic or repetitive output.
+- **Opacity**: It was difficult to trace why the system made specific extraction choices across multiple turns.
+- **Lack of Autonomy**: The engines did not exhibit the self-correcting or decision-making behavior characteristic of true AI agents.
+
+To address these, we integrated these components under the control of an **Orchestrator Agent**. This integration transforms the system from a passive processor into an active participant. The orchestrator assesses the state of the conversation, evaluates the density of signals collected, and determines whether the `RecommendationAgent` has sufficient information to provide a meaningful response. This "thinking before acting" phase (documented in the `reasoning\_trace`) is the hallmark of agentic behavior, ensuring that the system only intervenes when it can provide high-utility guidance.
+
+
 
 # Evaluation
 
@@ -187,18 +230,36 @@ These failure modes share a common root cause: the current architecture processe
 
 The generation of structured Career Profile Narratives enabled a successful mapping to the O\*NET 28.2 taxonomy. In a representative test case, the system autonomously identified \textbf{Web Developers} as the primary career match (Similarity Score: \textbf{0.7329}). The narrative-based synthesis allowed the engine to identify high-priority knowledge gaps in areas such as \textit{Communications and Media}, providing a practical roadmap for the user's next steps. This confirms that the graph-based memory is not merely a collection of nodes but a coherent representation of a user's professional trajectory.
 
-# Risks and Mitigations
+# Models and Technologies
 
-- **Extraction Noise**: Mitigated through rule-based fallback and type-aware entity linking.
-- **Entity Merging Errors**: Controlled via strict fuzzy-matching thresholds and type constraints.
-- **Hallucinations**: Reduced by using grounding techniques and LLM judicial review.
-- **Cost and Latency**: Optimized using sampling strategies and Groq's high-speed inference engine.
+The system leverages a specialized stack designed for high-speed inference and structured knowledge management:
+
+\begin{itemize}
+    \item \textbf{Large Language Models}: We utilize the \textit{Llama 3} family of models, specifically \textit{llama-3.3-70b-versatile} for high-reasoning tasks (orchestration and re-ranking) and \textit{llama-3.1-8b-instant} for high-throughput extraction. These models provide a balance between semantic depth and operational speed.
+    \item \textbf{Inference Infrastructure}: All LLM calls are routed through the \textbf{Groq LPU™ Inference Engine}, which provides the sub-second latency required for interactive conversational applications.
+    \item \textbf{Graph Framework}: \textbf{NetworkX} is used for the underlying MultiDiGraph representation, providing a flexible schema for typed professional entities and temporal relations.
+    \item \textbf{Taxonomy Alignment}: The \textbf{O*NET 28.2 Database} serves as the ground-truth ontology for occupational mapping, ensuring that all recommendations align with standard labor market classifications.
+    \item \textbf{Embedding Models}: We use dense vector embeddings for the Stage 1 retrieval, enabling efficient similarity search across the 923-occupation space.
+\end{itemize}
+
+
+# Responsible AI Considerations
+
+The development of a career-focused agent necessitates a rigorous approach to ethics and safety. Our system incorporates several measures to ensure responsible AI behavior:
+
+\begin{itemize}
+    \item \textbf{Bias and Fairness}: Occupational recommendations can inadvertently reflect historical biases present in training data. We use the O*NET taxonomy as a grounded, authoritative baseline to minimize ad-hoc stereotypes. Additionally, our two-stage recommendation engine uses Stage 1 (Vector) for objective matching and Stage 2 (LLM) for contextual nuance, providing a system of checks and balances.
+    \item \textbf{Hallucination Mitigation}: By grounding recommendations in a structured knowledge graph (the "Source of Truth") rather than relying solely on the LLM's internal weights, we significantly reduce the risk of fictitious career paths or skill requirements.
+    \item \textbf{Privacy and PII}: While the current demo focuses on technical signals, future iterations will include automated PII (Personally Identifiable Information) scrubbing before data is sent to the graph memory layer, ensuring that professional guidance does not compromise user privacy.
+    \item \textbf{Transparency}: The introduction of the \texttt{reasoning\_trace} and \texttt{orchestrator.reasoning} fields provides a transparent audit trail of why the system made specific decisions, allowing users to understand the logic behind their career guidance.
+\end{itemize}
+
 
 # Conclusion and Future Work
 
 ## Summary of Contributions
 
-We have developed a Personal Knowledge Graph Memory Engine and Career Development Assistant that bridges the gap between unstructured conversation and structured O\*NET-aligned professional guidance. Our system demonstrates that graph-based relational memory can capture evolving career signals more effectively than flat context windows.
+We have developed an Orchestrator-Driven Personal Knowledge Graph Memory Engine and Career Development Assistant that bridges the gap between unstructured conversation and structured O\*NET-aligned professional guidance. Our core contribution is the implementation of an autonomous agentic architecture where a central orchestrator manages domain-specific engines, ensuring transparent reasoning and strategic recommendation activation. Our system demonstrates that graph-based relational memory, when coupled with agentic orchestration, can capture and utilize evolving career signals more effectively than traditional flat context windows or passive retrieval pipelines.
 
 ## Future Directions
 
