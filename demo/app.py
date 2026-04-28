@@ -53,6 +53,96 @@ except ImportError:
 
 
 # ---------------------------------------------------------------------------
+# Orchestrator Agent
+# ---------------------------------------------------------------------------
+
+class OrchestratorAgent:
+    """Coordinates Memory Agent, Career Agent, and Recommendation Agent.
+
+    Each turn the orchestrator reasons about the conversation state and decides:
+    - whether to trigger career recommendations (not every turn)
+    - a one-sentence trace explaining the decision
+    Falls back to rule-based logic when Groq is unavailable.
+    """
+
+    def __init__(self, model: str = "llama-3.1-8b-instant") -> None:
+        self.model = model
+
+    def decide(
+        self,
+        message: str,
+        turn_number: int,
+        signal_counts: dict,
+        api_key: str | None = None,
+    ) -> dict:
+        if api_key and _Groq:
+            try:
+                return self._decide_with_groq(message, turn_number, signal_counts, api_key)
+            except Exception:
+                pass
+        return self._decide_with_rules(message, turn_number, signal_counts)
+
+    def _decide_with_groq(
+        self, message: str, turn_number: int, signal_counts: dict, api_key: str
+    ) -> dict:
+        total = sum(signal_counts.values())
+        summary = ", ".join(f"{k}: {v}" for k, v in signal_counts.items() if v > 0) or "none yet"
+        prompt = (
+            "You are the Orchestrator of a career advisor AI system. "
+            "Your job is to decide whether to activate the Recommendation Agent this turn.\n\n"
+            "The system has two components that always run:\n"
+            "- Memory Component: extracts personal context (goals, preferences, constraints)\n"
+            "- Career Component: extracts career signals (skills, tools, projects, career goals)\n\n"
+            "The Recommendation Agent is expensive — only activate it when it would genuinely help:\n"
+            "- Has the user shared enough about their background, skills, or goals?\n"
+            "- Is the user asking about career direction, job fit, or what they should pursue?\n"
+            "- Would a career recommendation be meaningful and actionable right now?\n\n"
+            f"Conversation turn: {turn_number}\n"
+            f"Signals extracted so far: {summary} (total: {total})\n"
+            f'User message: "{message}"\n\n'
+            "Use your judgment. Do not apply rigid rules — reason about whether the user "
+            "has provided enough context for a meaningful career recommendation.\n\n"
+            "Return JSON only, no markdown:\n"
+            '{"run_recommender": true, "reasoning": "one sentence natural language explanation"}'
+        )
+        client = _Groq(api_key=api_key, timeout=8.0, max_retries=0)
+        completion = client.chat.completions.create(
+            model=self.model,
+            temperature=0.0,
+            messages=[{"role": "system", "content": prompt}],
+        )
+        raw = (completion.choices[0].message.content or "").strip()
+        import re as _re
+        if raw.startswith("```"):
+            raw = _re.sub(r"^```(?:json)?\s*", "", raw)
+            raw = _re.sub(r"\s*```$", "", raw)
+        import json as _json
+        parsed = _json.loads(raw)
+        return {
+            "run_recommender": bool(parsed.get("run_recommender", True)),
+            "reasoning": str(parsed.get("reasoning", "")),
+        }
+
+    def _decide_with_rules(
+        self, message: str, turn_number: int, signal_counts: dict
+    ) -> dict:
+        total = sum(signal_counts.values())
+        career_keywords = {"career", "job", "recommend", "suggest", "role", "position", "work as"}
+        asks_rec = any(kw in message.lower() for kw in career_keywords)
+        run_recommender = (total > 3) or asks_rec
+        if run_recommender:
+            reasoning = (
+                f"Sufficient career signals collected ({total}) — activating Recommendation Agent."
+            )
+        else:
+            reasoning = (
+                f"Turn {turn_number}, {total} signal(s) so far — "
+                "continuing signal collection before triggering recommendations."
+            )
+        return {"run_recommender": run_recommender, "reasoning": reasoning}
+
+
+# ---------------------------------------------------------------------------
 # Startup
 # ---------------------------------------------------------------------------
 _occupations: list = []
@@ -97,9 +187,11 @@ def _new_session() -> str:
         # (the filter is designed for noisy batch data, not interactive demos)
         "memory_agent": MemoryExtractionAgent(graph_memory=mg, use_relevance_filter=False),
         "reranker": GroqCareerReranker(),
+        "orchestrator": OrchestratorAgent(),
         "turn_counter": 0,
         "history": [],          # [{role, content}]  for multi-turn context
         "extractions": [],      # accumulated extraction sections (for re-ranking context)
+        "reasoning_trace": [],  # orchestrator decision log
     }
     return sid
 
@@ -229,7 +321,8 @@ async def chat(req: ChatRequest):
         "speaker": "human",
     }
 
-    # 1. Extraction + graph update
+    # 1. Memory Agent + Career Agent always run (signal extraction)
+    career_graph: CareerGraphMemory = sess["career_graph"]
     career_out = sess["career_agent"].process_turn(turn)
     memory_out = sess["memory_agent"].process_turn(turn)
 
@@ -238,11 +331,24 @@ async def chat(req: ChatRequest):
     if any(ext_for_rerank.values()):
         sess["extractions"].append(ext_for_rerank)
 
-    # 2. Career recommendations (Stage 1: cosine shortlist → Stage 2: Groq re-rank)
-    career_graph: CareerGraphMemory = sess["career_graph"]
+    # 2. Orchestrator decides whether to activate Recommendation Agent,
+    #    using the freshly updated graph so signal counts reflect this turn's extractions
+    signal_counts = dict(career_graph.summary().get("nodes_by_type", {}))
+    signal_counts.pop("user", None)
+    orchestrator: OrchestratorAgent = sess["orchestrator"]
+    decision = orchestrator.decide(
+        message=req.message,
+        turn_number=sess["turn_counter"],
+        signal_counts=signal_counts,
+        api_key=os.getenv("GROQ_API_KEY"),
+    )
+    sess["reasoning_trace"].append({"turn": turn_id, **decision})
+    print(f"[Orchestrator] turn={turn_id} run_recommender={decision['run_recommender']} | {decision['reasoning']}")
+
+    # 3. Recommendation Agent — only activated when orchestrator decides
     recommendations: list[dict] = []
     profile: dict = {}
-    if _occupations:
+    if decision["run_recommender"] and _occupations:
         nodes = career_graph.signal_nodes()
         if nodes:
             try:
@@ -351,6 +457,11 @@ async def chat(req: ChatRequest):
             "career_nodes": career_graph.graph.number_of_nodes(),
             "career_edges": career_graph.graph.number_of_edges(),
             "memory_nodes": memory_graph.graph.number_of_nodes(),
+        },
+        "orchestrator": {
+            "reasoning": decision["reasoning"],
+            "run_recommender": decision["run_recommender"],
+            "turn": turn_id,
         },
     }
 

@@ -12,16 +12,35 @@ This project builds a two-part system on top of conversational AI:
 1. **Memory Engine** — extracts user-relevant information from conversations (goals, preferences, projects, constraints) and stores them in a persistent knowledge graph for long-term retrieval.
 2. **Career Engine** — uses the extracted signals to align with O\*NET occupation profiles, recommend careers via a two-stage pipeline, and generate personalized gap analysis and learning roadmaps.
 
+An **Orchestrator Agent** (`demo/app.py`) coordinates both engines in the live demo, using LLM-driven dynamic routing to decide each turn whether sufficient context has been gathered to activate career recommendations.
+
 ```
-Conversation Turns
-  → Signal Extraction (Groq LLM + rule-based fallback)
-  → Knowledge Graph (NetworkX)
-  → O*NET Profile Alignment (Sentence Transformers + keyword rules)
-  → Cognitive Inference (implicit trait inference)
-  → Stage 1: Cosine Similarity Shortlist (Top-20)
-  → Stage 2: Groq Re-ranking (Top-5 + reasoning)
-  → Gap Analysis & Learning Roadmap
+User Message
+  ├── Memory Engine:  Signal Extraction → Knowledge Graph (NetworkX)
+  ├── Career Engine:  Career Signal Extraction → Career Graph
+  ↓
+  Orchestrator Agent (LLM-driven routing)
+  └── if sufficient context →
+            → O*NET Profile Alignment (Sentence Transformers + keyword rules)
+            → Cognitive Inference (implicit trait inference)
+            → Stage 1: Cosine Similarity Shortlist (Top-20)
+            → Stage 2: Groq Re-ranking (Top-5 + reasoning trace)
+            → Gap Analysis & Learning Roadmap
 ```
+
+---
+
+## Orchestrator Agent
+
+**Code:** `demo/app.py`
+
+Coordinates the Memory Engine and Career Engine each turn. Uses Groq LLM reasoning (with rule-based fallback) to decide whether activating the recommendation pipeline would yield a meaningful result — rather than applying fixed thresholds. Returns a `reasoning` field in every API response explaining the decision.
+
+| Component | Responsibility | Runs every turn |
+|---|---|---|
+| **Memory Engine** | Extracts goals, preferences, constraints, tools → Knowledge Graph | ✅ |
+| **Career Engine** | Extracts skills, projects, career goals, work styles → Career Graph | ✅ |
+| **Recommendation Pipeline** | O\*NET alignment → cosine shortlist → Groq re-ranking → gap analysis | Conditional |
 
 ---
 
